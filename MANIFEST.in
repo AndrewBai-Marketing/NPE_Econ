@@ -1,0 +1,78 @@
+include LICENSE
+include README.md
+include CHANGELOG.md
+include CITATION.cff
+include CONTRIBUTING.md
+include SECURITY.md
+include pyproject.toml
+
+recursive-include src/structnpe *.py *.md *.yaml *.csv
+
+include docs/installation.md
+include docs/quickstart.md
+include docs/custom_simulator.md
+include docs/training.md
+include docs/inference.md
+include docs/parameter_summaries.md
+include docs/validation.md
+include docs/reproducibility.md
+include docs/troubleshooting.md
+include docs/limitations.md
+recursive-include docs/release *.md
+
+include examples/exact_toy.py
+include examples/custom_simulator.py
+include examples/save_reload.py
+include examples/01_quickstart_saved_estimator.py
+include examples/02_bayesian_workflow.py
+include examples/03_custom_simulator.py
+include examples/04_batch_inference.py
+include examples/05_structural_grid_validation.py
+include examples/eight_schools_validation.py
+include examples/_replacement_demo.py
+recursive-include examples/assets *
+recursive-include examples/tiny_ddc *.py *.md *.yaml *.csv
+
+recursive-include validation/exact_example *.py *.json *.md
+recursive-include validation/structural_example *.py *.json *.md
+recursive-include benchmarks *.py *.json
+recursive-include replication *.py *.json *.md *.txt *.toml
+recursive-include docs/snippets *.py *.txt
+recursive-include scripts *.py
+
+prune replication/results
+prune replication/rust_1987/data
+prune replication/rust_1987/results
+prune replication/iskhakov_2016/data
+prune replication/iskhakov_2016/results
+prune replication/eight_schools/results
+
+prune validation/exact_example/output/estimator
+prune validation/structural_example/output/estimator
+
+prune tests
+include tests/test_structnpe*.py
+include tests/test_replication*.py
+include tests/test_public_ci.py
+
+prune research
+prune artifacts
+prune paper_artifacts
+prune paper
+prune paper_latex
+prune data_manifest
+prune NpeCompilerLean
+prune src/ddc_npe
+prune src/airline_compiler
+prune src/marketing_compiler
+prune .lake
+prune .pytest_cache
+prune build
+prune dist
+
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude *.pt
+global-exclude *.pth
+global-exclude *.ckpt
+global-exclude .DS_Store

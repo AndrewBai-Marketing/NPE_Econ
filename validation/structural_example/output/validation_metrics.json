@@ -1,0 +1,1079 @@
+{
+  "benchmark": "finite_state_replacement_exact_grid_v1",
+  "checks": {
+    "central_95_endpoint_normalized_mae": {
+      "maximum": 0.15,
+      "passed": true,
+      "value": 0.027307277232719585
+    },
+    "correlation_max_abs_error": {
+      "maximum": 0.25,
+      "passed": true,
+      "value": 0.04367540038934836
+    },
+    "covariance_normalized_max_abs_error": {
+      "maximum": 0.05,
+      "passed": true,
+      "value": 0.005866846292818561
+    },
+    "joint_grid_voronoi_total_variation": {
+      "maximum": 0.35,
+      "passed": true,
+      "value": 0.2520696550871438
+    },
+    "marginal_quantile_grid_l1_normalized_mean": {
+      "maximum": 0.12,
+      "passed": true,
+      "value": 0.044690428542126175
+    },
+    "parameter_box_support_violation_rate": {
+      "maximum": 0.0,
+      "passed": true,
+      "value": 0.0
+    },
+    "parameter_mean_normalized_mae": {
+      "maximum": 0.1,
+      "passed": true,
+      "value": 0.0294578371959913
+    },
+    "parameter_sd_normalized_mae": {
+      "maximum": 0.1,
+      "passed": true,
+      "value": 0.012536963526124913
+    },
+    "policy_95_endpoint_mae": {
+      "maximum": 0.08,
+      "passed": true,
+      "value": 0.004519661002452671
+    },
+    "policy_mean_abs_error": {
+      "maximum": 0.06,
+      "passed": true,
+      "value": 0.0010231867252135096
+    },
+    "policy_sd_abs_error": {
+      "maximum": 0.05,
+      "passed": true,
+      "value": 0.0020284976208874844
+    },
+    "predictive_cell_probability_max_abs_error": {
+      "maximum": 0.06,
+      "passed": true,
+      "value": 0.002297573620224619
+    }
+  },
+  "comparison": {
+    "correlation": {
+      "approximate": [
+        [
+          1.0,
+          0.7987690319832311
+        ],
+        [
+          0.7987690319832311,
+          1.0
+        ]
+      ],
+      "exact": [
+        [
+          1.0,
+          0.8424444323725795
+        ],
+        [
+          0.8424444323725795,
+          1.0
+        ]
+      ]
+    },
+    "covariance": {
+      "approximate": [
+        [
+          0.010429302800583252,
+          0.05995571469485356
+        ],
+        [
+          0.05995571469485356,
+          0.5402110378780506
+        ]
+      ],
+      "exact": [
+        [
+          0.012541367465997934,
+          0.07300715929921277
+        ],
+        [
+          0.07300715929921277,
+          0.5988299029481357
+        ]
+      ]
+    },
+    "joint_grid_voronoi_projection": [
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 4.422003426764545e-06,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 0.00015175138987436596,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 3.905220182903322e-05,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 2.113573575852231e-07,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 6.036332808835901e-11,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 2.0546558825692274e-15,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 1.6436454929687813e-20,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 5.17521236323329e-26,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 9.171016828846067e-32,
+        "maintenance_cost": 0.1,
+        "replacement_cost": 5.75
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 1.3402512892085303e-07,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 0.00020428396874149713,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 0.003625600332558405,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.0003333333333333333,
+        "exact_probability": 0.0015881721013017113,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.0006666666666666666,
+        "exact_probability": 3.024805559127317e-05,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.0003333333333333333,
+        "exact_probability": 3.9970069468488515e-08,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 5.775388355504804e-12,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 1.4707753896675828e-16,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 1.0562932910818483e-21,
+        "maintenance_cost": 0.2,
+        "replacement_cost": 5.75
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 3.5770640005076127e-10,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 7.126532604054491e-06,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.0026666666666666666,
+        "exact_probability": 0.0023699561794687965,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.009333333333333334,
+        "exact_probability": 0.02709844527810417,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.009666666666666667,
+        "exact_probability": 0.01781540381047732,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.003,
+        "exact_probability": 0.0009478374360324885,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 5.148742870446747e-06,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 3.4849176698444695e-09,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 3.7255186740681497e-13,
+        "maintenance_cost": 0.3,
+        "replacement_cost": 5.75
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 2.3514545699838673e-13,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 3.087305844512441e-08,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.0036666666666666666,
+        "exact_probability": 8.406590489524314e-05,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.013666666666666667,
+        "exact_probability": 0.00973127496562574,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.059666666666666666,
+        "exact_probability": 0.08184268694845881,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.034,
+        "exact_probability": 0.07225777112523178,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.013,
+        "exact_probability": 0.00843129366506059,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.004333333333333333,
+        "exact_probability": 0.00014786225731241708,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 4.1821000106268514e-07,
+        "maintenance_cost": 0.4,
+        "replacement_cost": 5.75
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 6.257519190442111e-17,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 3.6358464182260494e-11,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.001,
+        "exact_probability": 5.027062200083917e-07,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.005,
+        "exact_probability": 0.00033290397611136676,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.021,
+        "exact_probability": 0.01821738964863269,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.09033333333333333,
+        "exact_probability": 0.12276305178691405,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.20866666666666667,
+        "exact_probability": 0.13390901403182218,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.046,
+        "exact_probability": 0.02801788485546123,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.0016666666666666668,
+        "exact_probability": 0.001225579415948724,
+        "maintenance_cost": 0.5,
+        "replacement_cost": 5.75
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 8.794865928976893e-21,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 1.7525736181091717e-14,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 9.179732460971166e-10,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.0003333333333333333,
+        "exact_probability": 2.476456978018334e-06,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.006666666666666667,
+        "exact_probability": 0.0005901928793128579,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.028,
+        "exact_probability": 0.018749367697525693,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.05,
+        "exact_probability": 0.10729352049797893,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.06566666666666666,
+        "exact_probability": 0.13636730761868096,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.04933333333333333,
+        "exact_probability": 0.04397242688409638,
+        "maintenance_cost": 0.6,
+        "replacement_cost": 5.75
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 7.648754980604054e-25,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 1.25
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 4.3719496675035826e-18,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 1.8125
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 7.125452751273791e-13,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 2.375
+      },
+      {
+        "approximate_probability": 0.0003333333333333333,
+        "exact_probability": 6.3005562428452596e-09,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 2.9375
+      },
+      {
+        "approximate_probability": 0.0,
+        "exact_probability": 5.111418110997785e-06,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 3.5
+      },
+      {
+        "approximate_probability": 0.0013333333333333333,
+        "exact_probability": 0.0005738316046073454,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 4.0625
+      },
+      {
+        "approximate_probability": 0.017666666666666667,
+        "exact_probability": 0.012185048059076456,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 4.625
+      },
+      {
+        "approximate_probability": 0.13466666666666666,
+        "exact_probability": 0.061677802026899875,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 5.1875
+      },
+      {
+        "approximate_probability": 0.118,
+        "exact_probability": 0.0877333399355511,
+        "maintenance_cost": 0.7,
+        "replacement_cost": 5.75
+      }
+    ],
+    "parameters": [
+      {
+        "approximate_mean": 0.5536158322181024,
+        "approximate_q025": 0.34839757097961666,
+        "approximate_q975": 0.7019915073533263,
+        "approximate_sd": 0.10212395801467573,
+        "exact_mean": 0.5345215140619692,
+        "exact_q025": 0.3,
+        "exact_q975": 0.7,
+        "exact_sd": 0.11198824699939693,
+        "parameter": "maintenance_cost",
+        "quantile_grid_l1": 0.030481906728604086
+      },
+      {
+        "approximate_mean": 4.689088113306141,
+        "approximate_q025": 3.038745905641802,
+        "approximate_q975": 5.737633002949922,
+        "approximate_sd": 0.7349905018964875,
+        "exact_mean": 4.567174964713218,
+        "exact_q025": 2.9375,
+        "exact_q975": 5.75,
+        "exact_sd": 0.7738410062462028,
+        "parameter": "replacement_cost",
+        "quantile_grid_l1": 0.17359955641460492
+      }
+    ],
+    "policy_replacement_share": {
+      "approximate_mean": 0.22927706459502503,
+      "approximate_q025": 0.19209463690500497,
+      "approximate_q975": 0.28704354627560247,
+      "approximate_sd": 0.02312103609968402,
+      "exact_mean": 0.23030025132023854,
+      "exact_q025": 0.19198555400245237,
+      "exact_q975": 0.2781133071732497,
+      "exact_sd": 0.021092538478796535,
+      "subsidy": 0.5
+    },
+    "posterior_predictive_expected_state_action_frequencies": [
+      {
+        "action": "keep",
+        "approximate": 0.2741808569108116,
+        "exact": 0.2734935400318177,
+        "state": 0
+      },
+      {
+        "action": "replace",
+        "approximate": 0.009285029287986005,
+        "exact": 0.009968817250185644,
+        "state": 0
+      },
+      {
+        "action": "keep",
+        "approximate": 0.22435134392656547,
+        "exact": 0.22321750673046659,
+        "state": 1
+      },
+      {
+        "action": "replace",
+        "approximate": 0.026102937330558268,
+        "exact": 0.026711286702657995,
+        "state": 1
+      },
+      {
+        "action": "keep",
+        "approximate": 0.1542512809731765,
+        "exact": 0.15352191236446183,
+        "state": 2
+      },
+      {
+        "action": "replace",
+        "approximate": 0.04911933738038609,
+        "exact": 0.04890813201893603,
+        "state": 2
+      },
+      {
+        "action": "keep",
+        "approximate": 0.08218304569425307,
+        "exact": 0.08246648947439422,
+        "state": 3
+      },
+      {
+        "action": "replace",
+        "approximate": 0.05756109150853003,
+        "exact": 0.05658481275129937,
+        "state": 3
+      },
+      {
+        "action": "keep",
+        "approximate": 0.0578741802803366,
+        "exact": 0.06017175390056122,
+        "state": 4
+      },
+      {
+        "action": "replace",
+        "approximate": 0.06509089670739662,
+        "exact": 0.06495574877521941,
+        "state": 4
+      }
+    ]
+  },
+  "configuration": {
+    "batch_size": 128,
+    "components": 5,
+    "depth": 2,
+    "epochs": 50,
+    "hidden_dim": 48,
+    "inference_seed": 51003,
+    "observed_seed": 51002,
+    "patience": 8,
+    "posterior_draws": 3000,
+    "simulations": 4000,
+    "training_seed": 51001,
+    "validation_fraction": 0.2
+  },
+  "environment": {
+    "numpy": "2.4.2",
+    "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+    "processor": "x86_64",
+    "python": "3.13.11",
+    "structnpe_version": "source-checkout"
+  },
+  "estimator": {
+    "model_fingerprint": "c1371104ce7303d2a37688c3a9a98987f5f8f6cf059a897fe9dd680b2663e75d",
+    "training_metadata": {
+      "accelerator_determinism": "CPU seeded path; platform/library changes may still alter floating-point results",
+      "architecture": {
+        "activation": "relu",
+        "components": 5,
+        "depth": 2,
+        "estimator_type": "mdn_diagonal_gaussian",
+        "hidden_dim": 48,
+        "input_dim": 10,
+        "log_variance_bounds": [
+          -7.0,
+          5.0
+        ],
+        "theta_dim": 2
+      },
+      "best_checkpoint": "validation/structural_example/output/estimator/best_estimator",
+      "best_epoch": 49,
+      "best_validation_nll": 0.36248948812484744,
+      "creation_timestamp": "2026-08-22T04:44:12.569618+00:00",
+      "device": "cpu",
+      "device_warning": "",
+      "estimator_type": "mdn_diagonal_gaussian",
+      "hardware": {
+        "machine": "x86_64",
+        "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+        "processor": "x86_64",
+        "python": "3.13.11"
+      },
+      "number_of_simulations": 4000,
+      "observation_adapter_fingerprint": "f00ba8883434e2d625a77683e61580534c95f970449b0f359c44f59b0d369c87",
+      "observation_adapter_fit": {
+        "count": 3200,
+        "sample": "complete training split only",
+        "split_seed": 3425708368
+      },
+      "package_version": "0.1.0b1",
+      "parameter_order": [
+        "maintenance_cost",
+        "replacement_cost"
+      ],
+      "parameter_transforms": [
+        "logit",
+        "logit"
+      ],
+      "prior_fingerprint": "5432f7814b58c6f4fcb0eec156e8e36fac27563e01ec1093eb0f02b972fc37db",
+      "requested_device": "cpu",
+      "resume_from": null,
+      "resume_optimizer_state": "not retained; compatible weights are resumed with a fresh AdamW optimizer",
+      "seed": 51001,
+      "seed_scheme": "numpy.SeedSequence(seed).spawn(4)",
+      "simulation_seconds": 1.5987126489635557,
+      "simulation_seed": 692283225,
+      "simulator_fingerprint": "06e0b1809b9bb8511b2e90bfb92e7e53424de1f322e3b9eb98f420a7bf79c52b",
+      "support_diagnostic": {
+        "calibration_quantile": 0.99,
+        "formal_test": false,
+        "method": "validation-calibrated nearest-neighbor distance in standardized representation",
+        "reference_size": 2048,
+        "threshold": 1.053014103857213
+      },
+      "total_fit_seconds": 56.93937619100325,
+      "training_seconds": 55.34066278405953,
+      "training_seed": 1225597100,
+      "training_validation_split": {
+        "split_seed": 3425708368,
+        "training": 3200,
+        "validation": 800,
+        "validation_fraction": 0.2
+      },
+      "validation_loss_history": [
+        {
+          "elapsed_seconds": 0.49696121097076684,
+          "epoch": 1,
+          "epoch_seconds": 0.4968988709151745,
+          "train_nll": 2.5795992279052733,
+          "validation_nll": 2.311801538467407
+        },
+        {
+          "elapsed_seconds": 0.5218470980180427,
+          "epoch": 2,
+          "epoch_seconds": 0.024797472055070102,
+          "train_nll": 2.0506371545791624,
+          "validation_nll": 1.8161607599258422
+        },
+        {
+          "elapsed_seconds": 0.5468965789768845,
+          "epoch": 3,
+          "epoch_seconds": 0.024990436038933694,
+          "train_nll": 1.6496788597106933,
+          "validation_nll": 1.491939172744751
+        },
+        {
+          "elapsed_seconds": 0.5719751439755782,
+          "epoch": 4,
+          "epoch_seconds": 0.0250189850339666,
+          "train_nll": 1.4119808101654052,
+          "validation_nll": 1.374514136314392
+        },
+        {
+          "elapsed_seconds": 0.6085038089659065,
+          "epoch": 5,
+          "epoch_seconds": 0.03646951692644507,
+          "train_nll": 1.2905653238296508,
+          "validation_nll": 1.2598395156860351
+        },
+        {
+          "elapsed_seconds": 0.6341531770303845,
+          "epoch": 6,
+          "epoch_seconds": 0.02558879798743874,
+          "train_nll": 1.2017148685455323,
+          "validation_nll": 1.1482825946807862
+        },
+        {
+          "elapsed_seconds": 0.6646679340628907,
+          "epoch": 7,
+          "epoch_seconds": 0.030457844957709312,
+          "train_nll": 1.1177223920822144,
+          "validation_nll": 1.1263606977462768
+        },
+        {
+          "elapsed_seconds": 0.6895147850736976,
+          "epoch": 8,
+          "epoch_seconds": 0.024791145930066705,
+          "train_nll": 1.0676539373397826,
+          "validation_nll": 1.065075569152832
+        },
+        {
+          "elapsed_seconds": 0.715244697057642,
+          "epoch": 9,
+          "epoch_seconds": 0.025665624998509884,
+          "train_nll": 1.0101690101623535,
+          "validation_nll": 1.0342621803283691
+        },
+        {
+          "elapsed_seconds": 0.7409643810242414,
+          "epoch": 10,
+          "epoch_seconds": 0.0256620830623433,
+          "train_nll": 0.964020688533783,
+          "validation_nll": 1.0333307027816772
+        },
+        {
+          "elapsed_seconds": 0.7728760780300945,
+          "epoch": 11,
+          "epoch_seconds": 0.031856490997597575,
+          "train_nll": 0.9173565316200256,
+          "validation_nll": 1.0200657796859742
+        },
+        {
+          "elapsed_seconds": 0.8015019530430436,
+          "epoch": 12,
+          "epoch_seconds": 0.028557804063893855,
+          "train_nll": 0.8717499852180481,
+          "validation_nll": 0.9437056970596314
+        },
+        {
+          "elapsed_seconds": 0.8286573570221663,
+          "epoch": 13,
+          "epoch_seconds": 0.027097267098724842,
+          "train_nll": 0.8644049334526062,
+          "validation_nll": 0.9167449569702149
+        },
+        {
+          "elapsed_seconds": 0.8543969420716166,
+          "epoch": 14,
+          "epoch_seconds": 0.025682259001769125,
+          "train_nll": 0.787849268913269,
+          "validation_nll": 0.9154624938964844
+        },
+        {
+          "elapsed_seconds": 0.8820010480703786,
+          "epoch": 15,
+          "epoch_seconds": 0.027530604973435402,
+          "train_nll": 0.7934596490859985,
+          "validation_nll": 0.9137692213058471
+        },
+        {
+          "elapsed_seconds": 0.907444671029225,
+          "epoch": 16,
+          "epoch_seconds": 0.025386151974089444,
+          "train_nll": 0.7617370796203613,
+          "validation_nll": 0.8286917924880981
+        },
+        {
+          "elapsed_seconds": 0.932345887995325,
+          "epoch": 17,
+          "epoch_seconds": 0.024812435964122415,
+          "train_nll": 0.7568115770816803,
+          "validation_nll": 0.8152225661277771
+        },
+        {
+          "elapsed_seconds": 0.9575978519860655,
+          "epoch": 18,
+          "epoch_seconds": 0.025195249007083476,
+          "train_nll": 0.7196830260753632,
+          "validation_nll": 0.8565309405326843
+        },
+        {
+          "elapsed_seconds": 0.9835579589707777,
+          "epoch": 19,
+          "epoch_seconds": 0.025957456906326115,
+          "train_nll": 0.6917964172363281,
+          "validation_nll": 0.7958615708351136
+        },
+        {
+          "elapsed_seconds": 1.0110321589745581,
+          "epoch": 20,
+          "epoch_seconds": 0.02741275599692017,
+          "train_nll": 0.6663786494731903,
+          "validation_nll": 0.7596151614189148
+        },
+        {
+          "elapsed_seconds": 1.0378523810068145,
+          "epoch": 21,
+          "epoch_seconds": 0.026755945989862084,
+          "train_nll": 0.6186243855953216,
+          "validation_nll": 0.7098263359069824
+        },
+        {
+          "elapsed_seconds": 1.070292414049618,
+          "epoch": 22,
+          "epoch_seconds": 0.032380534103140235,
+          "train_nll": 0.5735101187229157,
+          "validation_nll": 0.7129928874969482
+        },
+        {
+          "elapsed_seconds": 1.0966322519816458,
+          "epoch": 23,
+          "epoch_seconds": 0.026337343966588378,
+          "train_nll": 0.547387158870697,
+          "validation_nll": 0.6667156553268433
+        },
+        {
+          "elapsed_seconds": 1.1229607859859243,
+          "epoch": 24,
+          "epoch_seconds": 0.026270178030245006,
+          "train_nll": 0.5245458424091339,
+          "validation_nll": 0.6627634119987488
+        },
+        {
+          "elapsed_seconds": 1.151180034969002,
+          "epoch": 25,
+          "epoch_seconds": 0.028161437949165702,
+          "train_nll": 0.5207684445381164,
+          "validation_nll": 0.655679988861084
+        },
+        {
+          "elapsed_seconds": 1.1769417399773374,
+          "epoch": 26,
+          "epoch_seconds": 0.025691404938697815,
+          "train_nll": 0.4995872104167938,
+          "validation_nll": 0.6609843707084656
+        },
+        {
+          "elapsed_seconds": 1.2035726649919525,
+          "epoch": 27,
+          "epoch_seconds": 0.02662868401966989,
+          "train_nll": 0.48748391747474673,
+          "validation_nll": 0.6373427414894104
+        },
+        {
+          "elapsed_seconds": 1.2303519380511716,
+          "epoch": 28,
+          "epoch_seconds": 0.026718999026343226,
+          "train_nll": 0.4657835137844086,
+          "validation_nll": 0.6549647355079651
+        },
+        {
+          "elapsed_seconds": 1.2730663020629436,
+          "epoch": 29,
+          "epoch_seconds": 0.04271193197928369,
+          "train_nll": 0.5078628215193749,
+          "validation_nll": 0.8320809030532836
+        },
+        {
+          "elapsed_seconds": 1.2982129029696807,
+          "epoch": 30,
+          "epoch_seconds": 0.02514393301680684,
+          "train_nll": 0.5580954837799073,
+          "validation_nll": 0.6068847227096558
+        },
+        {
+          "elapsed_seconds": 1.3241769110318273,
+          "epoch": 31,
+          "epoch_seconds": 0.025903415982611477,
+          "train_nll": 0.4229323238134384,
+          "validation_nll": 0.565651593208313
+        },
+        {
+          "elapsed_seconds": 1.3665988460415974,
+          "epoch": 32,
+          "epoch_seconds": 0.04236205108463764,
+          "train_nll": 0.41691614985466,
+          "validation_nll": 0.5476117277145386
+        },
+        {
+          "elapsed_seconds": 1.3932530940510333,
+          "epoch": 33,
+          "epoch_seconds": 0.026594950002618134,
+          "train_nll": 0.40329167127609256,
+          "validation_nll": 0.546277470588684
+        },
+        {
+          "elapsed_seconds": 1.42157688701991,
+          "epoch": 34,
+          "epoch_seconds": 0.028259426006115973,
+          "train_nll": 0.4115880274772644,
+          "validation_nll": 0.5554239249229431
+        },
+        {
+          "elapsed_seconds": 1.4739618110470474,
+          "epoch": 35,
+          "epoch_seconds": 0.052382676978595555,
+          "train_nll": 0.36278360247612,
+          "validation_nll": 0.5047341918945313
+        },
+        {
+          "elapsed_seconds": 1.5012817829847336,
+          "epoch": 36,
+          "epoch_seconds": 0.02725897205527872,
+          "train_nll": 0.37303471386432646,
+          "validation_nll": 0.5474585604667663
+        },
+        {
+          "elapsed_seconds": 1.5786763720680028,
+          "epoch": 37,
+          "epoch_seconds": 0.07739192899316549,
+          "train_nll": 0.36787126779556273,
+          "validation_nll": 0.5122438406944275
+        },
+        {
+          "elapsed_seconds": 1.6041612019762397,
+          "epoch": 38,
+          "epoch_seconds": 0.025482241064310074,
+          "train_nll": 0.3451278132200241,
+          "validation_nll": 0.5107160377502441
+        },
+        {
+          "elapsed_seconds": 1.6820896120043471,
+          "epoch": 39,
+          "epoch_seconds": 0.0779257349204272,
+          "train_nll": 0.33731057703495027,
+          "validation_nll": 0.47739505767822266
+        },
+        {
+          "elapsed_seconds": 1.7080191989662126,
+          "epoch": 40,
+          "epoch_seconds": 0.025870513985864818,
+          "train_nll": 0.32801809966564177,
+          "validation_nll": 0.46509293556213377
+        },
+        {
+          "elapsed_seconds": 1.7853735539829358,
+          "epoch": 41,
+          "epoch_seconds": 0.07727184297982603,
+          "train_nll": 0.2808586710691452,
+          "validation_nll": 0.4930612754821777
+        },
+        {
+          "elapsed_seconds": 1.864967889036052,
+          "epoch": 42,
+          "epoch_seconds": 0.07959135400597006,
+          "train_nll": 0.28849099785089494,
+          "validation_nll": 0.4667943835258484
+        },
+        {
+          "elapsed_seconds": 1.8919014930725098,
+          "epoch": 43,
+          "epoch_seconds": 0.02693110005930066,
+          "train_nll": 0.29613503694534304,
+          "validation_nll": 0.4856953978538513
+        },
+        {
+          "elapsed_seconds": 1.969219877035357,
+          "epoch": 44,
+          "epoch_seconds": 0.07731567299924791,
+          "train_nll": 0.2964597362279892,
+          "validation_nll": 0.4715772247314453
+        },
+        {
+          "elapsed_seconds": 1.995300039066933,
+          "epoch": 45,
+          "epoch_seconds": 0.0260777740040794,
+          "train_nll": 0.28686613008379935,
+          "validation_nll": 0.41906257629394533
+        },
+        {
+          "elapsed_seconds": 2.0732439280254766,
+          "epoch": 46,
+          "epoch_seconds": 0.07788313191849738,
+          "train_nll": 0.2552386981993914,
+          "validation_nll": 0.42137370109558103
+        },
+        {
+          "elapsed_seconds": 2.10009025700856,
+          "epoch": 47,
+          "epoch_seconds": 0.026842683902941644,
+          "train_nll": 0.22362079054117204,
+          "validation_nll": 0.4417439842224121
+        },
+        {
+          "elapsed_seconds": 2.17900948098395,
+          "epoch": 48,
+          "epoch_seconds": 0.07891672500409186,
+          "train_nll": 0.21199856102466583,
+          "validation_nll": 0.41126811742782593
+        },
+        {
+          "elapsed_seconds": 2.2074465570040047,
+          "epoch": 49,
+          "epoch_seconds": 0.02837432804517448,
+          "train_nll": 0.17801882222294807,
+          "validation_nll": 0.36248948812484744
+        },
+        {
+          "elapsed_seconds": 2.2665187140228227,
+          "epoch": 50,
+          "epoch_seconds": 0.05898977699689567,
+          "train_nll": 0.15167026326060296,
+          "validation_nll": 0.37104780197143555
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "central_95_endpoint_normalized_mae": 0.027307277232719585,
+    "correlation_max_abs_error": 0.04367540038934836,
+    "covariance_normalized_max_abs_error": 0.005866846292818561,
+    "joint_grid_voronoi_total_variation": 0.2520696550871438,
+    "marginal_quantile_grid_l1_normalized_mean": 0.044690428542126175,
+    "parameter_box_support_violation_rate": 0.0,
+    "parameter_mean_normalized_mae": 0.0294578371959913,
+    "parameter_sd_normalized_mae": 0.012536963526124913,
+    "policy_95_endpoint_mae": 0.004519661002452671,
+    "policy_mean_abs_error": 0.0010231867252135096,
+    "policy_sd_abs_error": 0.0020284976208874844,
+    "predictive_cell_probability_max_abs_error": 0.002297573620224619
+  },
+  "nonclaim": "This comparison checks one predeclared midpoint-truth synthetic panel. It does not establish amortized accuracy across observations or transfer to another structural model.",
+  "profile": "smoke",
+  "schema_version": 1,
+  "status": "PASS",
+  "structural_configuration": {
+    "action_count": 2,
+    "agents": 12,
+    "discount": 0.9,
+    "parameter_grid_cells": 63,
+    "periods": 10,
+    "policy_replacement_subsidy": 0.5,
+    "state_count": 5,
+    "true_theta": [
+      0.4,
+      3.5
+    ]
+  },
+  "thresholds": {
+    "benchmark": "finite_state_replacement_exact_grid_v1",
+    "decision_rule": "Every listed metric must be finite and no larger than its predeclared maximum. A failed metric makes the profile fail.",
+    "target": "exact joint posterior on the declared 63-cell prior grid for one predeclared midpoint-truth synthetic panel, after projecting approximate continuous draws to nearest grid cells for the joint-mass check",
+    "threshold_file": "validation/structural_example/thresholds.json",
+    "threshold_schema_version": 1,
+    "threshold_sha256": "96cf03a5f80f9d7849ca8842f6aed232367907c9b02d67a8c657191161b78e92"
+  },
+  "timing_seconds": {
+    "inference": 0.001054754015058279,
+    "training": 57.05214505200274
+  }
+}

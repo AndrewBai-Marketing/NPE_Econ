@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "config_id": "structural_grid_smoke_0.1.0b1",
+  "benchmark": "finite_state_replacement_exact_grid_v1",
+  "device": "cpu",
+  "source_profile": "smoke",
+  "source_threshold_file": "validation/structural_example/thresholds.json",
+  "source_threshold_sha256": "96cf03a5f80f9d7849ca8842f6aed232367907c9b02d67a8c657191161b78e92",
+  "configuration": {
+    "simulations": 4000,
+    "posterior_draws": 3000,
+    "validation_fraction": 0.2,
+    "hidden_dim": 48,
+    "depth": 2,
+    "components": 5,
+    "epochs": 50,
+    "batch_size": 128,
+    "patience": 8,
+    "training_seed": 51001,
+    "observed_seed": 51002,
+    "inference_seed": 51003
+  },
+  "acceptance_maxima": {
+    "parameter_mean_normalized_mae": 0.1,
+    "parameter_sd_normalized_mae": 0.1,
+    "central_95_endpoint_normalized_mae": 0.15,
+    "covariance_normalized_max_abs_error": 0.05,
+    "correlation_max_abs_error": 0.25,
+    "marginal_quantile_grid_l1_normalized_mean": 0.12,
+    "joint_grid_voronoi_total_variation": 0.35,
+    "policy_mean_abs_error": 0.06,
+    "policy_sd_abs_error": 0.05,
+    "policy_95_endpoint_mae": 0.08,
+    "predictive_cell_probability_max_abs_error": 0.06,
+    "parameter_box_support_violation_rate": 0.0
+  },
+  "output": "structural_grid/validation_metrics.json",
+  "timeout_seconds": 1200
+}

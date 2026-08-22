@@ -1,0 +1,21 @@
+project_name: model_index_ddc
+output_dir: runs/model_index_ddc
+simulator_module: model
+simulator_class: TinyModelIndexDDC
+n_train: 400
+n_valid: 80
+n_test: 0
+seed: 123
+posterior:
+  type: model_index
+  hidden_dim: 64
+  n_components: 3
+  epochs: 50
+  batch_size: 64
+validation:
+  posterior_predictive: true
+  prior_predictive_support: true
+  simulation_based_calibration: true
+  ensemble_seeds: []
+counterfactuals:
+  policies: []

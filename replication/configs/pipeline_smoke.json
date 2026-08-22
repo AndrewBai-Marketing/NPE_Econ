@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "config_id": "release_pipeline_smoke_0.1.0b1",
+  "release": "0.1.0b1",
+  "environment": {
+    "device": "cpu",
+    "python_hash_seed": 0,
+    "threads": 1
+  },
+  "stages": {
+    "package_tests": {
+      "timeout_seconds": 900
+    },
+    "build_distributions": {
+      "timeout_seconds": 600
+    },
+    "wheel_install": {
+      "timeout_seconds": 600,
+      "system_site_packages": true,
+      "dependency_mode": "artifact-only; dependencies are inherited from the prepared replication environment"
+    },
+    "sdist_install": {
+      "timeout_seconds": 600,
+      "system_site_packages": true,
+      "dependency_mode": "artifact-only; dependencies and build backend are inherited from the prepared replication environment"
+    },
+    "support_warning": {
+      "observation_scale": 100.0,
+      "posterior_draws": 16,
+      "seed": 62001,
+      "timeout_seconds": 180
+    },
+    "save_reload": {
+      "simulations": 256,
+      "epochs": 2,
+      "posterior_draws": 128,
+      "seed": 97531,
+      "timeout_seconds": 600
+    },
+    "cpu_neural": {
+      "simulations": 256,
+      "epochs": 2,
+      "posterior_draws": 128,
+      "seed": 1234,
+      "timeout_seconds": 600
+    }
+  }
+}

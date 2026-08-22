@@ -1,0 +1,110 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: python-ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  base-tests:
+    name: Base tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    env:
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      PYTHONNOUSERSITE: "1"
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install base and development dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ".[dev]"
+
+      - name: Verify generated example snippets
+        run: python scripts/render_readme_examples.py --check
+
+      - name: Compile package sources
+        run: python -m compileall -q src/structnpe
+
+      - name: Verify the conventional-replication test dependency
+        run: python -c "import scipy; print(scipy.__version__)"
+
+      - name: Build wheel and source distribution
+        run: |
+          python -m build --wheel --sdist
+          python scripts/normalize_sdist.py dist/structnpe-0.1.0b1.tar.gz
+
+      - name: Run base package tests
+        run: |
+          python -m pytest -q \
+            tests/test_structnpe_*.py \
+            tests/test_public_ci.py \
+            tests/test_replication_*.py
+
+  clean-wheel-examples:
+    name: Clean base wheel and public examples
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      PYTHONNOUSERSITE: "1"
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Build wheel
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build
+          python -m build --wheel
+
+      - name: Install only the base wheel in a fresh environment
+        shell: bash
+        run: |
+          python -m venv "${RUNNER_TEMP}/structnpe-base-wheel"
+          "${RUNNER_TEMP}/structnpe-base-wheel/bin/python" -m pip install --upgrade pip
+          "${RUNNER_TEMP}/structnpe-base-wheel/bin/python" -m pip install dist/*.whl
+
+      - name: Run base examples and the retained CLI project against the installed wheel
+        shell: bash
+        run: |
+          cd "${RUNNER_TEMP}"
+          "${RUNNER_TEMP}/structnpe-base-wheel/bin/python" \
+            "${GITHUB_WORKSPACE}/scripts/run_installed_wheel_examples.py" \
+            --profile base --require-no-torch

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "profile": "full",
+  "declared_before_execution": true,
+  "run_status": "UNRUN_FUTURE_WORK",
+  "seed": 73101,
+  "simulations": 50000,
+  "epochs": 200,
+  "batch_size": 512,
+  "hidden_dim": 128,
+  "depth": 3,
+  "components": 5,
+  "patience": 25,
+  "posterior_draws": 20000,
+  "exact_draws": 100000,
+  "quadrature_points": 100001,
+  "note": "The full profile is bounded but has not been run for release 0.1.0b1. Thresholds must be frozen in a later version before execution."
+}
+

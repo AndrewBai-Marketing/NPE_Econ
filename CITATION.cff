@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+title: "structnpe: A simulator-to-posterior toolkit for structural models"
+message: "If you use this public-beta software, please cite the software."
+type: software
+authors:
+  - family-names: Bai
+    given-names: Andrew
+version: 0.1.0b1
+license: MIT
+abstract: "Public-beta software for amortized simulator-based posterior inference in structural models."

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "frozen_before_first_empirical_mdn_comparison": true,
+  "change_rule": "Any threshold change requires a new schema version and preservation of prior results.",
+  "prior": {
+    "replacement_cost": [4.0, 18.0],
+    "maintenance_slope": [0.2, 6.0],
+    "density": "independent continuous uniform"
+  },
+  "dense_grid": {
+    "replacement_cost_points": 141,
+    "maintenance_slope_points": 117,
+    "quadrature": "Cartesian trapezoidal",
+    "bellman_residual_tolerance": 1e-9
+  },
+  "comparison": {
+    "posterior_draws": 20000,
+    "policy_draws": 2000,
+    "joint_histogram_bins": [12, 10],
+    "expected_replacement_horizon_months": 12,
+    "expected_replacement_buses": 37,
+    "gates": {
+      "maximum_marginal_cdf_supremum": 0.1,
+      "joint_coarsened_total_variation": 0.15,
+      "maximum_parameter_mean_error_in_grid_sd": 0.25,
+      "policy_mean_maximum_absolute_error": 0.03,
+      "policy_interval_endpoint_maximum_absolute_error": 0.06,
+      "expected_replacements_mean_absolute_error": 0.5,
+      "expected_replacements_interval_endpoint_maximum_absolute_error": 1.0,
+      "empirical_support_warning_allowed": false
+    }
+  },
+  "calibration": {
+    "minimum_simulations_for_acceptance": 200,
+    "draws_per_simulation": 1000,
+    "gates": {
+      "maximum_absolute_bias_as_prior_width_fraction": 0.03,
+      "coverage_90_lower": 0.84,
+      "coverage_90_upper": 0.96,
+      "maximum_rank_histogram_l1": 0.5
+    }
+  },
+  "training_profiles": {
+    "smoke": {
+      "simulations": 500,
+      "epochs": 5,
+      "acceptance_eligible": false
+    },
+    "full": {
+      "simulations": 20000,
+      "epochs": 100,
+      "acceptance_eligible": true
+    }
+  },
+  "promotion_rule": "All comparison and calibration gates must pass under the full profile before an empirical NPE replication claim is promoted. A smoke result cannot pass the promotion gate.",
+  "timing_rule": "Report simulation, training excluding simulation, loading, inference, and conventional comparison separately; a finite break-even is not required and must not be invented."
+}

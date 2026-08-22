@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "status": "conventional_grid_and_calibration_passed_empirical_posterior_failed",
+  "paths_are_repository_relative": true,
+  "data": {
+    "source_commit": "43d37bd1d24a0a6c6e73e747545ad490d1f7f95b",
+    "raw_sha256": "5e85a1c33c11632effbec3ffb213c8e4c92501a49dfe388ad28a203f8c732387",
+    "processed_sha256": "7f9e169e5cb2f18204c342935cadab13df188af4275c45fe07dfe0f94840376b",
+    "observations": 4329,
+    "choice_observations": 4292,
+    "transition_counts": [1682, 2555, 55]
+  },
+  "validation_config": {
+    "path": "replication/rust_1987/validation_config.json",
+    "sha256": "bc227e62b45f4c76f5a7e3131d761a279e694c159a65b7e7b98497a111941bac",
+    "frozen_before_first_empirical_mdn_comparison": true
+  },
+  "nfxp": {
+    "success": true,
+    "replacement_cost": 10.074942207157468,
+    "maintenance_slope": 2.2930929804154183,
+    "negative_log_likelihood": 163.58428365680265,
+    "bellman_residual": 3.019806626980426e-14,
+    "optimizer_iterations": 9,
+    "objective_evaluations": 11,
+    "representative_warm_seconds": 0.021472216001711786,
+    "mpec_supported": false
+  },
+  "dense_grid": {
+    "executed": true,
+    "shape": [141, 117],
+    "points": 16497,
+    "seconds": 12.513178415014409,
+    "replacement_cost": {
+      "mean": 10.609515435769197,
+      "sd": 1.4404070038588512,
+      "median": 10.5,
+      "q025": 8.2,
+      "q975": 13.8
+    },
+    "maintenance_slope": {
+      "mean": 2.51076682046225,
+      "sd": 0.5861694329312419,
+      "median": 2.45,
+      "q025": 1.4999999999999998,
+      "q975": 3.8
+    }
+  },
+  "empirical_npe_smoke": {
+    "promotion_eligible": false,
+    "training_simulations": 500,
+    "epochs": 5,
+    "posterior_draws": 2000,
+    "simulation_seconds": 4.13887181004975,
+    "training_seconds_excluding_simulation": 55.08280834602192,
+    "inference_seconds": 0.12197122303768992,
+    "approximation_gates_pass": false,
+    "joint_coarsened_total_variation": 0.877660959889462,
+    "marginal_cdf_supremum": [0.4274205168749019, 0.3977356475157595],
+    "parameter_mean_error_in_grid_sd": [1.0492267520800893, 1.124156194460948],
+    "policy_mean_max_absolute_error": 0.033347887377616695,
+    "policy_interval_endpoint_max_absolute_error": 0.18145916675215473,
+    "expected_replacements_12_months": {
+      "grid_mean": 0.04835340002844619,
+      "npe_mean": 0.5678529073606169
+    },
+    "gate_results": {
+      "empirical_support": true,
+      "expected_replacements_interval": false,
+      "expected_replacements_mean": false,
+      "joint_coarsened_tv": false,
+      "marginal_cdf": false,
+      "parameter_means": false,
+      "policy_interval": false,
+      "policy_mean": false
+    }
+  },
+  "calibration_smoke": {
+    "promotion_eligible": false,
+    "simulations": 20,
+    "draws_per_simulation": 300,
+    "pass": false,
+    "gate_results": {
+      "bias": false,
+      "coverage_90": false,
+      "minimum_simulations": false,
+      "rank_histogram": false
+    },
+    "all_region": {
+      "replacement_cost": {
+        "bias": 0.9072472236516413,
+        "rmse": 2.418430235148493,
+        "coverage_90": 1.0,
+        "rank_histogram_l1": 0.6
+      },
+      "maintenance_slope": {
+        "bias": 0.34247143218598497,
+        "rmse": 1.2650777808836489,
+        "coverage_90": 0.9,
+        "rank_histogram_l1": 0.39999999999999997
+      }
+    }
+  },
+  "full_empirical_npe_campaign": {
+    "executed": true,
+    "training": {
+      "simulations": 20000,
+      "epochs_requested": 100,
+      "best_epoch": 17,
+      "simulation_seconds": 23.27455057692714,
+      "training_seconds_excluding_simulation": 67.90093934908509,
+      "estimator_fingerprint": "77264efc1797b656c16a2d70672393ecf10ea2cbf0b70dc1c1d035fba5c4578b"
+    },
+    "empirical_comparison": {
+      "posterior_draws": 20000,
+      "policy_draws": 2000,
+      "promotion_eligible": true,
+      "approximation_gates_pass": false,
+      "pass": false,
+      "parameter_mean_grid": [10.60951543576918, 2.510766820462246],
+      "parameter_mean_npe": [12.863577462848403, 3.2528108816532244],
+      "parameter_mean_error_in_grid_sd": [1.5648785524095536, 1.2659207722249497],
+      "marginal_cdf_supremum": [0.4727546262611874, 0.4012154838518957],
+      "joint_coarsened_total_variation": 0.5143022899893078,
+      "policy_mean_max_absolute_error": 0.01722359705184097,
+      "policy_interval_endpoint_max_absolute_error": 0.04268589866239998,
+      "expected_replacements_12_months": {
+        "grid_mean": 0.04835340002844619,
+        "grid_q025": 0.0017644142063153027,
+        "grid_q975": 0.20881959796503188,
+        "npe_mean": 0.015386764406093847,
+        "npe_q025": 0.00008910409889577067,
+        "npe_q975": 0.09773222608641544
+      },
+      "gate_results": {
+        "empirical_support": true,
+        "expected_replacements_interval": true,
+        "expected_replacements_mean": true,
+        "joint_coarsened_tv": false,
+        "marginal_cdf": false,
+        "parameter_means": false,
+        "policy_interval": true,
+        "policy_mean": true
+      }
+    },
+    "calibration": {
+      "simulations": 200,
+      "draws_per_simulation": 1000,
+      "pass": true,
+      "gate_results": {
+        "bias": true,
+        "coverage_90": true,
+        "minimum_simulations": true,
+        "rank_histogram": true
+      },
+      "all_region": {
+        "replacement_cost": {
+          "bias": -0.2485216338158254,
+          "rmse": 1.6093981992476618,
+          "coverage_90": 0.91,
+          "rank_histogram_l1": 0.19
+        },
+        "maintenance_slope": {
+          "bias": -0.06886578614670114,
+          "rmse": 0.6123200653337886,
+          "coverage_90": 0.91,
+          "rank_histogram_l1": 0.11999999999999998
+        }
+      }
+    },
+    "claim_allowed": false,
+    "claim_blocker": "The full empirical posterior failed the frozen parameter-mean, marginal-CDF, and joint-distribution gates even though calibration and policy-functional gates passed."
+  },
+  "nonclaim": "The exact NFXP, dense-grid reference, and full simulator-calibration gates passed. The full empirical MDN posterior failed frozen marginal and joint agreement gates, so this evidence does not claim a successful empirical NPE replication."
+}

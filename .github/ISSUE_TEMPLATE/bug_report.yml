@@ -1,0 +1,44 @@
+name: Bug report
+description: Report a reproducible defect in structnpe.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not upload private data, credentials, or untrusted estimator artifacts.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide the smallest synthetic, self-contained example that fails.
+      render: python
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: structnpe version
+      placeholder: 0.1.0b1
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Python, operating system, and device
+      placeholder: Python 3.13, Ubuntu 24.04, CPU
+    validations:
+      required: true
+  - type: textarea
+    id: traceback
+    attributes:
+      label: Traceback or logs
+      description: Redact usernames, local paths, secrets, and private data.
+      render: shell
+

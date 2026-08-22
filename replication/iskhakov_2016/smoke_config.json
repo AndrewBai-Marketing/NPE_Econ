@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "status": "bounded_smoke_configuration",
+  "discount_factors": [0.975],
+  "repetitions_per_discount_factor": 3,
+  "training_simulations_per_discount_factor": 300,
+  "epochs": 3,
+  "posterior_draws_per_panel": 300,
+  "seed": 2016
+}
+

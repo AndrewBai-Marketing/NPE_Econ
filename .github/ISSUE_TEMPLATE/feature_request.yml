@@ -1,0 +1,29 @@
+name: Feature request
+description: Propose a focused improvement to the public package.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What user problem is not handled by the current API?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the smallest useful API or documentation change.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation and compatibility
+      description: Note tests, posterior-validation implications, artifact compatibility, or migration concerns.
+

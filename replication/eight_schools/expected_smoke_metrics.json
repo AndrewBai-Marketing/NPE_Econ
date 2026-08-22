@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "release": "0.1.0b1",
+  "status": "PASS",
+  "profile": "smoke",
+  "configuration_sha256": "caa18ad1fb5c501215410e9cf1837653be70d0513c960f28097e94c54ad6391d",
+  "result_sha256_before_path_sanitization": "1699573701c574d295d0c3e54a6cd2e338207b80530431d3a5825dcbc53961ac",
+  "model_fingerprint": "08cc1502c8bc091cd7588143fb67f93b5f7bcd1cef6c9618a8d50519325b4198",
+  "metrics": {
+    "parameter_mean_standardized_mae": 0.18680675016801204,
+    "parameter_sd_standardized_mae": 0.1467300063981138,
+    "central_95_endpoint_standardized_mae": 0.3452124548196165,
+    "correlation_max_abs_error": 0.36585695130394824,
+    "tau_mean_abs_error": 1.4037327691092,
+    "predictive_mean_max_abs_error": 1.5521266384752614,
+    "tau_support_violation_rate": 0.0
+  },
+  "posterior_hyperparameters": {
+    "mu_exact_mean": 6.503109606061986,
+    "mu_approximate_mean": 6.114827297802623,
+    "tau_exact_mean": 4.685474735464257,
+    "tau_approximate_mean": 6.089207504573457
+  },
+  "historical_timing_seconds": {
+    "exact_reference": 0.8104657230433077,
+    "training": 64.20752986799926,
+    "inference": 0.002650426933541894
+  },
+  "timing_is_acceptance_threshold": false,
+  "environment": {
+    "python": "3.13.11",
+    "device": "cpu"
+  },
+  "limitations": [
+    "This is one observed Eight Schools dataset under one stated prior.",
+    "The smoke profile is not a broad hierarchical-model validation campaign.",
+    "The larger full profile remains unrun for release 0.1.0b1."
+  ]
+}

@@ -1,0 +1,21 @@
+project_name: custom_simulator
+output_dir: runs/custom_simulator
+simulator_module: model
+simulator_class: MyModel
+n_train: 200
+n_valid: 50
+n_test: 0
+seed: 123
+posterior:
+  type: gaussian
+  hidden_dim: 64
+  n_components: 3
+  epochs: 50
+  batch_size: 64
+validation:
+  posterior_predictive: true
+  prior_predictive_support: true
+  simulation_based_calibration: true
+  ensemble_seeds: []
+counterfactuals:
+  policies: []

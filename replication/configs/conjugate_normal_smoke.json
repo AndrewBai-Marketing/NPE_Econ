@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "config_id": "conjugate_normal_smoke_0.1.0b1",
+  "benchmark": "conjugate_normal_exact_v1",
+  "device": "cpu",
+  "source_profile": "smoke",
+  "source_threshold_file": "validation/exact_example/thresholds.json",
+  "source_threshold_sha256": "676aeab7d484fc09c40cba5dc0eb433558afd50284798c36233366b9103d6349",
+  "configuration": {
+    "simulations": 2500,
+    "evaluation_cases": 32,
+    "posterior_draws": 1500,
+    "validation_fraction": 0.2,
+    "hidden_dim": 32,
+    "depth": 2,
+    "components": 5,
+    "epochs": 35,
+    "batch_size": 128,
+    "patience": 7,
+    "training_seed": 41001,
+    "evaluation_seed": 41002,
+    "inference_seed": 41003
+  },
+  "acceptance_maxima": {
+    "posterior_mean_mae": 0.1,
+    "posterior_sd_mae": 0.07,
+    "posterior_variance_mae": 0.04,
+    "central_95_endpoint_mae": 0.15,
+    "marginal_quantile_grid_l1_mean": 0.1,
+    "coverage_95_abs_error": 0.2,
+    "predictive_sd_mae": 0.08
+  },
+  "output": "conjugate_normal/validation_metrics.json",
+  "timeout_seconds": 1200
+}

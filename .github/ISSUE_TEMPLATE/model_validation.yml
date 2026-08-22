@@ -1,0 +1,66 @@
+name: Model-validation question
+description: Ask about validating structnpe on a simulator-defined model.
+title: "[Validation]: "
+labels: [validation]
+body:
+  - type: markdown
+    attributes:
+      value: Use synthetic or public information only. Do not upload private data or proprietary simulators.
+  - type: textarea
+    id: simulator
+    attributes:
+      label: Simulator and parameter vector
+      description: Describe the simulator, named parameters, supports, and important latent or discrete structure.
+    validations:
+      required: true
+  - type: textarea
+    id: prior
+    attributes:
+      label: Prior
+      description: State the joint prior and any transforms or constraints.
+    validations:
+      required: true
+  - type: textarea
+    id: representation
+    attributes:
+      label: Observed-data representation
+      description: Describe the raw observation and the adapter or summary supplied to the estimator.
+    validations:
+      required: true
+  - type: input
+    id: budget
+    attributes:
+      label: Simulation and training budget
+      placeholder: 20,000 simulations; 50 epochs; 5 MDN components
+    validations:
+      required: true
+  - type: textarea
+    id: comparator
+    attributes:
+      label: Comparator and posterior diagnostics
+      description: Report any exact grid, MCMC, likelihood, SBC, predictive, marginal, joint, or decision-relevant comparisons.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: 0.1.0b1
+    validations:
+      required: true
+  - type: input
+    id: fingerprint
+    attributes:
+      label: Model fingerprint
+      description: Copy the fingerprint text only; do not attach a private artifact.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproducible example
+      description: Provide a synthetic, self-contained example with fixed seeds.
+      render: python
+    validations:
+      required: true
+

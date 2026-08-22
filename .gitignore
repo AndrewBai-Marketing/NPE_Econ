@@ -1,0 +1,50 @@
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Packaging and release outputs
+/build/
+/dist/
+*.egg-info/
+/release_manifest.json
+/SHA256SUMS
+/release-assets/
+
+# Replication outputs and externally fetched data
+/replication/results/*
+!/replication/results/.gitignore
+/replication/*/results/*
+!/replication/*/results/.gitignore
+/replication/rust_1987/data/
+/replication/iskhakov_2016/data/
+*.ckpt
+*.pt
+*.pth
+
+# Example and local run outputs
+/runs/
+/saved/
+/examples/output/
+
+# Editors, notebooks, schedulers, and operating systems
+.idea/
+.vscode/
+.ipynb_checkpoints/
+slurm-*.out
+*.slurm.log
+.DS_Store

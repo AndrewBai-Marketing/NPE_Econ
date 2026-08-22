@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "release": "0.1.0b1",
+  "role": "frozen historical beta evidence",
+  "comparison_semantics": {
+    "maximum": "The tolerance is the original predeclared validation maximum; pass means current <= tolerance, not closeness to the historical realization.",
+    "descriptive": "The historical value is shown, but timing or tiny-SBC variation is not a release gate."
+  },
+  "metrics": {
+    "conjugate_normal.posterior_mean_mae": {
+      "stage": "conjugate_normal",
+      "source": "conjugate_normal",
+      "path": ["metrics", "posterior_mean_mae"],
+      "historical": 0.011477428132404762,
+      "comparison": "maximum",
+      "tolerance": 0.1,
+      "gating": true
+    },
+    "conjugate_normal.posterior_sd_mae": {
+      "stage": "conjugate_normal",
+      "source": "conjugate_normal",
+      "path": ["metrics", "posterior_sd_mae"],
+      "historical": 0.0069170819776042825,
+      "comparison": "maximum",
+      "tolerance": 0.07,
+      "gating": true
+    },
+    "conjugate_normal.predictive_sd_mae": {
+      "stage": "conjugate_normal",
+      "source": "conjugate_normal",
+      "path": ["metrics", "predictive_sd_mae"],
+      "historical": 0.004878448422465766,
+      "comparison": "maximum",
+      "tolerance": 0.08,
+      "gating": true
+    },
+    "sbc.bias": {
+      "stage": "sbc_32",
+      "source": "conjugate_normal",
+      "path": ["sbc", "by_parameter_and_region", 0, "bias"],
+      "historical": -0.020028200115631917,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "sbc.rmse": {
+      "stage": "sbc_32",
+      "source": "conjugate_normal",
+      "path": ["sbc", "by_parameter_and_region", 0, "rmse"],
+      "historical": 0.22578373410723018,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "sbc.coverage_50": {
+      "stage": "sbc_32",
+      "source": "conjugate_normal",
+      "path": ["sbc", "by_parameter_and_region", 0, "coverage_50"],
+      "historical": 0.46875,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "sbc.coverage_80": {
+      "stage": "sbc_32",
+      "source": "conjugate_normal",
+      "path": ["sbc", "by_parameter_and_region", 0, "coverage_80"],
+      "historical": 0.8125,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "sbc.coverage_90": {
+      "stage": "sbc_32",
+      "source": "conjugate_normal",
+      "path": ["sbc", "by_parameter_and_region", 0, "coverage_90"],
+      "historical": 0.84375,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "sbc.coverage_95": {
+      "stage": "sbc_32",
+      "source": "conjugate_normal",
+      "path": ["sbc", "by_parameter_and_region", 0, "coverage_95"],
+      "historical": 0.96875,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "structural_grid.joint_grid_voronoi_total_variation": {
+      "stage": "structural_grid",
+      "source": "structural_grid",
+      "path": ["metrics", "joint_grid_voronoi_total_variation"],
+      "historical": 0.2520696550871438,
+      "comparison": "maximum",
+      "tolerance": 0.35,
+      "gating": true
+    },
+    "structural_grid.policy_mean_abs_error": {
+      "stage": "structural_grid",
+      "source": "structural_grid",
+      "path": ["metrics", "policy_mean_abs_error"],
+      "historical": 0.0010231867252135096,
+      "comparison": "maximum",
+      "tolerance": 0.06,
+      "gating": true
+    },
+    "structural_grid.exact_policy_mean": {
+      "stage": "structural_grid",
+      "source": "structural_grid",
+      "path": ["comparison", "policy_replacement_share", "exact_mean"],
+      "historical": 0.23030025132023854,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "structural_grid.approximate_policy_mean": {
+      "stage": "structural_grid",
+      "source": "structural_grid",
+      "path": ["comparison", "policy_replacement_share", "approximate_mean"],
+      "historical": 0.22927706459502503,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "structural_grid.predictive_cell_max_abs_error": {
+      "stage": "structural_grid",
+      "source": "structural_grid",
+      "path": ["metrics", "predictive_cell_probability_max_abs_error"],
+      "historical": 0.002297573620224619,
+      "comparison": "maximum",
+      "tolerance": 0.06,
+      "gating": true
+    },
+    "performance.simulation_seconds": {
+      "stage": "benchmark",
+      "source": "benchmark",
+      "path": ["timing", "simulation_seconds"],
+      "historical": 0.04391256195958704,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "performance.training_excluding_simulation_seconds": {
+      "stage": "benchmark",
+      "source": "benchmark",
+      "path": ["timing", "training_excluding_simulation_seconds"],
+      "historical": 52.18852048111148,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "performance.one_dataset_10000_draws_median_seconds": {
+      "stage": "benchmark",
+      "source": "benchmark",
+      "path": ["timing", "one_dataset_warm_inference", "median_seconds"],
+      "historical": 0.0005696100415661931,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "performance.batch_32_median_seconds": {
+      "stage": "benchmark",
+      "source": "benchmark",
+      "path": ["timing", "batch_warm_inference", "median_seconds"],
+      "historical": 0.012883023009635508,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    },
+    "performance.load_median_seconds": {
+      "stage": "benchmark",
+      "source": "benchmark",
+      "path": ["timing", "estimator_load_warm_process", "median_seconds"],
+      "historical": 0.002903230953961611,
+      "comparison": "descriptive",
+      "tolerance": null,
+      "gating": false
+    }
+  },
+  "limitations": [
+    "The SBC record contains only 32 cases and is not a calibration study.",
+    "The structural comparison is one fixed synthetic panel.",
+    "Timing is historical, machine-dependent, and non-gating.",
+    "No full-profile evidence was completed for 0.1.0b1."
+  ]
+}

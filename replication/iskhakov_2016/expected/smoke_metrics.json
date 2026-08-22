@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "status": "completed_bounded_run",
+  "paths_are_repository_relative": true,
+  "configuration": {
+    "smoke_path": "replication/iskhakov_2016/smoke_config.json",
+    "smoke_sha256": "ec9801da0034939c3745690d9012853c6caa79b822ce2132b5001196d01a203b",
+    "full_path": "replication/iskhakov_2016/full_campaign.json",
+    "full_sha256": "2819146ec8b572837eaf58c752f7d70c7735cdce1f2a13115009dc026d0bf24f",
+    "full_status": "configured_not_run"
+  },
+  "design": {
+    "beta": 0.975,
+    "repetitions": 3,
+    "buses": 50,
+    "periods": 120,
+    "num_states": 175,
+    "cost_scale": 0.001,
+    "truth": [11.7257, 2.4569],
+    "transition_probabilities": [0.0937, 0.4475, 0.4459, 0.0127, 0.0002],
+    "transition_treatment": "fixed at the declared DGP values for NFXP and NPE"
+  },
+  "nfxp": {
+    "successes": 3,
+    "bias": [-1.1279182398918923, -0.27371536472516],
+    "rmse": [1.605187473989791, 0.4608851265231389],
+    "seconds_per_panel": 1.3637125126551837,
+    "maximum_bellman_residual": 2.3092638912203256e-14
+  },
+  "npe": {
+    "training_simulations": 300,
+    "epochs": 3,
+    "draws_per_panel": 300,
+    "bias": [0.2761784363183377, 0.15354562613993647],
+    "rmse": [0.3691084029702034, 0.15668958024166707],
+    "coverage_95": [1.0, 1.0],
+    "posterior_correlation_mean": -0.058180890816804574,
+    "simulation_seconds": 8.651972022955306,
+    "training_seconds_excluding_simulation": 66.3503883840749,
+    "inference_seconds_per_panel": 0.0004057026623437802
+  },
+  "amortization": {
+    "descriptive_break_even_panels": 55.02474286288308,
+    "warning": "This timing estimate is based on only three panels and is not a stable performance claim."
+  },
+  "mpec": {
+    "supported": false
+  },
+  "nonclaim": "This three-panel, one-beta smoke is too small for substantive bias, coverage, or break-even claims and is not the configured six-beta/250-run campaign."
+}
