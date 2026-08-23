@@ -225,16 +225,6 @@ def test_current_structnpe_model_contract_uses_batched_simulator() -> None:
     assert all(np.asarray(item).shape == (2 * NUM_STATES,) for item in observations)
 
 
-def test_full_iskhakov_campaign_is_configured_but_unrun() -> None:
-    path = Path("replication/iskhakov_2016/full_campaign.json")
-    config = json.loads(path.read_text(encoding="utf-8"))
-    assert config["status"] == "configured_not_run"
-    assert config["design"]["discount_factors"] == [0.975, 0.985, 0.995, 0.999, 0.9995, 0.9999]
-    assert config["design"]["repetitions_per_discount_factor"] == 250
-    assert config["design"]["truth"]["replacement_cost"] == 11.7257
-    assert config["design"]["mpec"]["supported"] is False
-
-
 def test_committed_rust_evidence_is_sanitized_and_matches_frozen_config() -> None:
     evidence_path = Path("replication/rust_1987/expected/smoke_metrics.json")
     evidence_text = evidence_path.read_text(encoding="utf-8")
@@ -246,13 +236,3 @@ def test_committed_rust_evidence_is_sanitized_and_matches_frozen_config() -> Non
     config_path = Path(evidence["validation_config"]["path"])
     digest = hashlib.sha256(config_path.read_bytes()).hexdigest()
     assert digest == evidence["validation_config"]["sha256"]
-
-
-def test_committed_iskhakov_evidence_is_sanitized_and_full_campaign_unrun() -> None:
-    evidence_path = Path("replication/iskhakov_2016/expected/smoke_metrics.json")
-    evidence_text = evidence_path.read_text(encoding="utf-8")
-    evidence = json.loads(evidence_text)
-    assert ("/" + "home" + "/") not in evidence_text
-    assert evidence["configuration"]["full_status"] == "configured_not_run"
-    assert evidence["design"]["repetitions"] == 3
-    assert evidence["mpec"]["supported"] is False

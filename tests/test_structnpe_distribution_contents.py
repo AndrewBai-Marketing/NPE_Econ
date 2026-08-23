@@ -118,7 +118,7 @@ def test_wheel_contains_only_structnpe_package() -> None:
         assert "numpy>=1.26" in requirements
         assert "pandas>=2.2" in requirements
         assert metadata["License-Expression"] == "MIT"
-        assert {"build", "dev", "docs", "neural", "replication", "torch"} <= set(
+        assert {"build", "dev", "neural", "replication", "torch"} <= set(
             metadata.get_all("Provides-Extra", [])
         )
         entry_points = [name for name in names if name.endswith(".dist-info/entry_points.txt")]
@@ -141,6 +141,7 @@ def test_sdist_respects_public_release_boundary() -> None:
             assert member.uname == "" and member.gname == ""
             assert member.mode == (0o755 if member.isdir() else 0o644)
         allowed_children = {
+            "BENCHMARKS.md",
             "CHANGELOG.md",
             "CITATION.cff",
             "CONTRIBUTING.md",
@@ -149,16 +150,10 @@ def test_sdist_respects_public_release_boundary() -> None:
             "PKG-INFO",
             "README.md",
             "SECURITY.md",
-            "benchmarks",
-            "docs",
             "examples",
             "pyproject.toml",
-            "replication",
-            "scripts",
             "setup.cfg",
             "src",
-            "tests",
-            "validation",
         }
         assert {
             PurePosixPath(name).parts[1]
@@ -168,15 +163,11 @@ def test_sdist_respects_public_release_boundary() -> None:
         assert all(member.isfile() or member.isdir() for member in members)
         assert f"{prefix}LICENSE" in names
         assert f"{prefix}README.md" in names
+        assert f"{prefix}BENCHMARKS.md" in names
         assert f"{prefix}pyproject.toml" in names
         assert f"{prefix}src/structnpe/__init__.py" in names
-        assert f"{prefix}docs/release/06_RELEASE_READINESS.md" in names
-        assert f"{prefix}validation/exact_example/thresholds.json" in names
-        assert f"{prefix}validation/exact_example/output/validation_metrics.json" in names
-        assert f"{prefix}validation/structural_example/thresholds.json" in names
-        assert f"{prefix}validation/structural_example/output/validation_metrics.json" in names
-        assert f"{prefix}benchmarks/benchmark_results.json" in names
-        assert f"{prefix}replication/README.md" in names
-        assert f"{prefix}replication/scripts/run_all.py" in names
-        assert f"{prefix}replication/expected/release_0.1.0b1_metrics.json" in names
-        assert f"{prefix}scripts/render_readme_examples.py" in names
+        assert f"{prefix}examples/quickstart.py" in names
+        assert f"{prefix}examples/custom_model.py" in names
+        assert f"{prefix}examples/assets/demo_estimator/manifest.json" in names
+        assert not any(f"{prefix}replication/" in name for name in names)
+        assert not any(f"{prefix}tests/" in name for name in names)

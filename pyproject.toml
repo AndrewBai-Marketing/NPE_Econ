@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "structnpe"
 version = "0.1.0b1"
-description = "Amortized posterior inference for simulator-defined structural models"
+description = "Approximate Bayesian posteriors for models you can simulate"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -39,7 +39,6 @@ dev = [
   "pytest>=8",
   "scipy>=1.11",
 ]
-docs = ["mkdocs>=1.6"]
 replication = [
   "torch>=2.2",
   "scipy>=1.11",

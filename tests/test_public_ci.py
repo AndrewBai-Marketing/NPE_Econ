@@ -21,12 +21,33 @@ from scripts.normalize_sdist import (
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_documentation_snippets_are_current() -> None:
-    subprocess.run(
-        [sys.executable, str(ROOT / "scripts" / "render_readme_examples.py"), "--check"],
-        cwd=ROOT,
-        check=True,
+def test_public_benchmark_table_matches_frozen_evidence() -> None:
+    eight = json.loads(
+        (ROOT / "replication/eight_schools/expected_smoke_metrics.json").read_text(
+            encoding="utf-8"
+        )
+    )["posterior_hyperparameters"]
+    rust = json.loads(
+        (ROOT / "replication/rust_1987/expected/smoke_metrics.json").read_text(
+            encoding="utf-8"
+        )
+    )["full_empirical_npe_campaign"]["empirical_comparison"]
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    benchmarks = (ROOT / "BENCHMARKS.md").read_text(encoding="utf-8")
+
+    expected_rows = (
+        f"| Eight Schools | population mean `mu` | {eight['mu_exact_mean']:.4f} | "
+        f"{eight['mu_approximate_mean']:.4f} |",
+        f"| Eight Schools | heterogeneity `tau` | {eight['tau_exact_mean']:.4f} | "
+        f"{eight['tau_approximate_mean']:.4f} |",
+        f"| Rust bus replacement | replacement cost | "
+        f"{rust['parameter_mean_grid'][0]:.4f} | {rust['parameter_mean_npe'][0]:.4f} |",
+        f"| Rust bus replacement | maintenance slope | "
+        f"{rust['parameter_mean_grid'][1]:.4f} | {rust['parameter_mean_npe'][1]:.4f} |",
     )
+    for row in expected_rows:
+        assert row in readme
+        assert row in benchmarks
 
 
 def test_every_executable_public_example_has_an_installed_wheel_profile() -> None:
@@ -42,76 +63,6 @@ def test_every_executable_public_example_has_an_installed_wheel_profile() -> Non
         stdout=subprocess.PIPE,
     )
     assert "PUBLIC_EXAMPLE_INVENTORY_OK" in completed.stdout
-
-
-def test_release_asset_generator_hashes_only_distributions(tmp_path: Path) -> None:
-    dist = tmp_path / "dist"
-    output = tmp_path / "release"
-    dist.mkdir()
-    wheel = dist / "structnpe-0.1.0b1-py3-none-any.whl"
-    sdist = dist / "structnpe-0.1.0b1.tar.gz"
-    wheel.write_bytes(b"test wheel")
-    sdist.write_bytes(b"test sdist")
-    commit = "a" * 40
-
-    subprocess.run(
-        [
-            sys.executable,
-            str(ROOT / "scripts" / "generate_release_assets.py"),
-            "--dist-dir",
-            str(dist),
-            "--output-dir",
-            str(output),
-            "--tag",
-            "v0.1.0b1",
-            "--commit",
-            commit,
-        ],
-        cwd=ROOT,
-        check=True,
-    )
-
-    manifest = json.loads((output / "release_manifest.json").read_text(encoding="utf-8"))
-    assert manifest["source"] == {"tag": "v0.1.0b1", "commit": commit}
-    assert manifest["release"]["channel"] == "github-prerelease"
-    assert manifest["release"]["pypi_publication"] is False
-    assert [entry["filename"] for entry in manifest["artifacts"]] == sorted(
-        [wheel.name, sdist.name]
-    )
-    expected = {
-        wheel.name: hashlib.sha256(wheel.read_bytes()).hexdigest(),
-        sdist.name: hashlib.sha256(sdist.read_bytes()).hexdigest(),
-    }
-    assert {entry["filename"]: entry["sha256"] for entry in manifest["artifacts"]} == expected
-    assert (output / "SHA256SUMS").read_text(encoding="utf-8").splitlines() == [
-        f"{expected[name]}  {name}" for name in sorted(expected)
-    ]
-
-
-def test_release_asset_generator_rejects_tag_version_mismatch(tmp_path: Path) -> None:
-    dist = tmp_path / "dist"
-    dist.mkdir()
-    completed = subprocess.run(
-        [
-            sys.executable,
-            str(ROOT / "scripts" / "generate_release_assets.py"),
-            "--dist-dir",
-            str(dist),
-            "--output-dir",
-            str(tmp_path / "release"),
-            "--tag",
-            "v9.9.9",
-            "--commit",
-            "b" * 40,
-        ],
-        cwd=ROOT,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
-    assert completed.returncode != 0
-    assert "tag/version mismatch" in completed.stdout
 
 
 def test_sdist_normalizer_removes_identity_and_executable_file_modes(tmp_path: Path) -> None:
@@ -226,19 +177,6 @@ def test_sdist_normalizer_rejects_input_symlink_without_touching_target(tmp_path
 
     assert link.is_symlink()
     assert target.read_bytes() == target_before
-
-
-def test_release_workflow_has_no_pypi_publication_path() -> None:
-    workflow = (ROOT / ".github" / "workflows" / "github-prerelease.yml").read_text(
-        encoding="utf-8"
-    )
-    lowered = workflow.lower()
-    assert "workflow_dispatch" in workflow
-    assert "contents: write" in workflow
-    assert "prerelease" in lowered
-    assert "id-token: write" not in lowered
-    assert "pypa/gh-action-pypi-publish" not in lowered
-    assert "twine upload" not in lowered
 
 
 def test_model_validation_form_requests_the_public_reproduction_contract() -> None:

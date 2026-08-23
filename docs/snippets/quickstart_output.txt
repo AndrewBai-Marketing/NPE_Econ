@@ -1,3 +1,0 @@
-       parameter  posterior_mean  posterior_sd   median     q025    q975
-maintenance_cost        0.552179      0.103336 0.539629 0.342964 0.70229
-replacement_cost        4.689264      0.724780 4.742391 3.037325 5.73117
