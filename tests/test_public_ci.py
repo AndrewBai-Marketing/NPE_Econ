@@ -23,10 +23,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_public_benchmark_table_matches_frozen_evidence() -> None:
     eight = json.loads(
-        (ROOT / "replication/eight_schools/expected_smoke_metrics.json").read_text(
+        (ROOT / "replication/eight_schools/expected_metrics.json").read_text(
             encoding="utf-8"
         )
-    )["posterior_hyperparameters"]
+    )
     rust_mdn = json.loads(
         (ROOT / "replication/rust_1987/expected/smoke_metrics.json").read_text(
             encoding="utf-8"
@@ -45,11 +45,30 @@ def test_public_benchmark_table_matches_frozen_evidence() -> None:
     dense_mean = rust["dense_reference"]["posterior"]["mean"]
     first_run = rust["classifier_runs"][0]
     classifier_mean = first_run["posterior"]["mean"]
+    exact_mean = eight["exact_reference"]["mean"]
+    approximate_means = [
+        [row["approximate_mean"] for row in run["parameters"]]
+        for run in eight["runs"]
+    ]
+    mean_of_means = [
+        sum(row[index] for row in approximate_means) / len(approximate_means)
+        for index in range(2)
+    ]
+    ranges = [
+        (
+            min(row[index] for row in approximate_means),
+            max(row[index] for row in approximate_means),
+        )
+        for index in range(2)
+    ]
     expected_rows = (
-        f"| Population mean `mu` | {eight['mu_exact_mean']:.4f} | "
-        f"{eight['mu_approximate_mean']:.4f} |",
-        f"| Heterogeneity `tau` | {eight['tau_exact_mean']:.4f} | "
-        f"{eight['tau_approximate_mean']:.4f} |",
+        f"| Deterministic quadrature posterior mean | {exact_mean[0]:.4f} | "
+        f"{exact_mean[1]:.4f} |",
+        f"| `structnpe.fit`, average posterior mean over five seeds | "
+        f"{mean_of_means[0]:.4f} | {mean_of_means[1]:.4f} |",
+        f"| Range of the five fitted posterior means | "
+        f"[{ranges[0][0]:.4f}, {ranges[0][1]:.4f}] | "
+        f"[{ranges[1][0]:.4f}, {ranges[1][1]:.4f}] |",
         f"| This repository's NFXP maximum likelihood | "
         f"{nfxp['replacement_cost']:.4f} | {nfxp['maintenance_slope']:.4f} |",
         f"| Dense-grid posterior mean | {dense_mean[0]:.4f} | "
@@ -58,8 +77,34 @@ def test_public_benchmark_table_matches_frozen_evidence() -> None:
         f"{classifier_mean[0]:.4f} | {classifier_mean[1]:.4f} |",
     )
     for row in expected_rows:
-        assert row in readme
+        assert row in readme or row in benchmarks
+
+    assert eight["all_seeds_pass"] is True
+    assert all(run["status"] == "PASS" for run in eight["runs"])
+    for run in eight["runs"]:
+        values = run["parameters"]
+        row = (
+            f"| {run['seed']} | {values[0]['approximate_mean']:.4f} | "
+            f"{values[1]['approximate_mean']:.4f} | "
+            f"{values[0]['approximate_sd']:.4f} | "
+            f"{values[1]['approximate_sd']:.4f} | "
+            f"{run['metrics']['marginal_cdf_max_abs_error']:.5f} |"
+        )
         assert row in benchmarks
+    worst_eight_cdf = max(
+        run["metrics"]["marginal_cdf_max_abs_error"] for run in eight["runs"]
+    )
+    worst_eight_mean = max(
+        run["metrics"]["hyperparameter_mean_max_standardized_abs_error"]
+        for run in eight["runs"]
+    )
+    worst_eight_joint = max(
+        run["metrics"]["joint_20x20_quantile_grid_total_variation"]
+        for run in eight["runs"]
+    )
+    assert f"{worst_eight_cdf:.5f}" in readme
+    assert f"{worst_eight_mean:.5f}" in readme
+    assert f"{worst_eight_joint:.5f}" in readme
 
     assert rust["all_seeds_pass_frozen_numerical_comparison_limits"] is True
     assert all(

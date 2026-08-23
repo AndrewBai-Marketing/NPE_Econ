@@ -2,9 +2,9 @@
 
 The repository maintains two public-data comparisons:
 
-- [`eight_schools`](eight_schools/) compares the neural posterior with
-  quadrature and conditional Gaussian calculations for the canonical Eight
-  Schools data.
+- [`eight_schools`](eight_schools/) compares five public-API fits of the exact
+  marginalized `(mu, tau)` hyperposterior with deterministic quadrature for
+  the canonical Eight Schools data.
 - [`rust_1987`](rust_1987/) reproduces the conventional group-4 bus
   replacement estimate, constructs a dense Bayesian grid reference, evaluates
   a passing model-specific simulation classifier, and preserves the failed

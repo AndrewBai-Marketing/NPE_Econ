@@ -24,14 +24,18 @@ generic `structnpe.fit` MDN.
 
 ### Eight Schools
 
-| Parameter | Exact posterior mean | `structnpe.fit` mean | Difference |
-| --- | ---: | ---: | ---: |
-| Population mean `mu` | 6.5031 | 6.1148 | -0.3883 |
-| Heterogeneity `tau` | 4.6855 | 6.0892 | +1.4037 |
+| Result | Population mean `mu` | Heterogeneity `tau` |
+| --- | ---: | ---: |
+| Deterministic quadrature posterior mean | 6.4720 | 4.7531 |
+| Mean of five `structnpe.fit` posterior means | 6.4178 | 4.7042 |
+| Range across the five fitted posterior means | [6.0483, 6.9624] | [4.5063, 5.0521] |
 
-The bounded Eight Schools smoke run passed its declared thresholds. It still
-has visible approximation error, especially in heterogeneity and posterior
-dependence, and is not presented as an exact match.
+The mean and range in the last two rows summarize stochastic training runs;
+they are not an ensemble posterior or a posterior uncertainty interval.
+All five fixed seeds pass the committed numerical accuracy gates. This is a
+comparison of the marginalized two-parameter hyperposterior, not a claim that
+the current diagonal mixture can reliably learn every centered hierarchical
+parameterization.
 
 ## Eight Schools model
 
@@ -42,7 +46,7 @@ y     = [28, 8, -3, 7, -1, 1, 18, 12]
 sigma = [15, 10, 16, 11, 9, 11, 10, 18].
 ```
 
-The maintained hierarchical model is
+The hierarchical model is
 
 $$
 \mu\sim\mathcal N(0,10^2),\qquad
@@ -54,26 +58,80 @@ $$
 y_j\mid\theta_j\sim\mathcal N(\theta_j,\sigma_j^2).
 $$
 
-The reference integrates over \(\tau\) by dense one-dimensional quadrature
-and uses the conditional Gaussian law for \(\mu\) and the school effects. The
-five-component diagonal-Gaussian MDN is trained through the public API.
+For the public estimand, the latent \(\theta_j\) are integrated out exactly:
 
-| Diagnostic | Result |
-| --- | ---: |
-| Standardized parameter-mean MAE | 0.187 |
-| Standardized posterior-SD MAE | 0.147 |
-| Maximum absolute correlation error | 0.366 |
-| Absolute error in posterior mean of `tau` | 1.404 |
+$$
+p(\mu,\tau\mid y)
+\propto p(\mu)p(\tau)
+\prod_{j=1}^{8}
+\mathcal N\!\left(y_j;\mu,\tau^2+\sigma_j^2\right).
+$$
 
-Run the checked bounded comparison from a repository checkout:
+The simulator therefore accepts only \((\mu,\tau)\) and draws each reported
+effect from the corresponding marginal Gaussian. This is exactly the same
+hyperparameter posterior as the hierarchical model above; it avoids treating
+the eight latent school effects as estimands when they are not the object in
+the comparison.
+
+The independent reference integrates over \(\tau\) on a dense log grid and
+integrates \(\mu\) analytically conditional on \(\tau\). Its deterministic
+moments are
+
+$$
+\mathbb E[(\mu,\tau)\mid y]=(6.4720,\,4.7531),\qquad
+\operatorname{SD}[(\mu,\tau)\mid y]=(4.1912,\,3.6838).
+$$
+
+Means, standard deviations, and correlation use deterministic quadrature
+moments. Interval, marginal-CDF, and joint-grid comparisons use 400,000 fixed
+draws from that quadrature law and are labeled as draw-based in the evidence.
+
+The five public-API fits use 50,000 simulations each, ten diagonal-Gaussian
+components, and seeds 73001--73005:
+
+| Seed | `mu` mean | `tau` mean | `mu` SD | `tau` SD | Max CDF error |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 73001 | 6.5305 | 5.0521 | 4.2670 | 3.9206 | 0.03395 |
+| 73002 | 6.1960 | 4.7005 | 4.1413 | 3.8387 | 0.02873 |
+| 73003 | 6.0483 | 4.5063 | 4.0678 | 3.6340 | 0.04246 |
+| 73004 | 6.9624 | 4.6186 | 4.3167 | 3.7311 | 0.04997 |
+| 73005 | 6.3516 | 4.6437 | 4.1008 | 3.7344 | 0.02047 |
+
+Worst across the five runs:
+
+| Diagnostic | Result | Limit |
+| --- | ---: | ---: |
+| Posterior-mean error, in exact posterior SDs | 0.11701 | 0.15 |
+| Relative posterior-SD error | 0.06428 | 0.15 |
+| 95% interval-endpoint error, in exact posterior SDs | 0.18910 | 0.20 |
+| Marginal-CDF supremum error | 0.04997 | 0.10 |
+| Correlation error | 0.04284 | 0.15 |
+| Joint 20-by-20 quantile-grid total variation | 0.06350 | 0.08 |
+
+Run the checked comparison from a repository checkout:
 
 ```bash
 python -m pip install ".[replication]"
-python replication/eight_schools/run_validation.py --profile smoke --quiet
+python replication/eight_schools/run_validation.py --quiet
 ```
 
-The larger configuration remains unrun. Code and compact evidence are in
+The committed compact evidence records the exact configuration, fixed seeds,
+per-seed results, and model fingerprints. Code and evidence are in
 [`replication/eight_schools`](https://github.com/AndrewBai-Marketing/NPE_Econ/tree/main/replication/eight_schools).
+
+The marginalized representation and training budget were chosen while
+repairing the earlier benchmark. The five-seed result is reproducible
+development evidence, not a preregistered holdout or a simulation-based
+calibration campaign. The joint metric is a coarsened finite-grid diagnostic,
+not a proof of exact joint-law recovery. In particular, dependence is weak in
+this posterior, and the current joint-TV and correlation limits would not
+reject a product-of-exact-marginals negative control. Dependence recovery is
+therefore not established by this benchmark.
+
+The earlier checked-in centered ten-dimensional run was only a permissive
+pipeline smoke test. Its reference column also reported finite reference-draw
+means as though they were deterministic quadrature means. That table has been
+replaced rather than relabeled as successful accuracy evidence.
 
 ## Rust bus-replacement model
 
@@ -201,7 +259,8 @@ The checked evidence shows that the public Rust maximum-likelihood result is
 reproduced, that the structured simulation classifier closely matches the
 declared Bayesian reference across five seeds, and that the current generic
 diagonal MDN is not reliable for that same empirical posterior. Eight Schools
-provides a separate, direct public-API smoke test.
+provides a separate, direct five-seed public-API accuracy comparison for a
+two-parameter marginalized hyperposterior.
 
 None of these results establishes structural identification, correct model
 specification, causal interpretation, or universal posterior accuracy. A new

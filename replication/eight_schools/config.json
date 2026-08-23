@@ -1,0 +1,28 @@
+{
+  "schema_version": 2,
+  "benchmark": "eight_schools_marginal_hyperposterior_v2",
+  "seeds": [73001, 73002, 73003, 73004, 73005],
+  "simulations": 50000,
+  "epochs": 150,
+  "batch_size": 512,
+  "hidden_dim": 128,
+  "depth": 3,
+  "components": 10,
+  "patience": 25,
+  "torch_num_threads": 1,
+  "posterior_draws": 100000,
+  "inference_seed_offset": 1000,
+  "exact_draws": 400000,
+  "exact_seed": 72991,
+  "quadrature_points": 100001,
+  "thresholds": {
+    "hyperparameter_mean_max_standardized_abs_error": 0.15,
+    "hyperparameter_sd_max_relative_abs_error": 0.15,
+    "central_95_endpoint_max_standardized_abs_error": 0.2,
+    "marginal_cdf_max_abs_error": 0.1,
+    "correlation_abs_error": 0.15,
+    "joint_20x20_quantile_grid_total_variation": 0.08,
+    "tau_support_violation_rate": 0.0
+  },
+  "interpretation": "Five-seed numerical accuracy benchmark for the marginalized (mu, tau) posterior."
+}

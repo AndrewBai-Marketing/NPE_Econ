@@ -202,18 +202,36 @@ comparison limits; the worst marginal-CDF error was 0.08645 (limit 0.10) and
 the worst joint total-variation error was 0.14653 (limit 0.15). This is a
 Rust-specific finite-grid classifier, not the generic `structnpe.fit` MDN.
 
-The generic API is exercised directly by the Eight Schools comparison:
+The generic API is exercised directly on the Eight Schools
+hyperparameter posterior. Integrating out the latent school effects gives the
+exact simulator
 
-| Eight Schools parameter | Exact posterior mean | `structnpe.fit` mean |
+$$
+y_j\mid\mu,\tau
+\sim \mathcal N\!\left(\mu,\tau^2+\sigma_j^2\right),
+$$
+
+so `structnpe.fit` targets an approximation
+$q_\phi(\mu,\tau\mid y)\approx p(\mu,\tau\mid y)$, not an unnecessarily
+enlarged ten-dimensional parameterization.
+
+| Eight Schools result | Population mean `mu` | Heterogeneity `tau` |
 | --- | ---: | ---: |
-| Population mean `mu` | 6.5031 | 6.1148 |
-| Heterogeneity `tau` | 4.6855 | 6.0892 |
+| Deterministic quadrature posterior mean | 6.4720 | 4.7531 |
+| `structnpe.fit`, average posterior mean over five seeds | 6.4178 | 4.7042 |
+| Range of the five fitted posterior means | [6.0483, 6.9624] | [4.5063, 5.0521] |
 
-That bounded smoke run passed its declared thresholds, with visible error in
-heterogeneity and joint dependence. The preserved generic diagonal-MDN Rust
-run did not pass; keeping it beside the successful structured comparison makes
-the estimator limitation explicit instead of confusing it with a problem in
-the public data or Rust likelihood.
+The last two rows summarize variation across independent training runs; the
+average is not an ensemble posterior and the range is not a credible interval.
+The quadrature posterior standard deviations are `(4.1912, 3.6838)`; the
+five-seed averages from `structnpe.fit` are `(4.1787, 3.7718)`. Every fixed
+seed passes the numerical gates. Across the five runs, the worst marginal-CDF
+error is `0.04997`, the worst coarsened joint total-variation error is
+`0.06350`, and the worst posterior-mean error is `0.11701` exact posterior
+standard deviations.
+
+The generic diagonal-MDN Rust run remains a documented failure. It is not
+used as evidence for generic accuracy.
 
 See [BENCHMARKS.md](BENCHMARKS.md) for models, priors, diagnostics, commands,
 and machine-readable results. These examples do not establish uniformly
@@ -236,10 +254,10 @@ model-specific comparison or calibration study before substantive use.
 ## Project status
 
 This is an MIT-licensed public beta for Python 3.11--3.13. The current neural
-posterior is a five-component diagonal-Gaussian mixture; it can miss tails,
-boundaries, dependence, or multimodality. Saved estimators are tied to the
-prior, simulator, parameter ordering, and data representation used in
-training.
+posterior is a configurable finite mixture of diagonal Gaussians (five
+components by default); it can miss tails, boundaries, dependence, or
+multimodality. Saved estimators are tied to the prior, simulator, parameter
+ordering, and data representation used in training.
 
 - [Benchmark evidence](BENCHMARKS.md)
 - [Complete custom-model example](examples/custom_model.py)

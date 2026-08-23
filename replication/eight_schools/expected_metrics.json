@@ -1,0 +1,564 @@
+{
+  "all_seeds_pass": true,
+  "benchmark": "eight_schools_marginal_hyperposterior_v2",
+  "canonical_configuration": true,
+  "configuration": {
+    "batch_size": 512,
+    "benchmark": "eight_schools_marginal_hyperposterior_v2",
+    "components": 10,
+    "depth": 3,
+    "epochs": 150,
+    "exact_draws": 400000,
+    "exact_seed": 72991,
+    "hidden_dim": 128,
+    "inference_seed_offset": 1000,
+    "interpretation": "Five-seed numerical accuracy benchmark for the marginalized (mu, tau) posterior.",
+    "patience": 25,
+    "posterior_draws": 100000,
+    "quadrature_points": 100001,
+    "schema_version": 2,
+    "seeds": [
+      73001,
+      73002,
+      73003,
+      73004,
+      73005
+    ],
+    "simulations": 50000,
+    "thresholds": {
+      "central_95_endpoint_max_standardized_abs_error": 0.2,
+      "correlation_abs_error": 0.15,
+      "hyperparameter_mean_max_standardized_abs_error": 0.15,
+      "hyperparameter_sd_max_relative_abs_error": 0.15,
+      "joint_20x20_quantile_grid_total_variation": 0.08,
+      "marginal_cdf_max_abs_error": 0.1,
+      "tau_support_violation_rate": 0.0
+    },
+    "torch_num_threads": 1
+  },
+  "configuration_file_sha256": "5971bf8d4f335e937e4677e45b9ea39fb97fdf890d140c91f87b417af4e22048",
+  "data": {
+    "reported_effects": [
+      28.0,
+      8.0,
+      -3.0,
+      7.0,
+      -1.0,
+      1.0,
+      18.0,
+      12.0
+    ],
+    "reported_standard_errors": [
+      15.0,
+      10.0,
+      16.0,
+      11.0,
+      9.0,
+      11.0,
+      10.0,
+      18.0
+    ]
+  },
+  "effective_configuration_sha256": "2a0610a6a6097a51cad7d98f428827cfa07b090df44f529c201b994cee0c5559",
+  "environment": {
+    "numpy": "2.4.2",
+    "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+    "python": "3.13.11",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "torch": "2.5.1+cu121",
+    "torch_num_threads": 1
+  },
+  "exact_reference": {
+    "correlation": -0.04649431715408,
+    "draw_seed": 72991,
+    "draws_for_distributional_metrics": 400000,
+    "mean": [
+      6.47201703296998,
+      4.75310343438264
+    ],
+    "method": "dense log-tau quadrature with conditional Gaussian mu",
+    "sd": [
+      4.1911629448257,
+      3.68381836174331
+    ]
+  },
+  "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+  "runs": [
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.15640652424282
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.01250790159571
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.08117191580114
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.06427507473738
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.0468325
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.03395
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "930b235378f03d2253bf4ac478036a0703b819bb740489375380bbea7a72e2a1",
+      "metrics": {
+        "approximate_correlation": -0.03398641555837,
+        "central_95_endpoint_max_standardized_abs_error": 0.15640652424282,
+        "correlation_abs_error": 0.01250790159571,
+        "hyperparameter_mean_max_standardized_abs_error": 0.08117191580114,
+        "hyperparameter_sd_max_relative_abs_error": 0.06427507473738,
+        "joint_20x20_quantile_grid_total_variation": 0.0468325,
+        "marginal_cdf_max_abs_error": 0.03395,
+        "marginal_cdf_supremum": [
+          0.0088325,
+          0.03395
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "508116287cc74357ba9313551aa6e17f160cae7ab44eaea304447780ac00d26c",
+      "parameters": [
+        {
+          "approximate_mean": 6.53046910823818,
+          "approximate_q025": -1.88547006780694,
+          "approximate_q975": 14.92382828337415,
+          "approximate_sd": 4.2670093698935,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.0088325,
+          "mean_error_in_exact_sd": 0.01394650507214,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.01809674929519
+        },
+        {
+          "approximate_mean": 5.05212602826876,
+          "approximate_q025": 0.18937374751505,
+          "approximate_q975": 14.3237963027819,
+          "approximate_sd": 3.92059606226328,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.03395,
+          "mean_error_in_exact_sd": 0.08117191580114,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.06427507473738
+        }
+      ],
+      "seed": 73001,
+      "status": "PASS",
+      "training_summary": {
+        "best_epoch": 16,
+        "best_validation_nll": 1.64616576385498,
+        "number_of_simulations": 50000,
+        "simulation_seed": 3982708508,
+        "training_seed": 1294164089
+      }
+    },
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.0782901939569
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.04283941929738
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.06584969197001
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.04203249419389
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.04839
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.02873
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "26057fdea6e638762dbd43d5e21d7b686545ae25f6087061e8e1bb9018774f5f",
+      "metrics": {
+        "approximate_correlation": -0.0036548978567,
+        "central_95_endpoint_max_standardized_abs_error": 0.0782901939569,
+        "correlation_abs_error": 0.04283941929738,
+        "hyperparameter_mean_max_standardized_abs_error": 0.06584969197001,
+        "hyperparameter_sd_max_relative_abs_error": 0.04203249419389,
+        "joint_20x20_quantile_grid_total_variation": 0.04839,
+        "marginal_cdf_max_abs_error": 0.02873,
+        "marginal_cdf_supremum": [
+          0.02873,
+          0.0114225
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "508116287cc74357ba9313551aa6e17f160cae7ab44eaea304447780ac00d26c",
+      "parameters": [
+        {
+          "approximate_mean": 6.19603024405708,
+          "approximate_q025": -2.03923517043637,
+          "approximate_q975": 14.31185161240863,
+          "approximate_sd": 4.14128417899885,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.02873,
+          "mean_error_in_exact_sd": 0.06584969197001,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.01190093691977
+        },
+        {
+          "approximate_mean": 4.70046762400751,
+          "approximate_q025": 0.17988674912257,
+          "approximate_q975": 13.7030881465939,
+          "approximate_sd": 3.83865843564464,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.0114225,
+          "mean_error_in_exact_sd": 0.01428838373839,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.04203249419389
+        }
+      ],
+      "seed": 73002,
+      "status": "PASS",
+      "training_summary": {
+        "best_epoch": 10,
+        "best_validation_nll": 1.63443745574951,
+        "number_of_simulations": 50000,
+        "simulation_seed": 2457592240,
+        "training_seed": 3053251034
+      }
+    },
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.1768723435894
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.01687357993909
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.10110518445705
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.02943812865622
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.0634975
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.0424575
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "d016419b49a19952d70a852861882eca680cadea3501fbbd69cc952f5a4e77f3",
+      "metrics": {
+        "approximate_correlation": -0.02962073721499,
+        "central_95_endpoint_max_standardized_abs_error": 0.1768723435894,
+        "correlation_abs_error": 0.01687357993909,
+        "hyperparameter_mean_max_standardized_abs_error": 0.10110518445705,
+        "hyperparameter_sd_max_relative_abs_error": 0.02943812865622,
+        "joint_20x20_quantile_grid_total_variation": 0.0634975,
+        "marginal_cdf_max_abs_error": 0.0424575,
+        "marginal_cdf_supremum": [
+          0.0424575,
+          0.03348
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "508116287cc74357ba9313551aa6e17f160cae7ab44eaea304447780ac00d26c",
+      "parameters": [
+        {
+          "approximate_mean": 6.04826873034385,
+          "approximate_q025": -1.9698173565242,
+          "approximate_q975": 13.9865911929558,
+          "approximate_sd": 4.06778295083672,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.0424575,
+          "mean_error_in_exact_sd": 0.10110518445705,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.02943812865622
+        },
+        {
+          "approximate_mean": 4.50628754929451,
+          "approximate_q025": 0.15138184418669,
+          "approximate_q975": 13.09605748988055,
+          "approximate_sd": 3.63400302888786,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.03348,
+          "mean_error_in_exact_sd": 0.0670000148898,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.01352274405622
+        }
+      ],
+      "seed": 73003,
+      "status": "PASS",
+      "training_summary": {
+        "best_epoch": 10,
+        "best_validation_nll": 1.6448894903183,
+        "number_of_simulations": 50000,
+        "simulation_seed": 1157335214,
+        "training_seed": 1358677707
+      }
+    },
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.18909713581389
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.00074234712622
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.11701417120765
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.02995191171265
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.0596025
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.0499725
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "7e703040f88263b443f58eb647aa8f9f40f5897d94a3352ce506f3a9e3e3ee75",
+      "metrics": {
+        "approximate_correlation": -0.0472366642803,
+        "central_95_endpoint_max_standardized_abs_error": 0.18909713581389,
+        "correlation_abs_error": 0.00074234712622,
+        "hyperparameter_mean_max_standardized_abs_error": 0.11701417120765,
+        "hyperparameter_sd_max_relative_abs_error": 0.02995191171265,
+        "joint_20x20_quantile_grid_total_variation": 0.0596025,
+        "marginal_cdf_max_abs_error": 0.0499725,
+        "marginal_cdf_supremum": [
+          0.0499725,
+          0.02146
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "508116287cc74357ba9313551aa6e17f160cae7ab44eaea304447780ac00d26c",
+      "parameters": [
+        {
+          "approximate_mean": 6.96244249135497,
+          "approximate_q025": -1.54761938860087,
+          "approximate_q975": 15.43251548085983,
+          "approximate_sd": 4.31669628732243,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.0499725,
+          "mean_error_in_exact_sd": 0.11701417120765,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.02995191171265
+        },
+        {
+          "approximate_mean": 4.61857128184203,
+          "approximate_q025": 0.19075178448079,
+          "approximate_q975": 13.59838456827966,
+          "approximate_sd": 3.73112225074053,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.02146,
+          "mean_error_in_exact_sd": 0.03651975730881,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.01284099386888
+        }
+      ],
+      "seed": 73004,
+      "status": "PASS",
+      "training_summary": {
+        "best_epoch": 7,
+        "best_validation_nll": 1.66515932254791,
+        "number_of_simulations": 50000,
+        "simulation_seed": 1299732020,
+        "training_seed": 1836158010
+      }
+    },
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.09990195808888
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.04187567349103
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.0297098103726
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.02156719062533
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.0428975
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.02047
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "5ed7e1f921844d324e2639b6e4af2b764470ac3a33aeac7d0ccbac944d60d399",
+      "metrics": {
+        "approximate_correlation": -0.0883699906451,
+        "central_95_endpoint_max_standardized_abs_error": 0.09990195808888,
+        "correlation_abs_error": 0.04187567349103,
+        "hyperparameter_mean_max_standardized_abs_error": 0.0297098103726,
+        "hyperparameter_sd_max_relative_abs_error": 0.02156719062533,
+        "joint_20x20_quantile_grid_total_variation": 0.0428975,
+        "marginal_cdf_max_abs_error": 0.02047,
+        "marginal_cdf_supremum": [
+          0.015645,
+          0.02047
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "508116287cc74357ba9313551aa6e17f160cae7ab44eaea304447780ac00d26c",
+      "parameters": [
+        {
+          "approximate_mean": 6.35157454182717,
+          "approximate_q025": -1.86334675375983,
+          "approximate_q975": 14.3319843638852,
+          "approximate_sd": 4.10077133465282,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.015645,
+          "mean_error_in_exact_sd": 0.02873724852228,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.02156719062533
+        },
+        {
+          "approximate_mean": 4.64365788940815,
+          "approximate_q025": 0.16810172589563,
+          "approximate_q975": 14.11564374446165,
+          "approximate_sd": 3.73438016066226,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.02047,
+          "mean_error_in_exact_sd": 0.0297098103726,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.01372537784274
+        }
+      ],
+      "seed": 73005,
+      "status": "PASS",
+      "training_summary": {
+        "best_epoch": 17,
+        "best_validation_nll": 1.66659870414734,
+        "number_of_simulations": 50000,
+        "simulation_seed": 242588026,
+        "training_seed": 803629586
+      }
+    }
+  ],
+  "schema_version": 2,
+  "status": "PASS"
+}

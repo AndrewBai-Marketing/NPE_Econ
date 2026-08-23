@@ -1,7 +1,14 @@
-name: Public benchmark smoke
+name: Public benchmarks
 
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
+
+concurrency:
+  group: public-benchmarks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -43,5 +50,5 @@ jobs:
       - name: Run the custom-model training example
         run: python scripts/run_installed_wheel_examples.py --profile neural
 
-      - name: Run the bounded Eight Schools comparison
-        run: python replication/eight_schools/run_validation.py --profile smoke --quiet
+      - name: Run the Eight Schools accuracy comparison
+        run: python replication/eight_schools/run_validation.py --quiet

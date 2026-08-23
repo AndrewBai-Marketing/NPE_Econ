@@ -58,6 +58,30 @@ def tau_quadrature(
     return tau, mass / mass.sum(), posterior_mean, posterior_variance
 
 
+def hyperparameter_moments(*, points: int = 40_001) -> dict[str, np.ndarray | float]:
+    """Return deterministic quadrature moments for ``(mu, tau)``.
+
+    Unlike summaries computed from :func:`sample_exact_posterior`, these values
+    contain no Monte Carlo error.
+    """
+
+    tau, mass, mu_mean, mu_variance = tau_quadrature(points=points)
+    mean = np.array([np.sum(mass * mu_mean), np.sum(mass * tau)])
+    variance = np.array(
+        [
+            np.sum(mass * (mu_variance + mu_mean**2)) - mean[0] ** 2,
+            np.sum(mass * tau**2) - mean[1] ** 2,
+        ]
+    )
+    covariance = float(np.sum(mass * mu_mean * tau) - mean[0] * mean[1])
+    correlation = covariance / float(np.sqrt(variance[0] * variance[1]))
+    return {
+        "mean": mean,
+        "sd": np.sqrt(variance),
+        "correlation": correlation,
+    }
+
+
 def sample_exact_posterior(
     draws: int,
     *,
@@ -82,4 +106,3 @@ def sample_exact_posterior(
     )
     school_effects = rng.normal(school_mean, np.sqrt(school_variance))
     return np.column_stack([mu, tau, school_effects])
-
