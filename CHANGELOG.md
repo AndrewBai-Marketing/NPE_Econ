@@ -11,8 +11,10 @@
 - Added NumPy-only CPU inference from trained neural estimators; Torch is
   required for training.
 - Added public-data comparisons for Eight Schools and Rust's bus replacement
-  model. Eight Schools passes its bounded smoke thresholds; the empirical Rust
-  neural posterior fails its frozen accuracy gates.
+  model. Eight Schools passes its bounded smoke thresholds. A Rust-specific
+  simulation-trained grid classifier matches the dense posterior reference
+  across five seeds, while the preserved generic diagonal-MDN run fails its
+  frozen empirical accuracy gates.
 - Added tests and CI for Python 3.11--3.13.
 
 ## 0.1.0-alpha

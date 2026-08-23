@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "compact_float_decimal_places": 14,
+  "benchmark": "Rust (1987) canonical group-4 structured finite-grid classifier",
+  "estimator": {
+    "kind": "simulation-estimated finite-grid generative classifier",
+    "generic_structnpe_fit_mdn": false,
+    "target": "posterior for (replacement_cost, maintenance_slope) conditional on observed state exposures",
+    "parameter_order": ["replacement_cost", "maintenance_slope"],
+    "coarse_grid_shape": [29, 30],
+    "classes": 870,
+    "replicates_per_class": 500,
+    "equivalent_panel_simulations": 435000,
+    "simulation_unit": "fixed-exposure conditional choice panel, not a jointly simulated state path",
+    "seeds": [1701, 1702, 1703, 1704, 1705],
+    "smoothing": "independent Jeffreys Beta(1/2, 1/2) posterior means",
+    "aggregate_binomial_equivalence": "For class g and state s, summing M independent Binomial(N_s,p_gs) panel counts is exactly Binomial(M*N_s,p_gs); the implementation draws the latter."
+  },
+  "data_summary": {
+    "buses": 37,
+    "conditional_choice_observations": 4292,
+    "observed_replacements": 33,
+    "states": 90
+  },
+  "data_provenance": {
+    "path": "replication/rust_1987/data/processed/group4.csv",
+    "sha256": "7f9e169e5cb2f18204c342935cadab13df188af4275c45fe07dfe0f94840376b",
+    "canonical_processed_group4": true,
+    "transition_counts": [1682, 2555, 55],
+    "transition_probabilities": [0.39189189189189, 0.5952935694315, 0.01281453867661],
+    "canonical_transition_match": true,
+    "canonical_reference": {
+      "source_commit": "43d37bd1d24a0a6c6e73e747545ad490d1f7f95b",
+      "raw_sha256": "5e85a1c33c11632effbec3ffb213c8e4c92501a49dfe388ad28a203f8c732387",
+      "processed_sha256": "7f9e169e5cb2f18204c342935cadab13df188af4275c45fe07dfe0f94840376b",
+      "transition_counts": [1682, 2555, 55],
+      "transition_probabilities": [0.39189189189189, 0.5952935694315, 0.01281453867661]
+    }
+  },
+  "validation_config": {
+    "path": "replication/rust_1987/validation_config.json",
+    "sha256": "bc227e62b45f4c76f5a7e3131d761a279e694c159a65b7e7b98497a111941bac",
+    "frozen_default": true,
+    "gates_read_from_frozen_file": true
+  },
+  "dense_reference": {
+    "grid_shape": [141, 117],
+    "posterior": {
+      "mean": [10.60951543576918, 2.51076682046225],
+      "sd": [1.44040700385885, 0.58616943293124],
+      "correlation": 0.92043000644698,
+      "q025": [8.2, 1.5],
+      "median": [10.5, 2.45],
+      "q975": [13.8, 3.8]
+    },
+    "expected_replacements_12_months": {
+      "mean": 0.04895292173017,
+      "q025": 0.00190943344398,
+      "q975": 0.21071129914751
+    }
+  },
+  "exact_coarse_reference": {
+    "posterior": {
+      "mean": [10.60949201568129, 2.51075794601731],
+      "sd": [1.4403565650688, 0.58615135199944],
+      "correlation": 0.92042543014036
+    },
+    "parameter_mean_error_in_dense_sd": [1.625935436e-05, 1.513972657e-05],
+    "marginal_cdf_supremum": [0.05723412122057, 0.05274594641621],
+    "joint_coarsened_total_variation": 0.08955801092218,
+    "policy_mean_max_absolute_error": 2.4080258e-07,
+    "policy_interval_endpoint_max_absolute_error": 0.00137970662939,
+    "expected_replacements_mean_absolute_error": 2.3272145e-07,
+    "expected_replacements_interval_endpoint_max_absolute_error": 0.02314823477699,
+    "all_frozen_numerical_comparison_limits_pass": true
+  },
+  "classifier_runs": [
+    {
+      "seed": 1701,
+      "posterior": {
+        "mean": [10.5831803162951, 2.49722243440079],
+        "sd": [1.45328018421305, 0.59116287358081],
+        "correlation": 0.92306783538213
+      },
+      "parameter_mean_error_in_dense_sd": [0.01828310984571, 0.02310660587286],
+      "marginal_cdf_supremum": [0.08644305259595, 0.08644544523593],
+      "joint_coarsened_total_variation": 0.13401115734438,
+      "policy_mean_max_absolute_error": 0.00046824766009,
+      "policy_interval_endpoint_max_absolute_error": 0.0020203067185,
+      "expected_replacements_mean_absolute_error": 0.00132442295018,
+      "expected_replacements_interval_endpoint_max_absolute_error": 0.02358598235132,
+      "all_frozen_numerical_comparison_limits_pass": true
+    },
+    {
+      "seed": 1702,
+      "posterior": {
+        "mean": [10.63309020588683, 2.52243014553888],
+        "sd": [1.43943438182456, 0.59051838385066],
+        "correlation": 0.91947706167629
+      },
+      "parameter_mean_error_in_dense_sd": [0.01636674221556, 0.01989753204686],
+      "marginal_cdf_supremum": [0.07327697323328, 0.0732289637703],
+      "joint_coarsened_total_variation": 0.10996162088907,
+      "policy_mean_max_absolute_error": 0.00039296389989,
+      "policy_interval_endpoint_max_absolute_error": 0.00139361450382,
+      "expected_replacements_mean_absolute_error": 0.00074750770708,
+      "expected_replacements_interval_endpoint_max_absolute_error": 0.02349821603487,
+      "all_frozen_numerical_comparison_limits_pass": true
+    },
+    {
+      "seed": 1703,
+      "posterior": {
+        "mean": [10.64080539123223, 2.51993374605625],
+        "sd": [1.43802306507077, 0.57826740769103],
+        "correlation": 0.9175603800304
+      },
+      "parameter_mean_error_in_dense_sd": [0.02172299591659, 0.0156386960476],
+      "marginal_cdf_supremum": [0.07687855387467, 0.06959798445536],
+      "joint_coarsened_total_variation": 0.11973555646844,
+      "policy_mean_max_absolute_error": 0.00018237058049,
+      "policy_interval_endpoint_max_absolute_error": 0.00117561851604,
+      "expected_replacements_mean_absolute_error": 0.00158415885727,
+      "expected_replacements_interval_endpoint_max_absolute_error": 0.04225599172295,
+      "all_frozen_numerical_comparison_limits_pass": true
+    },
+    {
+      "seed": 1704,
+      "posterior": {
+        "mean": [10.56580614175095, 2.48027854176139],
+        "sd": [1.43214797463276, 0.59004684709124],
+        "correlation": 0.92266040564937
+      },
+      "parameter_mean_error_in_dense_sd": [0.03034509961499, 0.05201274066509],
+      "marginal_cdf_supremum": [0.08373531472232, 0.07664536136029],
+      "joint_coarsened_total_variation": 0.14653231815581,
+      "policy_mean_max_absolute_error": 0.00121160582438,
+      "policy_interval_endpoint_max_absolute_error": 0.00150324782213,
+      "expected_replacements_mean_absolute_error": 0.00210621876021,
+      "expected_replacements_interval_endpoint_max_absolute_error": 0.02402785502263,
+      "all_frozen_numerical_comparison_limits_pass": true
+    },
+    {
+      "seed": 1705,
+      "posterior": {
+        "mean": [10.62451875693437, 2.52850119292272],
+        "sd": [1.47506943192492, 0.59335472588257],
+        "correlation": 0.928243307589
+      },
+      "parameter_mean_error_in_dense_sd": [0.0104160290286, 0.03025468655332],
+      "marginal_cdf_supremum": [0.06958632616967, 0.06935697368876],
+      "joint_coarsened_total_variation": 0.06072726229053,
+      "policy_mean_max_absolute_error": 0.00080531767921,
+      "policy_interval_endpoint_max_absolute_error": 0.00134777323364,
+      "expected_replacements_mean_absolute_error": 0.00044615733479,
+      "expected_replacements_interval_endpoint_max_absolute_error": 0.0231334173751,
+      "all_frozen_numerical_comparison_limits_pass": true
+    }
+  ],
+  "all_seeds_pass_frozen_numerical_comparison_limits": true,
+  "nonclaim": "This is a model-specific conditional finite-grid classifier, not the generic structnpe.fit MDN, not an amortized estimator for arbitrary panels, and not evidence for other structural models. Passing the frozen numerical comparison limits is not the MDN-specific promotion or calibration result."
+}

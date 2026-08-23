@@ -5,12 +5,14 @@ replication of the canonical group-4 bus-engine replacement calculation, plus
 a current-API `structnpe` posterior experiment. It does not copy the legacy
 `ddc_npe` implementation or third-party source code.
 
-The conventional NFXP and dense-grid reference pass. The full simulator
-calibration also passes, but the empirical NPE posterior fails the frozen
-marginal and joint agreement gates in
+The conventional NFXP, dense-grid reference, and a model-specific structured
+classifier pass their numerical comparisons. The generic current-API MDN's
+full simulator calibration also passes, but its empirical posterior fails the
+frozen marginal and joint agreement gates in
 [`validation_config.json`](validation_config.json). It is therefore not a
-headline-eligible empirical NPE replication. The compact committed record is
-[`expected/smoke_metrics.json`](expected/smoke_metrics.json).
+headline-eligible empirical MDN replication. The two compact committed records
+are [`expected/structured_classifier_metrics.json`](expected/structured_classifier_metrics.json)
+and [`expected/smoke_metrics.json`](expected/smoke_metrics.json).
 
 ## Frozen model and data convention
 
@@ -103,7 +105,88 @@ This is a posterior under the stated uniform prior. It is not "Rust's
 posterior," and it need not be centered exactly on the maximum-likelihood
 estimate.
 
-## Train, infer, compare, and calibrate
+## Passing model-specific structured classifier
+
+The empirical failure below is specific to the generic diagonal-MDN
+approximation, not to simulation of the Rust model. A small model-specific
+classifier recovers the same posterior target. It is included as a transparent
+positive benchmark and is clearly separate from `structnpe.fit`.
+
+Let `n_s` be the observed number of choices made in mileage state `s`, `r_s`
+the replacements among them, and `p_s(theta_g)` the exact Rust policy at grid
+class `theta_g = (RC_g, slope_g)`. The target conditional choice posterior is
+
+```text
+pi(theta_g | r,n) proportional to
+    q_g product_s p_s(theta_g)^r_s [1-p_s(theta_g)]^(n_s-r_s),
+```
+
+where `q_g` is the trapezoidal prior mass. The structured classifier does not
+insert the exact policy into this expression. For each class and state it
+simulates `M=500` fixed-exposure panels and estimates the policy using
+Jeffreys smoothing:
+
+```text
+K_gs ~ Binomial(M n_s, p_s(theta_g)),
+p_hat_gs = (K_gs + 1/2) / (M n_s + 1).
+```
+
+This aggregate draw is exactly simulation-equivalent to materializing the
+same conditional panels, because the sum of `M` independent
+`Binomial(n_s,p_s(theta_g))` counts is `Binomial(M n_s,p_s(theta_g))`. It avoids
+writing 435,000 redundant panel rows; it does not replace simulation with the
+exact likelihood. Conditioning on the observed exposure histogram means this
+is not a reusable estimator for arbitrary panels.
+
+Reproduce the five-seed benchmark with:
+
+```bash
+python -m replication.rust_1987.structured_classifier \
+  replication/rust_1987/data/processed/group4.csv \
+  --output replication/rust_1987/results/structured_classifier_metrics.json
+```
+
+By default, the CLI reads the prior, dense-grid definition, and numerical
+comparison limits from [`validation_config.json`](validation_config.json). It
+calls that configuration frozen only when both its path and SHA-256 match the
+committed default. It also authenticates the processed CSV using its SHA-256,
+transition counts, and transition probabilities before calling the result the
+canonical group-4 benchmark. A custom `--thresholds` path is recorded as
+non-frozen even when its bytes are copied from the default; a different CSV is
+reported as noncanonical. The CLI reports the `141 x 117` dense posterior, an
+exact-likelihood `29 x 30` coarse posterior, and simulation-estimated
+classifier posteriors for seeds 1701--1705. The committed path-sanitized result is
+[`expected/structured_classifier_metrics.json`](expected/structured_classifier_metrics.json).
+The CLI applies the public `compact_benchmark_result` transformation, so the
+default command reproduces the committed numeric record to its declared
+precision. Compact evidence floats are rounded to 14 decimal places after all
+calculations; byte-for-byte or unrounded floating-point identity across
+platforms is not claimed. Python callers that need the expanded per-parameter
+interval records and individual gate booleans can use `run_benchmark` directly.
+
+The exact coarse posterior mean was `(10.60949, 2.51076)`, compared with the
+dense mean `(10.60952, 2.51077)`. Across the five simulation seeds, classifier
+means ranged from `(10.56581, 2.48028)` to `(10.64081, 2.52850)` coordinate by
+coordinate. The worst seeded diagnostics were:
+
+| Diagnostic | Worst seed | Frozen limit |
+|---|---:|---:|
+| Maximum marginal CDF supremum | 0.08645 | 0.10000 |
+| Joint 12-by-10 TV | 0.14653 | 0.15000 |
+| Maximum mean error in dense-grid SDs | 0.05201 | 0.25000 |
+| Policy-mean maximum absolute error | 0.00121 | 0.03000 |
+| Policy-interval endpoint maximum error | 0.00202 | 0.06000 |
+| Expected-replacement mean absolute error | 0.00211 | 0.50000 |
+| Expected-replacement interval endpoint error | 0.04226 | 1.00000 |
+
+All five seeds satisfy the frozen numerical comparison limits, including the
+support check by construction. This is not a claim that the generic MDN
+passes, and it does not inherit the MDN-specific full-profile promotion or
+all-prior calibration result. Its narrow lesson is that a likelihood-aligned,
+finite-grid classifier can estimate this particular strongly correlated Rust
+posterior reliably.
+
+## Generic MDN: train, infer, compare, and calibrate
 
 The simulator is genuinely batched and returns state-visit and replacement
 counts for each simulated panel. Training uses the public `StructuralModel`,

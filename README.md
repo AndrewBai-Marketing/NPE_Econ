@@ -1,23 +1,112 @@
 # structnpe
 
-`structnpe` learns an approximate Bayesian posterior for the parameters of a
-model that you can simulate.
+## What it estimates
 
-You provide:
+`structnpe` estimates a conditional distribution over structural parameters,
+not a single coefficient and not the likelihood itself. You provide a prior
+\(\pi\), a simulator \(P_\theta\), and a deterministic data representation
+\(S\), fitted on the training split and then frozen where applicable:
 
-1. a prior for the parameter vector `theta`;
-2. a simulator that generates data from `theta`; and
-3. a fixed representation `S(data)` used by the estimator.
+$$
+\Theta\sim\pi,\qquad
+Y\mid\Theta=\theta\sim P_\theta,\qquad
+X=S(Y).
+$$
 
-Training generates parameter--dataset pairs and fits
+For observed data \(y_{\mathrm{obs}}\), when the relevant densities exist, the
+target is
 
-```text
-q(theta | S(data))  ~=  p(theta | S(data)).
-```
+$$
+p(\theta\mid S(Y)=s_{\mathrm{obs}})
+=
+\frac{p_S(s_{\mathrm{obs}}\mid\theta)\,\pi(\theta)}
+     {\int p_S(s_{\mathrm{obs}}\mid\vartheta)
+            \pi(\vartheta)\,d\vartheta},
+\qquad s_{\mathrm{obs}}=S(y_{\mathrm{obs}}),
+$$
 
-For observed data, the output is a set of aligned draws from this approximate
-joint posterior. If `S(data)` is only a summary, the target is the posterior
-conditional on that summary—not necessarily the full-data posterior.
+where \(p_S(\cdot\mid\theta)\) is the distribution of the simulator output
+after applying \(S\). The package never needs to evaluate that likelihood.
+Instead, it draws prior-predictive training pairs
+
+$$
+\theta_i\sim\pi,\qquad y_i\sim P_{\theta_i}.
+$$
+
+With the declared coordinatewise parameter transform \(T\) and fitted
+standardization constants,
+
+$$
+u=D_x^{-1}\!\left(S(y)-a_x\right),
+\qquad
+z=D_\theta^{-1}\!\left(T(\theta)-a_\theta\right).
+$$
+
+The estimator fits the neural conditional density
+
+$$
+q_\phi(z\mid u)
+=
+\sum_{k=1}^{K}\omega_k(u)\,
+\mathcal N\!\left(z;\mu_k(u),
+\operatorname{diag}\{\exp(\ell_k(u))\}\right),
+$$
+
+where \(u\) is the standardized \(S(y)\), \(z\) is the transformed and
+standardized \(\theta\), the log variances \(\ell_k\) are clipped to
+\([-7,5]\), and the current default is \(K=5\). Training approximately minimizes
+
+$$
+\widehat{\mathcal L}_n(\phi)
+=-\frac{1}{n}\sum_{i=1}^{n}\log q_\phi(z_i\mid u_i).
+$$
+
+For fixed preprocessing, define the population criterion
+
+$$
+\mathcal L(\phi):=\mathbb E[-\log q_\phi(Z\mid U)].
+$$
+
+When the required expectations exist, it decomposes as
+
+$$
+\mathcal L(\phi)
+=H(Z\mid U)
++\mathbb E_U\!\left[
+D_{\mathrm{KL}}\!\left(
+p(\,\cdot\mid U)\,\Vert\,q_\phi(\,\cdot\mid U)
+\right)\right].
+$$
+
+Thus the ideal population solution is the forward-KL projection of the
+representation posterior onto the chosen neural mixture family. In practice,
+finite simulations, a finite network, and numerical training make it an
+approximation. Inference samples and maps back to the declared parameter units:
+
+$$
+z^{(r)}\sim q_{\widehat\phi}(\,\cdot\mid u_{\mathrm{obs}}),
+\qquad
+\theta^{(r)}=T^{-1}\!\left(a_\theta+D_\theta z^{(r)}\right).
+$$
+
+The returned rows are aligned draws from the induced approximate joint
+posterior. The representation target
+\(p(\theta\mid S(Y)=s_{\mathrm{obs}})\) equals the full-data posterior
+\(p(\theta\mid y_{\mathrm{obs}})\) only when \(S\) is sufficient (or otherwise
+information-preserving) under the maintained model; neural approximation error
+can remain even then.
+
+Consequently, for any user-defined scalar or vector functional \(h\), the same
+joint draws estimate posterior objects such as
+
+$$
+\mathbb E[h(\Theta)\mid S(Y)=s_{\mathrm{obs}}]
+\approx \frac{1}{R}\sum_{r=1}^{R}h(\theta^{(r)}),
+$$
+
+including parameter means when \(h(\theta)=\theta\), probabilities when \(h\)
+is an indicator, and model-defined profit, welfare, elasticity, or policy
+effects when those functions are supplied by the user.
 
 ## Use a trained estimator
 
@@ -96,25 +185,39 @@ representation when the executable simulator is attached.
 
 ## Public-data comparisons
 
-Accuracy comes before speed. These are the checked-in results for the two
-public examples in this repository:
+Accuracy comes before speed. The Rust example separates the conventional
+maximum-likelihood estimate from the Bayesian posterior means, because they
+are different estimands:
 
-| Example | Parameter | Reference posterior mean | `structnpe` posterior mean |
-| --- | --- | ---: | ---: |
-| Eight Schools | population mean `mu` | 6.5031 | 6.1148 |
-| Eight Schools | heterogeneity `tau` | 4.6855 | 6.0892 |
-| Rust bus replacement | replacement cost | 10.6095 | 12.8636 |
-| Rust bus replacement | maintenance slope | 2.5108 | 3.2528 |
+| Rust method and estimand | Replacement cost | Maintenance slope |
+| --- | ---: | ---: |
+| Public NFXP maximum likelihood | 10.0749 | 2.2931 |
+| This repository's NFXP maximum likelihood | 10.0749 | 2.2931 |
+| Dense-grid posterior mean | 10.6095 | 2.5108 |
+| Simulation-trained grid posterior mean (seed 1701) | 10.5832 | 2.4972 |
 
-The Eight Schools bounded smoke comparison passed its declared thresholds,
-with visible error in heterogeneity and joint dependence. The Rust neural
-posterior failed its frozen marginal and joint accuracy gates. The independent
-conventional Rust implementation does reproduce the public NFXP estimates,
-but that validates the comparator—not the neural posterior.
+The final row uses the same 37-bus panel and prior as the dense reference. All
+five fixed simulation seeds passed the frozen posterior and policy
+comparison limits; the worst marginal-CDF error was 0.08645 (limit 0.10) and
+the worst joint total-variation error was 0.14653 (limit 0.15). This is a
+Rust-specific finite-grid classifier, not the generic `structnpe.fit` MDN.
+
+The generic API is exercised directly by the Eight Schools comparison:
+
+| Eight Schools parameter | Exact posterior mean | `structnpe.fit` mean |
+| --- | ---: | ---: |
+| Population mean `mu` | 6.5031 | 6.1148 |
+| Heterogeneity `tau` | 4.6855 | 6.0892 |
+
+That bounded smoke run passed its declared thresholds, with visible error in
+heterogeneity and joint dependence. The preserved generic diagonal-MDN Rust
+run did not pass; keeping it beside the successful structured comparison makes
+the estimator limitation explicit instead of confusing it with a problem in
+the public data or Rust likelihood.
 
 See [BENCHMARKS.md](BENCHMARKS.md) for models, priors, diagnostics, commands,
-and machine-readable results. The evidence is mixed; this beta does not claim
-uniformly accurate inference across structural models.
+and machine-readable results. These examples do not establish uniformly
+accurate inference across structural models.
 
 ## When it is useful
 

@@ -27,27 +27,65 @@ def test_public_benchmark_table_matches_frozen_evidence() -> None:
             encoding="utf-8"
         )
     )["posterior_hyperparameters"]
-    rust = json.loads(
+    rust_mdn = json.loads(
         (ROOT / "replication/rust_1987/expected/smoke_metrics.json").read_text(
             encoding="utf-8"
         )
-    )["full_empirical_npe_campaign"]["empirical_comparison"]
+    )
+    rust = json.loads(
+        (
+            ROOT
+            / "replication/rust_1987/expected/structured_classifier_metrics.json"
+        ).read_text(encoding="utf-8")
+    )
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     benchmarks = (ROOT / "BENCHMARKS.md").read_text(encoding="utf-8")
 
+    nfxp = rust_mdn["nfxp"]
+    dense_mean = rust["dense_reference"]["posterior"]["mean"]
+    first_run = rust["classifier_runs"][0]
+    classifier_mean = first_run["posterior"]["mean"]
     expected_rows = (
-        f"| Eight Schools | population mean `mu` | {eight['mu_exact_mean']:.4f} | "
+        f"| Population mean `mu` | {eight['mu_exact_mean']:.4f} | "
         f"{eight['mu_approximate_mean']:.4f} |",
-        f"| Eight Schools | heterogeneity `tau` | {eight['tau_exact_mean']:.4f} | "
+        f"| Heterogeneity `tau` | {eight['tau_exact_mean']:.4f} | "
         f"{eight['tau_approximate_mean']:.4f} |",
-        f"| Rust bus replacement | replacement cost | "
-        f"{rust['parameter_mean_grid'][0]:.4f} | {rust['parameter_mean_npe'][0]:.4f} |",
-        f"| Rust bus replacement | maintenance slope | "
-        f"{rust['parameter_mean_grid'][1]:.4f} | {rust['parameter_mean_npe'][1]:.4f} |",
+        f"| This repository's NFXP maximum likelihood | "
+        f"{nfxp['replacement_cost']:.4f} | {nfxp['maintenance_slope']:.4f} |",
+        f"| Dense-grid posterior mean | {dense_mean[0]:.4f} | "
+        f"{dense_mean[1]:.4f} |",
+        f"| Simulation-trained grid posterior mean (seed {first_run['seed']}) | "
+        f"{classifier_mean[0]:.4f} | {classifier_mean[1]:.4f} |",
     )
     for row in expected_rows:
         assert row in readme
         assert row in benchmarks
+
+    assert rust["all_seeds_pass_frozen_numerical_comparison_limits"] is True
+    assert all(
+        run["all_frozen_numerical_comparison_limits_pass"]
+        for run in rust["classifier_runs"]
+    )
+    worst_cdf = max(
+        max(run["marginal_cdf_supremum"]) for run in rust["classifier_runs"]
+    )
+    worst_tv = max(
+        run["joint_coarsened_total_variation"]
+        for run in rust["classifier_runs"]
+    )
+    assert f"{worst_cdf:.5f}" in readme
+    assert f"{worst_tv:.5f}" in readme
+    for run in rust["classifier_runs"]:
+        row = (
+            f"| {run['seed']} | {run['posterior']['mean'][0]:.4f} | "
+            f"{run['posterior']['mean'][1]:.4f} | "
+            f"{max(run['marginal_cdf_supremum']):.5f} | "
+            f"{run['joint_coarsened_total_variation']:.5f} |"
+        )
+        assert row in benchmarks
+    assert "not the generic `structnpe.fit` MDN" in readme
+    assert "12.8636" in benchmarks
+    assert "3.2528" in benchmarks
 
 
 def test_every_executable_public_example_has_an_installed_wheel_profile() -> None:
