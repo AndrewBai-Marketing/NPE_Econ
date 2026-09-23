@@ -150,6 +150,7 @@ def test_sdist_respects_public_release_boundary() -> None:
             "PKG-INFO",
             "README.md",
             "SECURITY.md",
+            "THEORY.md",
             "examples",
             "pyproject.toml",
             "setup.cfg",
@@ -164,6 +165,7 @@ def test_sdist_respects_public_release_boundary() -> None:
         assert f"{prefix}LICENSE" in names
         assert f"{prefix}README.md" in names
         assert f"{prefix}BENCHMARKS.md" in names
+        assert f"{prefix}THEORY.md" in names
         assert f"{prefix}pyproject.toml" in names
         assert f"{prefix}src/structnpe/__init__.py" in names
         assert f"{prefix}examples/quickstart.py" in names

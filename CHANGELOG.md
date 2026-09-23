@@ -2,6 +2,10 @@
 
 ## 0.1.0b1 - Unreleased
 
+- Reworked the README around the posterior target, a runnable workflow, and
+  the public-API Eight Schools accuracy comparison. Added `THEORY.md` with
+  assumptions, proofs, references, and the boundary between population
+  properties and implementation evidence; include it in source distributions.
 - Added the `StructuralModel`/`fit`/`infer` workflow for learning approximate
   joint posteriors from prior-predictive simulations.
 - Added named posterior draws, summaries, transformations, batch inference,

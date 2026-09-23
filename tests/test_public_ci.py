@@ -118,8 +118,10 @@ def test_public_benchmark_table_matches_frozen_evidence() -> None:
         run["joint_coarsened_total_variation"]
         for run in rust["classifier_runs"]
     )
-    assert f"{worst_cdf:.5f}" in readme
-    assert f"{worst_tv:.5f}" in readme
+    # Rust details live on the benchmark page; the README leads with the
+    # canonical example evaluated through the generic public estimator.
+    assert f"{worst_cdf:.5f}" in benchmarks
+    assert f"{worst_tv:.5f}" in benchmarks
     for run in rust["classifier_runs"]:
         row = (
             f"| {run['seed']} | {run['posterior']['mean'][0]:.4f} | "
