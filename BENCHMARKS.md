@@ -104,39 +104,39 @@ sigma = [15, 10, 16, 11, 9, 11, 10, 18].
 
 The hierarchical model is
 
-$$
+```math
 \mu\sim\mathcal N(0,10^2),\qquad
-\tau\sim\operatorname{HalfNormal}(10),
-$$
+\tau\sim\mathrm{HalfNormal}(10),
+```
 
-$$
+```math
 \theta_j\mid\mu,\tau\sim\mathcal N(\mu,\tau^2),\qquad
 y_j\mid\theta_j\sim\mathcal N(\theta_j,\sigma_j^2).
-$$
+```
 
-For the public estimand, the latent \(\theta_j\) are integrated out exactly:
+For the public estimand, the latent $`\theta_j`$ are integrated out exactly:
 
-$$
+```math
 p(\mu,\tau\mid y)
 \propto p(\mu)p(\tau)
 \prod_{j=1}^{8}
 \mathcal N\!\left(y_j;\mu,\tau^2+\sigma_j^2\right).
-$$
+```
 
-The simulator therefore accepts only \((\mu,\tau)\) and draws each reported
+The simulator therefore accepts only $`(\mu,\tau)`$ and draws each reported
 effect from the corresponding marginal Gaussian. This is exactly the same
 hyperparameter posterior as the hierarchical model above; it avoids treating
 the eight latent school effects as estimands when they are not the object in
 the comparison.
 
-The independent reference integrates over \(\tau\) on a dense log grid and
-integrates \(\mu\) analytically conditional on \(\tau\). Its deterministic
+The independent reference integrates over $`\tau`$ on a dense log grid and
+integrates $`\mu`$ analytically conditional on $`\tau`$. Its deterministic
 moments are
 
-$$
+```math
 \mathbb E[(\mu,\tau)\mid y]=(6.4720,\,4.7531),\qquad
-\operatorname{SD}[(\mu,\tau)\mid y]=(4.1912,\,3.6838).
-$$
+\mathrm{SD}[(\mu,\tau)\mid y]=(4.1912,\,3.6838).
+```
 
 Means, standard deviations, and correlation use deterministic quadrature
 moments. Interval, marginal-CDF, and joint-grid comparisons use 400,000 fixed
@@ -196,59 +196,59 @@ replacement model: 37 buses, 117 periods per bus, and 4,292 conditional choice
 observations. The downloader is pinned to an immutable source commit and
 SHA-256 checksum; raw bus histories are not redistributed.
 
-The two estimated parameters are replacement cost \(RC\) and the
-mileage-dependent maintenance slope \(c\). Transition probabilities and the
+The two estimated parameters are replacement cost $`RC`$ and the
+mileage-dependent maintenance slope $`c`$. Transition probabilities and the
 discount factor are fixed at the declared values, and
 
-$$
+```math
 RC\sim U(4,18),\qquad c\sim U(0.2,6).
-$$
+```
 
-For observed exposure count \(n_s\) and replacement count \(r_s\) in mileage
-state \(s\), the conditional choice posterior is proportional to
+For observed exposure count $`n_s`$ and replacement count $`r_s`$ in mileage
+state $`s`$, the conditional choice posterior is proportional to
 
-$$
+```math
 \pi(\theta\mid r,n)
 \propto \pi(\theta)
 \prod_s p_s(\theta)^{r_s}
           [1-p_s(\theta)]^{n_s-r_s},
 \qquad \theta=(RC,c),
-$$
+```
 
-where \(p_s(\theta)\) is the dynamic replacement policy. The dense reference
-evaluates this object on a \(141\times117\) trapezoidal grid. Its posterior
+where $`p_s(\theta)`$ is the dynamic replacement policy. The dense reference
+evaluates this object on a $`141\times117`$ trapezoidal grid. Its posterior
 mean, standard deviation, and correlation are
 
-$$
+```math
 \mathbb E[\theta\mid r,n]=(10.6095,\,2.5108),
 \qquad
-\operatorname{sd}(\theta\mid r,n)=(1.4404,\,0.5862),
+\mathrm{sd}(\theta\mid r,n)=(1.4404,\,0.5862),
 \qquad
 \rho=0.9204.
-$$
+```
 
 ### Simulation-trained structured classifier
 
-The positive comparison uses a \(29\times30\) parameter grid with trapezoidal
-prior weights \(q_g\). At each class \(g\), it estimates the state policy from
-\(M=500\) simulated fixed-exposure panels. The implementation draws the
+The positive comparison uses a $`29\times30`$ parameter grid with trapezoidal
+prior weights $`q_g`$. At each class $`g`$, it estimates the state policy from
+$`M=500`$ simulated fixed-exposure panels. The implementation draws the
 aggregate counts
 
-$$
-K_{gs}\sim\operatorname{Binomial}(M n_s,p_s(\theta_g)),
+```math
+K_{gs}\sim\mathrm{Binomial}(M n_s,p_s(\theta_g)),
 \qquad
 \widehat p_{gs}=\frac{K_{gs}+1/2}{M n_s+1},
-$$
+```
 
 then computes
 
-$$
+```math
 \widehat w_g(r,n)
 \propto q_g\prod_s
 \widehat p_{gs}^{r_s}(1-\widehat p_{gs})^{n_s-r_s}.
-$$
+```
 
-The aggregate draw is distributionally identical to summing \(M\) independent
+The aggregate draw is distributionally identical to summing $`M`$ independent
 panel-level Binomial counts. It avoids materializing 435,000 redundant panel
 rows; it does not insert the exact policy into the classifier likelihood.
 
@@ -283,7 +283,7 @@ The earlier 20,000-simulation generic diagonal-MDN result remains checked in:
 | Maximum mean error in reference SDs | 1.565 | 0.250 | fail |
 | Policy-mean maximum absolute error | 0.0172 | 0.0300 | pass |
 
-Its posterior mean was \((12.8636,3.2528)\). That error lies along the
+Its posterior mean was $`(12.8636,3.2528)`$. That error lies along the
 reference posterior's strong positive ridge. Average prior-predictive
 calibration passed, but it did not guarantee accuracy at this empirical panel.
 This failure is estimator evidence; it is not evidence that the public NFXP

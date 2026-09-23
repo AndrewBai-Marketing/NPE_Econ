@@ -7,23 +7,23 @@ between-school heterogeneity `tau` for the canonical reported effects
 
 The hierarchical model is
 
-$$
+```math
 \mu\sim\mathcal N(0,10^2),\qquad
-\tau\sim\operatorname{HalfNormal}(10),
-$$
+\tau\sim\mathrm{HalfNormal}(10),
+```
 
-$$
+```math
 \theta_j\mid\mu,\tau\sim\mathcal N(\mu,\tau^2),\qquad
 y_j\mid\theta_j\sim\mathcal N(\theta_j,\sigma_j^2).
-$$
+```
 
-Because the public object is $p(\mu,\tau\mid y)$, the simulator integrates
+Because the public object is $`p(\mu,\tau\mid y)`$, the simulator integrates
 out each latent school effect:
 
-$$
+```math
 y_j\mid\mu,\tau
 \sim\mathcal N\!\left(\mu,\tau^2+\sigma_j^2\right).
-$$
+```
 
 This is an exact marginalization, not an approximation or a different prior.
 It avoids asking a diagonal Gaussian mixture to learn eight nuisance latent
@@ -44,10 +44,10 @@ committed in [`expected_metrics.json`](expected_metrics.json).
 
 Deterministic quadrature gives
 
-$$
+```math
 \mathbb E[(\mu,\tau)\mid y]=(6.4720,4.7531),\qquad
-\operatorname{SD}[(\mu,\tau)\mid y]=(4.1912,3.6838).
-$$
+\mathrm{SD}[(\mu,\tau)\mid y]=(4.1912,3.6838).
+```
 
 All five fixed seeds pass. The worst marginal-CDF error is `0.04997`; the
 worst coarsened joint total-variation error is `0.06350`; and the worst
