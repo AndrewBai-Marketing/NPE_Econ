@@ -31,7 +31,7 @@ body:
     id: budget
     attributes:
       label: Simulation and training budget
-      placeholder: 20,000 simulations; 50 epochs; 5 MDN components
+      placeholder: 20,000 simulations; 50 epochs; spline backend, 3 layers
     validations:
       required: true
   - type: textarea
@@ -45,7 +45,7 @@ body:
     id: version
     attributes:
       label: Package version
-      placeholder: 0.1.0b1
+      placeholder: 0.1.0b2
     validations:
       required: true
   - type: input

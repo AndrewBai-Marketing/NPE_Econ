@@ -22,13 +22,13 @@ fixed classifier seeds pass the frozen numerical posterior and policy
 comparison limits. The classifier is a Rust-specific estimator, not the
 generic `structnpe.fit` MDN.
 
-### Eight Schools
+### Eight Schools: legacy MDN
 
 | Result | Population mean `mu` | Heterogeneity `tau` |
 | --- | ---: | ---: |
 | Deterministic quadrature posterior mean | 6.4720 | 4.7531 |
-| Mean of five `structnpe.fit` posterior means | 6.4178 | 4.7042 |
-| Range across the five fitted posterior means | [6.0483, 6.9624] | [4.5063, 5.0521] |
+| `structnpe.fit`, average posterior mean over five MDN seeds | 6.4178 | 4.7042 |
+| Range of the five fitted MDN posterior means | [6.0483, 6.9624] | [4.5063, 5.0521] |
 
 The mean and range in the last two rows summarize stochastic training runs;
 they are not an ensemble posterior or a posterior uncertainty interval.
@@ -36,6 +36,62 @@ All five fixed seeds pass the committed numerical accuracy gates. This is a
 comparison of the marginalized two-parameter hyperposterior, not a claim that
 the current diagonal mixture can reliably learn every centered hierarchical
 parameterization.
+
+## Experimental spline backend
+
+Version 0.1.0b2 adds `fit(..., backend="spline")`, a conditional
+rational-quadratic spline flow adapted from the stockpiling research code.
+The package default remains `backend="mdn"`; the successful five-seed table
+above is specifically the MDN comparison.
+
+The spline uses the same model, data, representation, prior, exact reference,
+and accuracy limits. Each of three new seeds uses 50,000 simulations, up to
+150 epochs, learning rate 0.0005, and validation-based early stopping with
+patience 25. The architecture has three spline layers, 96 hidden features,
+two residual blocks, eight bins, and tail bound six.
+
+| Seed | `mu` mean | `tau` mean | Max CDF error | Max 95% endpoint error (reference SDs) | Joint grid TV | All limits |
+| ---: | ---: | ---: | ---: | ---: | ---: | :--- |
+| 83201 | 6.1269 | 4.9132 | 0.03094 | 0.17575 | 0.06033 | PASS |
+| 83202 | 7.0627 | 4.6841 | 0.06867 | 0.13511 | 0.08115 | FAIL |
+| 83203 | 6.3461 | 5.0334 | 0.03336 | 0.36018 | 0.06189 | FAIL |
+
+All three runs pass the posterior-mean error limit of 0.15 reference SDs.
+Only seed 83201 passes every limit. Seed 83202 misses the joint-grid TV
+limit (0.08115 versus 0.08); seed 83203 misses the interval-endpoint limit
+(0.36018 versus 0.20). These are accuracy limitations of this configuration,
+not successful distributional validation or evidence of superiority.
+
+The backend also passes a separate conjugate-normal conditional posterior
+recovery test and seeded artifact round-trip checks in
+[`tests/test_structnpe_spline.py`](tests/test_structnpe_spline.py).
+
+Reproduce the three-seed comparison:
+
+```bash
+python -m pip install ".[replication]"
+python replication/eight_schools/run_validation.py \
+  --config replication/eight_schools/spline_config.json \
+  --output-dir replication/eight_schools/spline_results --quiet
+```
+
+This command intentionally returns a nonzero status when any accuracy limit
+fails. The committed [configuration](replication/eight_schools/spline_config.json)
+and [complete compact evidence](replication/eight_schools/spline_expected_metrics.json)
+record all three runs; limits were not relaxed to admit the failures.
+
+During integration, a first 25,000-simulation check using the stock nflows
+conditioner passed only one of three seeds. Its first autoregressive
+coordinate could not use context through the masked hidden units; repeated
+permutation orders could therefore leave a parameter unresponsive to data.
+The public implementation adds a context-only connection to every spline
+output without introducing dependence on later parameters. A regression test
+checks both properties. Repeating those seeds passed two of three limits-based
+comparisons, with the remaining failure in joint-grid TV. The final budget
+above was then evaluated with three new seeds. Both earlier stages, including
+all failures and source hashes, remain in the
+[development record](replication/eight_schools/spline_development_checks.json).
+These are development checks, not an independent calibration campaign.
 
 ## Eight Schools model
 
@@ -86,8 +142,8 @@ Means, standard deviations, and correlation use deterministic quadrature
 moments. Interval, marginal-CDF, and joint-grid comparisons use 400,000 fixed
 draws from that quadrature law and are labeled as draw-based in the evidence.
 
-The five public-API fits use 50,000 simulations each, ten diagonal-Gaussian
-components, and seeds 73001--73005:
+The five legacy public-API fits use `backend="mdn"`, 50,000 simulations each,
+ten diagonal-Gaussian components, and seeds 73001--73005:
 
 | Seed | `mu` mean | `tau` mean | `mu` SD | `tau` SD | Max CDF error |
 | ---: | ---: | ---: | ---: | ---: | ---: |

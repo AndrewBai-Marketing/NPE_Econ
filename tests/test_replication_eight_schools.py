@@ -150,3 +150,24 @@ def test_committed_eight_schools_evidence_passes_all_fixed_seeds() -> None:
                 "passed": True,
                 "value": run["metrics"][name],
             }
+
+
+def test_spline_evidence_preserves_failures_and_matches_configuration() -> None:
+    benchmark_dir = ROOT / "replication/eight_schools"
+    config_bytes = (benchmark_dir / "spline_config.json").read_bytes()
+    config = json.loads(config_bytes)
+    evidence = json.loads((benchmark_dir / "spline_expected_metrics.json").read_text())
+    legacy_config = json.loads((benchmark_dir / "config.json").read_text())
+    assert config["backend"] == "spline"
+    assert config["thresholds"] == legacy_config["thresholds"]
+    assert evidence["configuration"] == config
+    assert evidence["configuration_file_sha256"] == hashlib.sha256(config_bytes).hexdigest()
+    assert [run["seed"] for run in evidence["runs"]] == config["seeds"]
+    assert evidence["status"] == "FAIL"
+    assert evidence["all_seeds_pass"] is False
+    for run in evidence["runs"]:
+        for name, maximum in config["thresholds"].items():
+            assert run["checks"][name]["passed"] == (run["metrics"][name] <= maximum)
+        assert (run["status"] == "PASS") == all(item["passed"] for item in run["checks"].values())
+        assert run["checks"]["hyperparameter_mean_max_standardized_abs_error"]["passed"]
+    assert sum(run["status"] == "PASS" for run in evidence["runs"]) == 1

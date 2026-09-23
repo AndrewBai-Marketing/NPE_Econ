@@ -1,0 +1,1209 @@
+{
+  "interpretation": "Development checks preceding the committed spline comparison. Failed runs retained; these are not results of the final configuration.",
+  "stages": [
+    {
+      "stage": "stock_nflows_conditioner",
+      "source_sha256": {
+        "replication/eight_schools/model.py": "e5c1a5e2d389ff569277343877dc37c35c28e09ffccde8baa308ae42de73b309",
+        "replication/eight_schools/spline_config.json": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+        "replication/eight_schools/config.json": "5971bf8d4f335e937e4677e45b9ea39fb97fdf890d140c91f87b417af4e22048",
+        "replication/eight_schools/exact.py": "64e9ceb69930fbf0a1970590b384e343b8a29be5b65f5f796bd488ffb90a8480",
+        "replication/eight_schools/expected_metrics.json": "9113f89e04605a973cc7c02f0761f8a47b8e9c29349131136d36fe96beb95609",
+        "replication/eight_schools/__init__.py": "c44a9e8c46831fb4ce5b6177741ea2e0e494850f908336d5be08e2d86b07f559",
+        "replication/eight_schools/run_validation.py": "c7b1624b031be3cc4926b69c4826d572d40ad3b0bc35c834b6c68c150c5efdd4",
+        "src/structnpe/_spline.py": "e716fc3c997b68cac49dd67985f90ddc95db486198ce0ac094ebad5bf71ec1be",
+        "src/structnpe/summaries.py": "502cc823a16acfac7a5f4ab2a8be4f2d106806e73705d30b0c84688d1c04abd4",
+        "src/structnpe/schema.py": "ef59c422bb37e487a8d5737a0ea8a5f76b0cd48ea1f5e2353b617b250f0c3a99",
+        "src/structnpe/posterior.py": "587575e844a1c9caac9bf4ae28606f53b843eb87ceebc4a79509735f82e000cb",
+        "src/structnpe/inference.py": "f7a9cced7bc5b8b0d975cc819b3c2d3bf42d76917a92c41920c0209383dec43f",
+        "src/structnpe/estimator.py": "d57e18ac5e60e5cc158e4e0d398748c83b15cc5cd029f452a0e8eb9e9d7aa717",
+        "src/structnpe/simulator.py": "8be96b1cc086a94c01929939e1c4304a1707a188771ebe3f999d1aedffcc6043",
+        "src/structnpe/reports.py": "3575b7a1f8d31d05bfe339822651e2ffa919cef06561d35ad191e8e133bf8fb1",
+        "src/structnpe/simulation_bank.py": "7cfa9e16e50131b029d6a003ff998bc8daca0b241bdb541cf292dc66180bb323",
+        "src/structnpe/counterfactuals.py": "6c68332e49c84aec54d7c0368630f06dc42955d2554a8db30f0f3400551d6e45",
+        "src/structnpe/cli.py": "1407f7855756e3c1d43774896a7785043f867935090e3ff1e685ed2f05a158e3",
+        "src/structnpe/validation.py": "e66fd10778f3594df1187487c5a9aee594854e048a1dd584548b05df5b58cda3",
+        "src/structnpe/_artifacts.py": "f3ce3607fa542e2a2ec009b9b7e583c1eb5d1d56688a2cdb704efaa15ec2d56f",
+        "src/structnpe/api.py": "c33b4340057d335ff9b78c3150e3536287ce84de8e8919e3e840ce1335aa8663",
+        "src/structnpe/_version.py": "f74068c94fbb0c98638fc7768555e9ab05524fed226e592e94b6fc6d73f861f3",
+        "src/structnpe/config.py": "01958469bb75edd2e8ca1ab5af3aca904bdda6a41f878341df41b269412f57a0",
+        "src/structnpe/_fingerprints.py": "14c9b82c9677ffce84d8a7ab5a07db04dde0bd2695816636e3996fa3c4800b8c",
+        "src/structnpe/__init__.py": "00c4f936c1decb301f7997c6ba3eeba792dca998ca354ff633efa2b024fea756",
+        "src/structnpe/results.py": "b06dc732d447212f21136c07cf3f3445d52dd4415ee0c9dc413925ebe1371ff2",
+        "src/structnpe/estimators/mdn.py": "f9ceb469bd58fc74231e25a9aeab31099487852915478a2761c6039fa6bc9e9e",
+        "src/structnpe/estimators/model_index.py": "f45dd57a3e0c0cfff7846fc2cd5d5ee11fe20b21d626632754858e5ebe8347b5",
+        "src/structnpe/estimators/gaussian.py": "cb6c35df1eeab0c900d4cf8508637488e08a40987b7c739c4b3654b55afad7bb",
+        "src/structnpe/estimators/finite_grid.py": "56e94963bc27f458334269b670cf95dbf07836673cac7c77fdd77a1ed8e23c4e",
+        "src/structnpe/estimators/__init__.py": "fd243570a3dab63ef5e2862d592332a4e4633fb3de266c9e9289f0c55192ac19",
+        "src/structnpe/templates/finite_ddc/model.py": "beb29627bb4cebe75fe80eab334a6cdeb78eb142bf3132ad063372cc4c8dff49",
+        "src/structnpe/templates/finite_ddc/README.md": "1db6cc8f5fe2b9e1ffc13b6afc5fe2a698a3a6108fff08944542f74a8a34384a",
+        "src/structnpe/templates/finite_ddc/observed_example.csv": "70e1fac42e9579809ade50661be41f48d0f15774aced607a60eeebbee6e51769",
+        "src/structnpe/templates/finite_ddc/config.yaml": "6c32f2911a6e38c6cfa245afc687bc31fd11ed04b19c861716e468e23e0acee6",
+        "src/structnpe/templates/finite_ddc/policy.yaml": "9b48da2a826f68e0bad70c9f60db1f9cc68d937d2ef7e4d241449609d12ad0ca",
+        "src/structnpe/templates/custom_simulator/model.py": "fb9bc2d717d68f4e520ba795d10920ba67af125a50f1d6bc41de8caf74da20ba",
+        "src/structnpe/templates/custom_simulator/README.md": "b6da4c6edfcd0ea8bf002587ff4d722013a03bff841b957fa47285e8c7b20064",
+        "src/structnpe/templates/custom_simulator/observed_example.csv": "4bc106d09c05e163a7f891e6f9f55751747e6ed2292f100d5b736f967d0ef590",
+        "src/structnpe/templates/custom_simulator/config.yaml": "7eceb733951f6abf2fd7042855fc7eb5767d6bcf24caa775e10b377d5e0bf3fd",
+        "src/structnpe/templates/custom_simulator/policy.yaml": "de25912301ea2506671d3d214380847ca770f4b9c33f45076e3c098521e7201d",
+        "src/structnpe/templates/model_index_ddc/model.py": "bba3c5c8a890f3679ff2b008778871069d8c981801732e96fc9f8edca6c9bc06",
+        "src/structnpe/templates/model_index_ddc/README.md": "9ef2a8ee60b779b988c6917af7926a58071f8a38ba9ccebac14de428c08b61f3",
+        "src/structnpe/templates/model_index_ddc/observed_example.csv": "19dcc5ceb7bee684b67407997ef98c7e8dfe68d7da701f3f4022a5040ffa8ded",
+        "src/structnpe/templates/model_index_ddc/config.yaml": "20bfaf83152eea993975c5d693542bef4ccb03123082a3de7b4909b79d985435",
+        "src/structnpe/templates/model_index_ddc/policy.yaml": "9b48da2a826f68e0bad70c9f60db1f9cc68d937d2ef7e4d241449609d12ad0ca"
+      },
+      "results": [
+        {
+          "all_seeds_pass": false,
+          "benchmark": "eight_schools_spline_hyperposterior_v1",
+          "canonical_configuration": false,
+          "configuration": {
+            "backend": "spline",
+            "batch_size": 512,
+            "benchmark": "eight_schools_spline_hyperposterior_v1",
+            "components": 10,
+            "depth": 2,
+            "epochs": 120,
+            "exact_draws": 400000,
+            "exact_seed": 72991,
+            "hidden_dim": 96,
+            "inference_seed_offset": 1000,
+            "interpretation": "Three fresh seeds for the public spline backend; thresholds inherited unchanged from the MDN comparison. components is ignored by spline fits.",
+            "patience": 20,
+            "posterior_draws": 100000,
+            "quadrature_points": 100001,
+            "schema_version": 2,
+            "seeds": [
+              83101
+            ],
+            "simulations": 25000,
+            "thresholds": {
+              "central_95_endpoint_max_standardized_abs_error": 0.2,
+              "correlation_abs_error": 0.15,
+              "hyperparameter_mean_max_standardized_abs_error": 0.15,
+              "hyperparameter_sd_max_relative_abs_error": 0.15,
+              "joint_20x20_quantile_grid_total_variation": 0.08,
+              "marginal_cdf_max_abs_error": 0.1,
+              "tau_support_violation_rate": 0.0
+            },
+            "torch_num_threads": 1
+          },
+          "configuration_file_sha256": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+          "data": {
+            "reported_effects": [
+              28.0,
+              8.0,
+              -3.0,
+              7.0,
+              -1.0,
+              1.0,
+              18.0,
+              12.0
+            ],
+            "reported_standard_errors": [
+              15.0,
+              10.0,
+              16.0,
+              11.0,
+              9.0,
+              11.0,
+              10.0,
+              18.0
+            ]
+          },
+          "effective_configuration_sha256": "a8127a8f371db35e75d1eb6d9d48b2e58fafc7929a074de9477a1b935f0adb3d",
+          "environment": {
+            "numpy": "2.4.2",
+            "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+            "python": "3.13.11",
+            "thread_environment": {
+              "MKL_NUM_THREADS": "1",
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "torch": "2.5.1+cu121",
+            "torch_num_threads": 1
+          },
+          "exact_reference": {
+            "correlation": -0.04649431715408,
+            "draw_seed": 72991,
+            "draws_for_distributional_metrics": 400000,
+            "mean": [
+              6.47201703296998,
+              4.75310343438264
+            ],
+            "method": "dense log-tau quadrature with conditional Gaussian mu",
+            "sd": [
+              4.1911629448257,
+              3.68381836174331
+            ]
+          },
+          "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+          "runs": [
+            {
+              "checks": {
+                "central_95_endpoint_max_standardized_abs_error": {
+                  "maximum": 0.2,
+                  "passed": false,
+                  "value": 4.35358020646715
+                },
+                "correlation_abs_error": {
+                  "maximum": 0.15,
+                  "passed": false,
+                  "value": 0.45687732912782
+                },
+                "hyperparameter_mean_max_standardized_abs_error": {
+                  "maximum": 0.15,
+                  "passed": false,
+                  "value": 1.65802653340947
+                },
+                "hyperparameter_sd_max_relative_abs_error": {
+                  "maximum": 0.15,
+                  "passed": false,
+                  "value": 1.38448920052142
+                },
+                "joint_20x20_quantile_grid_total_variation": {
+                  "maximum": 0.08,
+                  "passed": false,
+                  "value": 0.4999775
+                },
+                "marginal_cdf_max_abs_error": {
+                  "maximum": 0.1,
+                  "passed": false,
+                  "value": 0.4657775
+                },
+                "tau_support_violation_rate": {
+                  "maximum": 0.0,
+                  "passed": true,
+                  "value": 0.0
+                }
+              },
+              "estimator_fingerprint": "a56b89b9502926c2b87f80317d659347c662d0409304fc15597f8e98017c071d",
+              "metrics": {
+                "approximate_correlation": -0.50337164628189,
+                "central_95_endpoint_max_standardized_abs_error": 4.35358020646715,
+                "correlation_abs_error": 0.45687732912782,
+                "hyperparameter_mean_max_standardized_abs_error": 1.65802653340947,
+                "hyperparameter_sd_max_relative_abs_error": 1.38448920052142,
+                "joint_20x20_quantile_grid_total_variation": 0.4999775,
+                "marginal_cdf_max_abs_error": 0.4657775,
+                "marginal_cdf_supremum": [
+                  0.4657775,
+                  0.140535
+                ],
+                "tau_support_violation_rate": 0.0
+              },
+              "model_fingerprint": "b4078ed3644ab02aeb7ee99081b0a270eda6ac5af470fe79b2b23362b1f384c2",
+              "parameters": [
+                {
+                  "approximate_mean": -0.47704233539361,
+                  "approximate_q025": -20.05375692078206,
+                  "approximate_q975": 19.24737065577898,
+                  "approximate_sd": 9.99378277956245,
+                  "exact_draw_q025": -1.80719288211033,
+                  "exact_draw_q975": 14.63997857226399,
+                  "marginal_cdf_supremum": 0.4657775,
+                  "mean_error_in_exact_sd": 1.65802653340947,
+                  "parameter": "mu",
+                  "quadrature_mean": 6.47201703296998,
+                  "quadrature_sd": 4.1911629448257,
+                  "sd_relative_error": 1.38448920052142
+                },
+                {
+                  "approximate_mean": 6.69312245460309,
+                  "approximate_q025": 0.17622637185971,
+                  "approximate_q975": 20.83980148917161,
+                  "approximate_sd": 5.76242978335326,
+                  "exact_draw_q025": 0.18320367894687,
+                  "exact_draw_q975": 13.74762307687974,
+                  "marginal_cdf_supremum": 0.140535,
+                  "mean_error_in_exact_sd": 0.526632648441,
+                  "parameter": "tau",
+                  "quadrature_mean": 4.75310343438264,
+                  "quadrature_sd": 3.68381836174331,
+                  "sd_relative_error": 0.56425459061621
+                }
+              ],
+              "seed": 83101,
+              "status": "FAIL",
+              "training_summary": {
+                "best_epoch": 15,
+                "best_validation_nll": 2.49731968383789,
+                "number_of_simulations": 25000,
+                "simulation_seed": 392287334,
+                "training_seed": 3496224529
+              }
+            }
+          ],
+          "schema_version": 2,
+          "status": "FAIL"
+        },
+        {
+          "all_seeds_pass": true,
+          "benchmark": "eight_schools_spline_hyperposterior_v1",
+          "canonical_configuration": false,
+          "configuration": {
+            "backend": "spline",
+            "batch_size": 512,
+            "benchmark": "eight_schools_spline_hyperposterior_v1",
+            "components": 10,
+            "depth": 2,
+            "epochs": 120,
+            "exact_draws": 400000,
+            "exact_seed": 72991,
+            "hidden_dim": 96,
+            "inference_seed_offset": 1000,
+            "interpretation": "Three fresh seeds for the public spline backend; thresholds inherited unchanged from the MDN comparison. components is ignored by spline fits.",
+            "patience": 20,
+            "posterior_draws": 100000,
+            "quadrature_points": 100001,
+            "schema_version": 2,
+            "seeds": [
+              83102
+            ],
+            "simulations": 25000,
+            "thresholds": {
+              "central_95_endpoint_max_standardized_abs_error": 0.2,
+              "correlation_abs_error": 0.15,
+              "hyperparameter_mean_max_standardized_abs_error": 0.15,
+              "hyperparameter_sd_max_relative_abs_error": 0.15,
+              "joint_20x20_quantile_grid_total_variation": 0.08,
+              "marginal_cdf_max_abs_error": 0.1,
+              "tau_support_violation_rate": 0.0
+            },
+            "torch_num_threads": 1
+          },
+          "configuration_file_sha256": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+          "data": {
+            "reported_effects": [
+              28.0,
+              8.0,
+              -3.0,
+              7.0,
+              -1.0,
+              1.0,
+              18.0,
+              12.0
+            ],
+            "reported_standard_errors": [
+              15.0,
+              10.0,
+              16.0,
+              11.0,
+              9.0,
+              11.0,
+              10.0,
+              18.0
+            ]
+          },
+          "effective_configuration_sha256": "72d5faf1d2adccfe60bc08163087a690a18096a84e030bfd10bf6df3d0471864",
+          "environment": {
+            "numpy": "2.4.2",
+            "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+            "python": "3.13.11",
+            "thread_environment": {
+              "MKL_NUM_THREADS": "1",
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "torch": "2.5.1+cu121",
+            "torch_num_threads": 1
+          },
+          "exact_reference": {
+            "correlation": -0.04649431715408,
+            "draw_seed": 72991,
+            "draws_for_distributional_metrics": 400000,
+            "mean": [
+              6.47201703296998,
+              4.75310343438264
+            ],
+            "method": "dense log-tau quadrature with conditional Gaussian mu",
+            "sd": [
+              4.1911629448257,
+              3.68381836174331
+            ]
+          },
+          "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+          "runs": [
+            {
+              "checks": {
+                "central_95_endpoint_max_standardized_abs_error": {
+                  "maximum": 0.2,
+                  "passed": true,
+                  "value": 0.18194786415138
+                },
+                "correlation_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.04171484070477
+                },
+                "hyperparameter_mean_max_standardized_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.01701593379078
+                },
+                "hyperparameter_sd_max_relative_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.04750517612358
+                },
+                "joint_20x20_quantile_grid_total_variation": {
+                  "maximum": 0.08,
+                  "passed": true,
+                  "value": 0.0546725
+                },
+                "marginal_cdf_max_abs_error": {
+                  "maximum": 0.1,
+                  "passed": true,
+                  "value": 0.01942
+                },
+                "tau_support_violation_rate": {
+                  "maximum": 0.0,
+                  "passed": true,
+                  "value": 0.0
+                }
+              },
+              "estimator_fingerprint": "90dda0440388877f316ce62a25346419e4d3af93b7f631198ef4ce5e3a5f17a7",
+              "metrics": {
+                "approximate_correlation": -0.08820915785885,
+                "central_95_endpoint_max_standardized_abs_error": 0.18194786415138,
+                "correlation_abs_error": 0.04171484070477,
+                "hyperparameter_mean_max_standardized_abs_error": 0.01701593379078,
+                "hyperparameter_sd_max_relative_abs_error": 0.04750517612358,
+                "joint_20x20_quantile_grid_total_variation": 0.0546725,
+                "marginal_cdf_max_abs_error": 0.01942,
+                "marginal_cdf_supremum": [
+                  0.0125275,
+                  0.01942
+                ],
+                "tau_support_violation_rate": 0.0
+              },
+              "model_fingerprint": "b4078ed3644ab02aeb7ee99081b0a270eda6ac5af470fe79b2b23362b1f384c2",
+              "parameters": [
+                {
+                  "approximate_mean": 6.40070048179448,
+                  "approximate_q025": -2.17402882451424,
+                  "approximate_q975": 14.82817936414307,
+                  "approximate_sd": 4.2905722380638,
+                  "exact_draw_q025": -1.80719288211033,
+                  "exact_draw_q975": 14.63997857226399,
+                  "marginal_cdf_supremum": 0.0125275,
+                  "mean_error_in_exact_sd": 0.01701593379078,
+                  "parameter": "mu",
+                  "quadrature_mean": 6.47201703296998,
+                  "quadrature_sd": 4.1911629448257,
+                  "sd_relative_error": 0.02371878510732
+                },
+                {
+                  "approximate_mean": 4.73869728428729,
+                  "approximate_q025": 0.16494790405018,
+                  "approximate_q975": 14.41788595972056,
+                  "approximate_sd": 3.8588188018252,
+                  "exact_draw_q025": 0.18320367894687,
+                  "exact_draw_q975": 13.74762307687974,
+                  "marginal_cdf_supremum": 0.01942,
+                  "mean_error_in_exact_sd": 0.00391065700876,
+                  "parameter": "tau",
+                  "quadrature_mean": 4.75310343438264,
+                  "quadrature_sd": 3.68381836174331,
+                  "sd_relative_error": 0.04750517612358
+                }
+              ],
+              "seed": 83102,
+              "status": "PASS",
+              "training_summary": {
+                "best_epoch": 19,
+                "best_validation_nll": 1.64668541870117,
+                "number_of_simulations": 25000,
+                "simulation_seed": 1536903794,
+                "training_seed": 2455560023
+              }
+            }
+          ],
+          "schema_version": 2,
+          "status": "PASS"
+        },
+        {
+          "all_seeds_pass": false,
+          "benchmark": "eight_schools_spline_hyperposterior_v1",
+          "canonical_configuration": false,
+          "configuration": {
+            "backend": "spline",
+            "batch_size": 512,
+            "benchmark": "eight_schools_spline_hyperposterior_v1",
+            "components": 10,
+            "depth": 2,
+            "epochs": 120,
+            "exact_draws": 400000,
+            "exact_seed": 72991,
+            "hidden_dim": 96,
+            "inference_seed_offset": 1000,
+            "interpretation": "Three fresh seeds for the public spline backend; thresholds inherited unchanged from the MDN comparison. components is ignored by spline fits.",
+            "patience": 20,
+            "posterior_draws": 100000,
+            "quadrature_points": 100001,
+            "schema_version": 2,
+            "seeds": [
+              83103
+            ],
+            "simulations": 25000,
+            "thresholds": {
+              "central_95_endpoint_max_standardized_abs_error": 0.2,
+              "correlation_abs_error": 0.15,
+              "hyperparameter_mean_max_standardized_abs_error": 0.15,
+              "hyperparameter_sd_max_relative_abs_error": 0.15,
+              "joint_20x20_quantile_grid_total_variation": 0.08,
+              "marginal_cdf_max_abs_error": 0.1,
+              "tau_support_violation_rate": 0.0
+            },
+            "torch_num_threads": 1
+          },
+          "configuration_file_sha256": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+          "data": {
+            "reported_effects": [
+              28.0,
+              8.0,
+              -3.0,
+              7.0,
+              -1.0,
+              1.0,
+              18.0,
+              12.0
+            ],
+            "reported_standard_errors": [
+              15.0,
+              10.0,
+              16.0,
+              11.0,
+              9.0,
+              11.0,
+              10.0,
+              18.0
+            ]
+          },
+          "effective_configuration_sha256": "44607a9656b2c2d4bce63f8d8792cea722ca8b413c2eecc492d2040f89c96264",
+          "environment": {
+            "numpy": "2.4.2",
+            "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+            "python": "3.13.11",
+            "thread_environment": {
+              "MKL_NUM_THREADS": "1",
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "torch": "2.5.1+cu121",
+            "torch_num_threads": 1
+          },
+          "exact_reference": {
+            "correlation": -0.04649431715408,
+            "draw_seed": 72991,
+            "draws_for_distributional_metrics": 400000,
+            "mean": [
+              6.47201703296998,
+              4.75310343438264
+            ],
+            "method": "dense log-tau quadrature with conditional Gaussian mu",
+            "sd": [
+              4.1911629448257,
+              3.68381836174331
+            ]
+          },
+          "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+          "runs": [
+            {
+              "checks": {
+                "central_95_endpoint_max_standardized_abs_error": {
+                  "maximum": 0.2,
+                  "passed": false,
+                  "value": 0.360206422024
+                },
+                "correlation_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.02812469997235
+                },
+                "hyperparameter_mean_max_standardized_abs_error": {
+                  "maximum": 0.15,
+                  "passed": false,
+                  "value": 0.18764220029011
+                },
+                "hyperparameter_sd_max_relative_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.05123017491255
+                },
+                "joint_20x20_quantile_grid_total_variation": {
+                  "maximum": 0.08,
+                  "passed": false,
+                  "value": 0.08227
+                },
+                "marginal_cdf_max_abs_error": {
+                  "maximum": 0.1,
+                  "passed": true,
+                  "value": 0.072095
+                },
+                "tau_support_violation_rate": {
+                  "maximum": 0.0,
+                  "passed": true,
+                  "value": 0.0
+                }
+              },
+              "estimator_fingerprint": "52250a6abb19fa6d939e75e9bd9e57893f0756cb9e2824e7ebddccaa7362259e",
+              "metrics": {
+                "approximate_correlation": -0.07461901712643,
+                "central_95_endpoint_max_standardized_abs_error": 0.360206422024,
+                "correlation_abs_error": 0.02812469997235,
+                "hyperparameter_mean_max_standardized_abs_error": 0.18764220029011,
+                "hyperparameter_sd_max_relative_abs_error": 0.05123017491255,
+                "joint_20x20_quantile_grid_total_variation": 0.08227,
+                "marginal_cdf_max_abs_error": 0.072095,
+                "marginal_cdf_supremum": [
+                  0.072095,
+                  0.02219
+                ],
+                "tau_support_violation_rate": 0.0
+              },
+              "model_fingerprint": "b4078ed3644ab02aeb7ee99081b0a270eda6ac5af470fe79b2b23362b1f384c2",
+              "parameters": [
+                {
+                  "approximate_mean": 5.68557799622852,
+                  "approximate_q025": -3.31687669058558,
+                  "approximate_q975": 14.14108866696503,
+                  "approximate_sd": 4.39796786641499,
+                  "exact_draw_q025": -1.80719288211033,
+                  "exact_draw_q975": 14.63997857226399,
+                  "marginal_cdf_supremum": 0.072095,
+                  "mean_error_in_exact_sd": 0.18764220029011,
+                  "parameter": "mu",
+                  "quadrature_mean": 6.47201703296998,
+                  "quadrature_sd": 4.1911629448257,
+                  "sd_relative_error": 0.04934308789989
+                },
+                {
+                  "approximate_mean": 4.9487957162543,
+                  "approximate_q025": 0.18720438722857,
+                  "approximate_q975": 14.19722057875396,
+                  "approximate_sd": 3.87254102076149,
+                  "exact_draw_q025": 0.18320367894687,
+                  "exact_draw_q975": 13.74762307687974,
+                  "marginal_cdf_supremum": 0.02219,
+                  "mean_error_in_exact_sd": 0.05312213107572,
+                  "parameter": "tau",
+                  "quadrature_mean": 4.75310343438264,
+                  "quadrature_sd": 3.68381836174331,
+                  "sd_relative_error": 0.05123017491255
+                }
+              ],
+              "seed": 83103,
+              "status": "FAIL",
+              "training_summary": {
+                "best_epoch": 21,
+                "best_validation_nll": 1.67301546268463,
+                "number_of_simulations": 25000,
+                "simulation_seed": 1909140894,
+                "training_seed": 3535629082
+              }
+            }
+          ],
+          "schema_version": 2,
+          "status": "FAIL"
+        }
+      ]
+    },
+    {
+      "stage": "corrected_context_25000_simulations",
+      "source_sha256": {
+        "replication/eight_schools/model.py": "e5c1a5e2d389ff569277343877dc37c35c28e09ffccde8baa308ae42de73b309",
+        "replication/eight_schools/spline_config.json": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+        "replication/eight_schools/config.json": "5971bf8d4f335e937e4677e45b9ea39fb97fdf890d140c91f87b417af4e22048",
+        "replication/eight_schools/exact.py": "64e9ceb69930fbf0a1970590b384e343b8a29be5b65f5f796bd488ffb90a8480",
+        "replication/eight_schools/expected_metrics.json": "9113f89e04605a973cc7c02f0761f8a47b8e9c29349131136d36fe96beb95609",
+        "replication/eight_schools/__init__.py": "c44a9e8c46831fb4ce5b6177741ea2e0e494850f908336d5be08e2d86b07f559",
+        "replication/eight_schools/run_validation.py": "c7b1624b031be3cc4926b69c4826d572d40ad3b0bc35c834b6c68c150c5efdd4",
+        "src/structnpe/_spline.py": "dbb592092e8314f7d587469e7ddfd5c202daba0e9c0b0c7037410fc35c984baf",
+        "src/structnpe/summaries.py": "502cc823a16acfac7a5f4ab2a8be4f2d106806e73705d30b0c84688d1c04abd4",
+        "src/structnpe/schema.py": "ef59c422bb37e487a8d5737a0ea8a5f76b0cd48ea1f5e2353b617b250f0c3a99",
+        "src/structnpe/posterior.py": "587575e844a1c9caac9bf4ae28606f53b843eb87ceebc4a79509735f82e000cb",
+        "src/structnpe/inference.py": "f7a9cced7bc5b8b0d975cc819b3c2d3bf42d76917a92c41920c0209383dec43f",
+        "src/structnpe/estimator.py": "294c94482623cf231805a73879562fc1199999be750b10fefe939ff6c880782a",
+        "src/structnpe/simulator.py": "8be96b1cc086a94c01929939e1c4304a1707a188771ebe3f999d1aedffcc6043",
+        "src/structnpe/reports.py": "3575b7a1f8d31d05bfe339822651e2ffa919cef06561d35ad191e8e133bf8fb1",
+        "src/structnpe/simulation_bank.py": "7cfa9e16e50131b029d6a003ff998bc8daca0b241bdb541cf292dc66180bb323",
+        "src/structnpe/counterfactuals.py": "6c68332e49c84aec54d7c0368630f06dc42955d2554a8db30f0f3400551d6e45",
+        "src/structnpe/cli.py": "1407f7855756e3c1d43774896a7785043f867935090e3ff1e685ed2f05a158e3",
+        "src/structnpe/validation.py": "e66fd10778f3594df1187487c5a9aee594854e048a1dd584548b05df5b58cda3",
+        "src/structnpe/_artifacts.py": "f3ce3607fa542e2a2ec009b9b7e583c1eb5d1d56688a2cdb704efaa15ec2d56f",
+        "src/structnpe/api.py": "c33b4340057d335ff9b78c3150e3536287ce84de8e8919e3e840ce1335aa8663",
+        "src/structnpe/_version.py": "f74068c94fbb0c98638fc7768555e9ab05524fed226e592e94b6fc6d73f861f3",
+        "src/structnpe/config.py": "01958469bb75edd2e8ca1ab5af3aca904bdda6a41f878341df41b269412f57a0",
+        "src/structnpe/_fingerprints.py": "14c9b82c9677ffce84d8a7ab5a07db04dde0bd2695816636e3996fa3c4800b8c",
+        "src/structnpe/__init__.py": "00c4f936c1decb301f7997c6ba3eeba792dca998ca354ff633efa2b024fea756",
+        "src/structnpe/results.py": "b06dc732d447212f21136c07cf3f3445d52dd4415ee0c9dc413925ebe1371ff2",
+        "src/structnpe/estimators/mdn.py": "f9ceb469bd58fc74231e25a9aeab31099487852915478a2761c6039fa6bc9e9e",
+        "src/structnpe/estimators/model_index.py": "f45dd57a3e0c0cfff7846fc2cd5d5ee11fe20b21d626632754858e5ebe8347b5",
+        "src/structnpe/estimators/gaussian.py": "cb6c35df1eeab0c900d4cf8508637488e08a40987b7c739c4b3654b55afad7bb",
+        "src/structnpe/estimators/finite_grid.py": "56e94963bc27f458334269b670cf95dbf07836673cac7c77fdd77a1ed8e23c4e",
+        "src/structnpe/estimators/__init__.py": "fd243570a3dab63ef5e2862d592332a4e4633fb3de266c9e9289f0c55192ac19",
+        "src/structnpe/templates/finite_ddc/model.py": "beb29627bb4cebe75fe80eab334a6cdeb78eb142bf3132ad063372cc4c8dff49",
+        "src/structnpe/templates/custom_simulator/model.py": "fb9bc2d717d68f4e520ba795d10920ba67af125a50f1d6bc41de8caf74da20ba",
+        "src/structnpe/templates/model_index_ddc/model.py": "bba3c5c8a890f3679ff2b008778871069d8c981801732e96fc9f8edca6c9bc06"
+      },
+      "results": [
+        {
+          "all_seeds_pass": true,
+          "benchmark": "eight_schools_spline_hyperposterior_v1",
+          "canonical_configuration": false,
+          "configuration": {
+            "backend": "spline",
+            "batch_size": 512,
+            "benchmark": "eight_schools_spline_hyperposterior_v1",
+            "components": 10,
+            "depth": 2,
+            "epochs": 120,
+            "exact_draws": 400000,
+            "exact_seed": 72991,
+            "hidden_dim": 96,
+            "inference_seed_offset": 1000,
+            "interpretation": "Three fresh seeds for the public spline backend; thresholds inherited unchanged from the MDN comparison. components is ignored by spline fits.",
+            "patience": 20,
+            "posterior_draws": 100000,
+            "quadrature_points": 100001,
+            "schema_version": 2,
+            "seeds": [
+              83101
+            ],
+            "simulations": 25000,
+            "thresholds": {
+              "central_95_endpoint_max_standardized_abs_error": 0.2,
+              "correlation_abs_error": 0.15,
+              "hyperparameter_mean_max_standardized_abs_error": 0.15,
+              "hyperparameter_sd_max_relative_abs_error": 0.15,
+              "joint_20x20_quantile_grid_total_variation": 0.08,
+              "marginal_cdf_max_abs_error": 0.1,
+              "tau_support_violation_rate": 0.0
+            },
+            "torch_num_threads": 1
+          },
+          "configuration_file_sha256": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+          "data": {
+            "reported_effects": [
+              28.0,
+              8.0,
+              -3.0,
+              7.0,
+              -1.0,
+              1.0,
+              18.0,
+              12.0
+            ],
+            "reported_standard_errors": [
+              15.0,
+              10.0,
+              16.0,
+              11.0,
+              9.0,
+              11.0,
+              10.0,
+              18.0
+            ]
+          },
+          "effective_configuration_sha256": "a8127a8f371db35e75d1eb6d9d48b2e58fafc7929a074de9477a1b935f0adb3d",
+          "environment": {
+            "numpy": "2.4.2",
+            "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+            "python": "3.13.11",
+            "thread_environment": {
+              "MKL_NUM_THREADS": "1",
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "torch": "2.5.1+cu121",
+            "torch_num_threads": 1
+          },
+          "exact_reference": {
+            "correlation": -0.04649431715408,
+            "draw_seed": 72991,
+            "draws_for_distributional_metrics": 400000,
+            "mean": [
+              6.47201703296998,
+              4.75310343438264
+            ],
+            "method": "dense log-tau quadrature with conditional Gaussian mu",
+            "sd": [
+              4.1911629448257,
+              3.68381836174331
+            ]
+          },
+          "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+          "runs": [
+            {
+              "checks": {
+                "central_95_endpoint_max_standardized_abs_error": {
+                  "maximum": 0.2,
+                  "passed": true,
+                  "value": 0.16790605905992
+                },
+                "correlation_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.00228925199736
+                },
+                "hyperparameter_mean_max_standardized_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.09836071882121
+                },
+                "hyperparameter_sd_max_relative_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.02658383102724
+                },
+                "joint_20x20_quantile_grid_total_variation": {
+                  "maximum": 0.08,
+                  "passed": true,
+                  "value": 0.0751075
+                },
+                "marginal_cdf_max_abs_error": {
+                  "maximum": 0.1,
+                  "passed": true,
+                  "value": 0.044445
+                },
+                "tau_support_violation_rate": {
+                  "maximum": 0.0,
+                  "passed": true,
+                  "value": 0.0
+                }
+              },
+              "estimator_fingerprint": "3beaefea288d0e29a7265d0eb65f7e7b26104ddeecac49b363e6f664d5ee54ac",
+              "metrics": {
+                "approximate_correlation": -0.04420506515671,
+                "central_95_endpoint_max_standardized_abs_error": 0.16790605905992,
+                "correlation_abs_error": 0.00228925199736,
+                "hyperparameter_mean_max_standardized_abs_error": 0.09836071882121,
+                "hyperparameter_sd_max_relative_abs_error": 0.02658383102724,
+                "joint_20x20_quantile_grid_total_variation": 0.0751075,
+                "marginal_cdf_max_abs_error": 0.044445,
+                "marginal_cdf_supremum": [
+                  0.0362825,
+                  0.044445
+                ],
+                "tau_support_violation_rate": 0.0
+              },
+              "model_fingerprint": "fe1ed82905e0412ef33a3eaab93566ed6ee08d3a52966558f19918946ef17d22",
+              "parameters": [
+                {
+                  "approximate_mean": 6.2020361057171,
+                  "approximate_q025": -1.97760125461619,
+                  "approximate_q975": 14.6466195420309,
+                  "approximate_sd": 4.18460400462416,
+                  "exact_draw_q025": -1.80719288211033,
+                  "exact_draw_q975": 14.63997857226399,
+                  "marginal_cdf_supremum": 0.0362825,
+                  "mean_error_in_exact_sd": 0.06441670982661,
+                  "parameter": "mu",
+                  "quadrature_mean": 6.47201703296998,
+                  "quadrature_sd": 4.1911629448257,
+                  "sd_relative_error": 0.00156494516865
+                },
+                {
+                  "approximate_mean": 4.3907604123148,
+                  "approximate_q025": 0.13084545539636,
+                  "approximate_q975": 13.12908765346686,
+                  "approximate_sd": 3.58588835687967,
+                  "exact_draw_q025": 0.18320367894687,
+                  "exact_draw_q975": 13.74762307687974,
+                  "marginal_cdf_supremum": 0.044445,
+                  "mean_error_in_exact_sd": 0.09836071882121,
+                  "parameter": "tau",
+                  "quadrature_mean": 4.75310343438264,
+                  "quadrature_sd": 3.68381836174331,
+                  "sd_relative_error": 0.02658383102724
+                }
+              ],
+              "seed": 83101,
+              "status": "PASS",
+              "training_summary": {
+                "best_epoch": 31,
+                "best_validation_nll": 1.76224152965546,
+                "number_of_simulations": 25000,
+                "simulation_seed": 392287334,
+                "training_seed": 3496224529
+              }
+            }
+          ],
+          "schema_version": 2,
+          "status": "PASS"
+        },
+        {
+          "all_seeds_pass": false,
+          "benchmark": "eight_schools_spline_hyperposterior_v1",
+          "canonical_configuration": false,
+          "configuration": {
+            "backend": "spline",
+            "batch_size": 512,
+            "benchmark": "eight_schools_spline_hyperposterior_v1",
+            "components": 10,
+            "depth": 2,
+            "epochs": 120,
+            "exact_draws": 400000,
+            "exact_seed": 72991,
+            "hidden_dim": 96,
+            "inference_seed_offset": 1000,
+            "interpretation": "Three fresh seeds for the public spline backend; thresholds inherited unchanged from the MDN comparison. components is ignored by spline fits.",
+            "patience": 20,
+            "posterior_draws": 100000,
+            "quadrature_points": 100001,
+            "schema_version": 2,
+            "seeds": [
+              83102
+            ],
+            "simulations": 25000,
+            "thresholds": {
+              "central_95_endpoint_max_standardized_abs_error": 0.2,
+              "correlation_abs_error": 0.15,
+              "hyperparameter_mean_max_standardized_abs_error": 0.15,
+              "hyperparameter_sd_max_relative_abs_error": 0.15,
+              "joint_20x20_quantile_grid_total_variation": 0.08,
+              "marginal_cdf_max_abs_error": 0.1,
+              "tau_support_violation_rate": 0.0
+            },
+            "torch_num_threads": 1
+          },
+          "configuration_file_sha256": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+          "data": {
+            "reported_effects": [
+              28.0,
+              8.0,
+              -3.0,
+              7.0,
+              -1.0,
+              1.0,
+              18.0,
+              12.0
+            ],
+            "reported_standard_errors": [
+              15.0,
+              10.0,
+              16.0,
+              11.0,
+              9.0,
+              11.0,
+              10.0,
+              18.0
+            ]
+          },
+          "effective_configuration_sha256": "72d5faf1d2adccfe60bc08163087a690a18096a84e030bfd10bf6df3d0471864",
+          "environment": {
+            "numpy": "2.4.2",
+            "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+            "python": "3.13.11",
+            "thread_environment": {
+              "MKL_NUM_THREADS": "1",
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "torch": "2.5.1+cu121",
+            "torch_num_threads": 1
+          },
+          "exact_reference": {
+            "correlation": -0.04649431715408,
+            "draw_seed": 72991,
+            "draws_for_distributional_metrics": 400000,
+            "mean": [
+              6.47201703296998,
+              4.75310343438264
+            ],
+            "method": "dense log-tau quadrature with conditional Gaussian mu",
+            "sd": [
+              4.1911629448257,
+              3.68381836174331
+            ]
+          },
+          "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+          "runs": [
+            {
+              "checks": {
+                "central_95_endpoint_max_standardized_abs_error": {
+                  "maximum": 0.2,
+                  "passed": true,
+                  "value": 0.18174814696625
+                },
+                "correlation_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.00799112168554
+                },
+                "hyperparameter_mean_max_standardized_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.13561191382889
+                },
+                "hyperparameter_sd_max_relative_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.02205747158741
+                },
+                "joint_20x20_quantile_grid_total_variation": {
+                  "maximum": 0.08,
+                  "passed": false,
+                  "value": 0.08197
+                },
+                "marginal_cdf_max_abs_error": {
+                  "maximum": 0.1,
+                  "passed": true,
+                  "value": 0.0525725
+                },
+                "tau_support_violation_rate": {
+                  "maximum": 0.0,
+                  "passed": true,
+                  "value": 0.0
+                }
+              },
+              "estimator_fingerprint": "825dd070aabcbb802b3278c2af6cb45d6696c0b73b6a1b434f8d14dc5db4b23a",
+              "metrics": {
+                "approximate_correlation": -0.03850319546854,
+                "central_95_endpoint_max_standardized_abs_error": 0.18174814696625,
+                "correlation_abs_error": 0.00799112168554,
+                "hyperparameter_mean_max_standardized_abs_error": 0.13561191382889,
+                "hyperparameter_sd_max_relative_abs_error": 0.02205747158741,
+                "joint_20x20_quantile_grid_total_variation": 0.08197,
+                "marginal_cdf_max_abs_error": 0.0525725,
+                "marginal_cdf_supremum": [
+                  0.0525725,
+                  0.0327
+                ],
+                "tau_support_violation_rate": 0.0
+              },
+              "model_fingerprint": "fe1ed82905e0412ef33a3eaab93566ed6ee08d3a52966558f19918946ef17d22",
+              "parameters": [
+                {
+                  "approximate_mean": 7.04038866108654,
+                  "approximate_q025": -1.04545678325464,
+                  "approximate_q975": 15.12186029460344,
+                  "approximate_sd": 4.12323986102813,
+                  "exact_draw_q025": -1.80719288211033,
+                  "exact_draw_q975": 14.63997857226399,
+                  "marginal_cdf_supremum": 0.0525725,
+                  "mean_error_in_exact_sd": 0.13561191382889,
+                  "parameter": "mu",
+                  "quadrature_mean": 6.47201703296998,
+                  "quadrature_sd": 4.1911629448257,
+                  "sd_relative_error": 0.01620626176833
+                },
+                {
+                  "approximate_mean": 4.89606658531995,
+                  "approximate_q025": 0.18827825959419,
+                  "approximate_q975": 14.0808908430551,
+                  "approximate_sd": 3.76507408059063,
+                  "exact_draw_q025": 0.18320367894687,
+                  "exact_draw_q975": 13.74762307687974,
+                  "marginal_cdf_supremum": 0.0327,
+                  "mean_error_in_exact_sd": 0.03880841477473,
+                  "parameter": "tau",
+                  "quadrature_mean": 4.75310343438264,
+                  "quadrature_sd": 3.68381836174331,
+                  "sd_relative_error": 0.02205747158741
+                }
+              ],
+              "seed": 83102,
+              "status": "FAIL",
+              "training_summary": {
+                "best_epoch": 33,
+                "best_validation_nll": 1.65727394371033,
+                "number_of_simulations": 25000,
+                "simulation_seed": 1536903794,
+                "training_seed": 2455560023
+              }
+            }
+          ],
+          "schema_version": 2,
+          "status": "FAIL"
+        },
+        {
+          "all_seeds_pass": true,
+          "benchmark": "eight_schools_spline_hyperposterior_v1",
+          "canonical_configuration": false,
+          "configuration": {
+            "backend": "spline",
+            "batch_size": 512,
+            "benchmark": "eight_schools_spline_hyperposterior_v1",
+            "components": 10,
+            "depth": 2,
+            "epochs": 120,
+            "exact_draws": 400000,
+            "exact_seed": 72991,
+            "hidden_dim": 96,
+            "inference_seed_offset": 1000,
+            "interpretation": "Three fresh seeds for the public spline backend; thresholds inherited unchanged from the MDN comparison. components is ignored by spline fits.",
+            "patience": 20,
+            "posterior_draws": 100000,
+            "quadrature_points": 100001,
+            "schema_version": 2,
+            "seeds": [
+              83103
+            ],
+            "simulations": 25000,
+            "thresholds": {
+              "central_95_endpoint_max_standardized_abs_error": 0.2,
+              "correlation_abs_error": 0.15,
+              "hyperparameter_mean_max_standardized_abs_error": 0.15,
+              "hyperparameter_sd_max_relative_abs_error": 0.15,
+              "joint_20x20_quantile_grid_total_variation": 0.08,
+              "marginal_cdf_max_abs_error": 0.1,
+              "tau_support_violation_rate": 0.0
+            },
+            "torch_num_threads": 1
+          },
+          "configuration_file_sha256": "1dda2f3c8e965c6d1758905dd990cc2b39c4c71385ed9c547ffbd06b90b18232",
+          "data": {
+            "reported_effects": [
+              28.0,
+              8.0,
+              -3.0,
+              7.0,
+              -1.0,
+              1.0,
+              18.0,
+              12.0
+            ],
+            "reported_standard_errors": [
+              15.0,
+              10.0,
+              16.0,
+              11.0,
+              9.0,
+              11.0,
+              10.0,
+              18.0
+            ]
+          },
+          "effective_configuration_sha256": "44607a9656b2c2d4bce63f8d8792cea722ca8b413c2eecc492d2040f89c96264",
+          "environment": {
+            "numpy": "2.4.2",
+            "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+            "python": "3.13.11",
+            "thread_environment": {
+              "MKL_NUM_THREADS": "1",
+              "OMP_NUM_THREADS": "1",
+              "OPENBLAS_NUM_THREADS": "1"
+            },
+            "torch": "2.5.1+cu121",
+            "torch_num_threads": 1
+          },
+          "exact_reference": {
+            "correlation": -0.04649431715408,
+            "draw_seed": 72991,
+            "draws_for_distributional_metrics": 400000,
+            "mean": [
+              6.47201703296998,
+              4.75310343438264
+            ],
+            "method": "dense log-tau quadrature with conditional Gaussian mu",
+            "sd": [
+              4.1911629448257,
+              3.68381836174331
+            ]
+          },
+          "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+          "runs": [
+            {
+              "checks": {
+                "central_95_endpoint_max_standardized_abs_error": {
+                  "maximum": 0.2,
+                  "passed": true,
+                  "value": 0.1890085195779
+                },
+                "correlation_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.12016375339465
+                },
+                "hyperparameter_mean_max_standardized_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.10937209743247
+                },
+                "hyperparameter_sd_max_relative_abs_error": {
+                  "maximum": 0.15,
+                  "passed": true,
+                  "value": 0.0286830880128
+                },
+                "joint_20x20_quantile_grid_total_variation": {
+                  "maximum": 0.08,
+                  "passed": true,
+                  "value": 0.075165
+                },
+                "marginal_cdf_max_abs_error": {
+                  "maximum": 0.1,
+                  "passed": true,
+                  "value": 0.0347175
+                },
+                "tau_support_violation_rate": {
+                  "maximum": 0.0,
+                  "passed": true,
+                  "value": 0.0
+                }
+              },
+              "estimator_fingerprint": "3066723f27436266af523269dba79b0dece997da01c47e0aef3d6ea974549dab",
+              "metrics": {
+                "approximate_correlation": -0.16665807054873,
+                "central_95_endpoint_max_standardized_abs_error": 0.1890085195779,
+                "correlation_abs_error": 0.12016375339465,
+                "hyperparameter_mean_max_standardized_abs_error": 0.10937209743247,
+                "hyperparameter_sd_max_relative_abs_error": 0.0286830880128,
+                "joint_20x20_quantile_grid_total_variation": 0.075165,
+                "marginal_cdf_max_abs_error": 0.0347175,
+                "marginal_cdf_supremum": [
+                  0.0347175,
+                  0.03183
+                ],
+                "tau_support_violation_rate": 0.0
+              },
+              "model_fingerprint": "fe1ed82905e0412ef33a3eaab93566ed6ee08d3a52966558f19918946ef17d22",
+              "parameters": [
+                {
+                  "approximate_mean": 6.01362075101314,
+                  "approximate_q025": -2.5993583856216,
+                  "approximate_q975": 14.37267657154565,
+                  "approximate_sd": 4.31137844044813,
+                  "exact_draw_q025": -1.80719288211033,
+                  "exact_draw_q975": 14.63997857226399,
+                  "marginal_cdf_supremum": 0.0347175,
+                  "mean_error_in_exact_sd": 0.10937209743247,
+                  "parameter": "mu",
+                  "quadrature_mean": 6.47201703296998,
+                  "quadrature_sd": 4.1911629448257,
+                  "sd_relative_error": 0.0286830880128
+                },
+                {
+                  "approximate_mean": 4.4660936675433,
+                  "approximate_q025": 0.16466716235122,
+                  "approximate_q975": 13.24964828449116,
+                  "approximate_sd": 3.62121615488599,
+                  "exact_draw_q025": 0.18320367894687,
+                  "exact_draw_q975": 13.74762307687974,
+                  "marginal_cdf_supremum": 0.03183,
+                  "mean_error_in_exact_sd": 0.07791094420397,
+                  "parameter": "tau",
+                  "quadrature_mean": 4.75310343438264,
+                  "quadrature_sd": 3.68381836174331,
+                  "sd_relative_error": 0.01699383647887
+                }
+              ],
+              "seed": 83103,
+              "status": "PASS",
+              "training_summary": {
+                "best_epoch": 24,
+                "best_validation_nll": 1.70304307231903,
+                "number_of_simulations": 25000,
+                "simulation_seed": 1909140894,
+                "training_seed": 3535629082
+              }
+            }
+          ],
+          "schema_version": 2,
+          "status": "PASS"
+        }
+      ]
+    }
+  ]
+}

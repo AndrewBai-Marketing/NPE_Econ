@@ -21,7 +21,7 @@ class MDNPosterior(GaussianPosterior):
     def __init__(self, ridge: float = 1.0e-6) -> None:
         warnings.warn(
             "The project-file posterior type 'mdn' is a legacy Gaussian placeholder. "
-            "Use structnpe.fit(...) for the public beta's real neural MDN.",
+            "Use structnpe.fit(..., backend='mdn') for the public beta's neural MDN.",
             DeprecationWarning,
             stacklevel=2,
         )

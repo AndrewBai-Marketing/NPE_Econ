@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "benchmark": "eight_schools_spline_hyperposterior_v1",
+  "backend": "spline",
+  "seeds": [
+    83201,
+    83202,
+    83203
+  ],
+  "simulations": 50000,
+  "epochs": 150,
+  "batch_size": 512,
+  "hidden_dim": 96,
+  "depth": 2,
+  "components": 10,
+  "patience": 25,
+  "torch_num_threads": 1,
+  "posterior_draws": 100000,
+  "inference_seed_offset": 1000,
+  "exact_draws": 400000,
+  "exact_seed": 72991,
+  "quadrature_points": 100001,
+  "thresholds": {
+    "hyperparameter_mean_max_standardized_abs_error": 0.15,
+    "hyperparameter_sd_max_relative_abs_error": 0.15,
+    "central_95_endpoint_max_standardized_abs_error": 0.2,
+    "marginal_cdf_max_abs_error": 0.1,
+    "correlation_abs_error": 0.15,
+    "joint_20x20_quantile_grid_total_variation": 0.08,
+    "tau_support_violation_rate": 0.0
+  },
+  "interpretation": "Three new training seeds after fixing the context path and increasing the development budget. Accuracy limits are inherited unchanged from the MDN comparison; components is ignored by spline fits.",
+  "learning_rate": 0.0005
+}

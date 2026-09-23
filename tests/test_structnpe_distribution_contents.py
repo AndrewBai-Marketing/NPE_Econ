@@ -13,7 +13,7 @@ import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = Path(os.environ.get("STRUCTNPE_DIST_DIR", ROOT / "dist"))
-VERSION = "0.1.0b1"
+VERSION = "0.1.0b2"
 _WINDOWS_DRIVE_PATTERN = re.compile(r"(?:^|/)[A-Za-z]:")
 
 FORBIDDEN_COMPONENTS = {

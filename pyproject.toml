@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "structnpe"
-version = "0.1.0b1"
+version = "0.1.0b2"
 description = "Approximate Bayesian posteriors for models you can simulate"
 readme = "README.md"
 license = "MIT"
@@ -30,9 +30,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-neural = ["torch>=2.2"]
+neural = ["torch>=2.2", "nflows==0.14"]
 # Backward-compatible spelling retained for alpha users.
-torch = ["torch>=2.2"]
+torch = ["torch>=2.2", "nflows==0.14"]
 build = ["build>=1.2"]
 dev = [
   "build>=1.2",
@@ -41,6 +41,7 @@ dev = [
 ]
 replication = [
   "torch>=2.2",
+  "nflows==0.14",
   "scipy>=1.11",
   "matplotlib>=3.8",
 ]

@@ -17,7 +17,7 @@ from pathlib import Path, PurePosixPath
 
 MAX_MEMBERS = 10_000
 MAX_TOTAL_BYTES = 100 * 1024 * 1024
-EXPECTED_SDIST_ROOT = "structnpe-0.1.0b1"
+EXPECTED_SDIST_ROOT = "structnpe-0.1.0b2"
 EXPECTED_SDIST_FILENAME = f"{EXPECTED_SDIST_ROOT}.tar.gz"
 _WINDOWS_DRIVE_PATTERN = re.compile(r"(?:^|/)[A-Za-z]:")
 

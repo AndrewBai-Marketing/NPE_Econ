@@ -60,6 +60,7 @@ def run(*, simulations: int, epochs: int, draws: int, output: Path) -> None:
     model = build_model()
     estimator = fit(
         model,
+        backend="spline",
         simulations=simulations,
         epochs=epochs,
         seed=303,

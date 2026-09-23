@@ -31,6 +31,7 @@ def main() -> int:
     model = build_model()
     estimator = fit(
         model,
+        backend="mdn",
         simulations=args.simulations,
         seed=args.seed,
         hidden_dim=args.hidden_dim,
@@ -65,4 +66,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

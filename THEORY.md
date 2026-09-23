@@ -27,18 +27,43 @@ The current public estimator:
 2. Splits simulated datasets, fits the observation adapter on the training
    split, and freezes it; standardization also uses that split.
 3. Transforms each parameter using its declared bounds and standardizes it.
-4. Fits a neural mixture of $K$ diagonal Gaussians by conditional log loss,
-   using AdamW and validation-based early stopping.
-5. Samples the fitted joint mixture and maps draws back to parameter units.
+4. Fits a conditional density by log loss, using AdamW and validation-based
+   early stopping: an MDN by default, or an experimental autoregressive
+   spline flow with `backend="spline"`.
+5. Samples the fitted joint density and maps draws back to parameter units.
 
-In standardized coordinates $z=A(\theta)$ and $u=B(x)$, the density is
+In standardized coordinates $z=A(\theta)$ and $u=B(x)$, the spline flow
+maps parameters to a standard-normal base variable $e=f_\phi(z;u)$:
+
+$$
+q_\phi^Z(z\mid u)=\varphi(f_\phi(z;u))
+\left|\det\frac{\partial f_\phi(z;u)}{\partial z}\right|.
+$$
+
+Here $\varphi$ is the multivariate standard-normal density. The spline defaults use
+three autoregressive rational-quadratic spline layers with permutations,
+96 hidden features, two residual blocks per layer, eight bins, and linear
+tails outside $[-6,6]$. This adapts the density family used in our stockpiling
+research to the public model interface, train-only standardization, and
+checked numeric artifacts. It does not import the empirical Nielsen model,
+its trained weights, or its validation claims. The construction follows
+[Durkan et al. (2019)](https://proceedings.neurips.cc/paper_files/paper/2019/hash/7ac71d433f282034e088473244df8c02-Abstract.html)
+and uses [`nflows` 0.14](https://github.com/bayesiains/nflows).
+Each conditioner includes a context-only neural connection to all spline
+outputs. This preserves autoregressive restrictions on parameter inputs while
+allowing the first coordinate to depend on the observed representation;
+the stock MADE hidden-unit masks alone do not provide that path when the
+parameter dimension exceeds one. This correction is covered by a regression
+test and the public benchmark, independently of the research implementation.
+
+With the default `backend="mdn"`, the density remains
 
 $$
 q_\phi^Z(z\mid u)=\sum_{k=1}^K w_k(u)
 \mathcal N\!\left(z;m_k(u),\operatorname{diag}(\exp\ell_k(u))\right).
 $$
 
-The default $K$ is five; the implementation clips log variances to $[-7,5]$.
+For that backend, the default $K$ is five and log variances are clipped to $[-7,5]$.
 Diagonal components do not imply an independent joint posterior: the shared
 mixture component can induce dependence. A fixed finite mixture can still
 miss important dependence, tails, or modes.
@@ -98,8 +123,9 @@ Subtract $R_*$ and apply Proposition 1.
 Vanishing approximation, generalization, and optimization errors therefore
 imply average-KL convergence, in the mode in which the bound vanishes.
 This is a conditional theorem, not an established convergence guarantee for
-the package: the current fixed architecture, variance clipping, optimizer,
-and early stopping do not establish these assumptions. In particular,
+the package: the finite flow architecture, restricted tails, legacy MDN
+variance clipping, optimizer, and early stopping do not establish these
+assumptions. In particular,
 increasing the simulation count alone does not prove that $a_n$ vanishes.
 
 ## 3. What summaries discard
@@ -255,7 +281,8 @@ It is not implemented by merely replacing the prior callable in this package.
 | --- | --- |
 | Log-loss target, representation decomposition, and transformation identities | Mathematical properties under the assumptions above |
 | Convergence as simulations increase | Conditional corollary; assumptions not established for the fixed implementation |
-| Accurate Eight Schools hyperposterior on the reported dataset | Five-seed numerical comparison through the public API |
+| Accurate MDN Eight Schools hyperposterior on the reported dataset | Five-seed numerical comparison through the public API |
+| Spline Eight Schools comparison | One of three new fits passes every limit; all three pass posterior-mean limits |
 | Accurate generic MDN on the reported Rust panel | Not established; the documented run fails its accuracy limits |
 | Rust-specific simulation-trained grid posterior | Separate successful benchmark; different estimator |
 | Uniform local calibration, arbitrary-model identification, or general speed superiority | Not established |

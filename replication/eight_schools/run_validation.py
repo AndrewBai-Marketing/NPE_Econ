@@ -215,6 +215,7 @@ def compact_result(payload: dict[str, Any]) -> dict[str, Any]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--config", type=Path, default=CONFIG_PATH)
     parser.add_argument("--output-dir", type=Path, default=HERE / "results")
     parser.add_argument("--simulations", type=int, default=None)
     parser.add_argument("--epochs", type=int, default=None)
@@ -226,7 +227,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-    default_config = json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    default_config = json.loads(args.config.read_text(encoding="utf-8"))
     config = dict(default_config)
     for argument, key in (
         (args.simulations, "simulations"),
@@ -263,6 +264,7 @@ def main() -> int:
         training_start = time.perf_counter()
         estimator = fit(
             build_model(),
+            backend=config.get("backend", "mdn"),
             simulations=int(config["simulations"]),
             seed=seed,
             hidden_dim=int(config["hidden_dim"]),
@@ -271,6 +273,7 @@ def main() -> int:
             epochs=int(config["epochs"]),
             batch_size=int(config["batch_size"]),
             patience=int(config["patience"]),
+            learning_rate=float(config.get("learning_rate", 1e-3)),
             device="cpu",
             output_dir=run_output / "estimator",
             progress=not args.quiet,
@@ -326,11 +329,11 @@ def main() -> int:
     all_seeds_pass = all(run["status"] == "PASS" for run in runs)
     payload: dict[str, Any] = {
         "schema_version": 2,
-        "benchmark": "eight_schools_marginal_hyperposterior_v2",
+        "benchmark": config["benchmark"],
         "status": "PASS" if all_seeds_pass else "FAIL",
         "all_seeds_pass": all_seeds_pass,
         "canonical_configuration": config == default_config,
-        "configuration_file_sha256": _sha256(CONFIG_PATH),
+        "configuration_file_sha256": _sha256(args.config),
         "effective_configuration_sha256": _json_sha256(config),
         "configuration": config,
         "data": {

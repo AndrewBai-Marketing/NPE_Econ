@@ -64,9 +64,9 @@ def test_public_benchmark_table_matches_frozen_evidence() -> None:
     expected_rows = (
         f"| Deterministic quadrature posterior mean | {exact_mean[0]:.4f} | "
         f"{exact_mean[1]:.4f} |",
-        f"| `structnpe.fit`, average posterior mean over five seeds | "
+        f"| `structnpe.fit`, average posterior mean over five MDN seeds | "
         f"{mean_of_means[0]:.4f} | {mean_of_means[1]:.4f} |",
-        f"| Range of the five fitted posterior means | "
+        f"| Range of the five fitted MDN posterior means | "
         f"[{ranges[0][0]:.4f}, {ranges[0][1]:.4f}] | "
         f"[{ranges[1][0]:.4f}, {ranges[1][1]:.4f}] |",
         f"| This repository's NFXP maximum likelihood | "
@@ -102,9 +102,9 @@ def test_public_benchmark_table_matches_frozen_evidence() -> None:
         run["metrics"]["joint_20x20_quantile_grid_total_variation"]
         for run in eight["runs"]
     )
-    assert f"{worst_eight_cdf:.5f}" in readme
-    assert f"{worst_eight_mean:.5f}" in readme
-    assert f"{worst_eight_joint:.5f}" in readme
+    assert f"{worst_eight_cdf:.5f}" in benchmarks
+    assert f"{worst_eight_mean:.5f}" in benchmarks
+    assert f"{worst_eight_joint:.5f}" in benchmarks
 
     assert rust["all_seeds_pass_frozen_numerical_comparison_limits"] is True
     assert all(
@@ -154,7 +154,7 @@ def test_sdist_normalizer_removes_identity_and_executable_file_modes(tmp_path: P
     archive = tmp_path / EXPECTED_SDIST_FILENAME
     payload = b"public source\n"
     with tarfile.open(archive, mode="w:gz") as output:
-        directory = tarfile.TarInfo("structnpe-0.1.0b1")
+        directory = tarfile.TarInfo(EXPECTED_SDIST_ROOT)
         directory.type = tarfile.DIRTYPE
         directory.mode = 0o777
         directory.uid = 123
@@ -162,7 +162,7 @@ def test_sdist_normalizer_removes_identity_and_executable_file_modes(tmp_path: P
         directory.uname = "private-user"
         directory.gname = "private-group"
         output.addfile(directory)
-        member = tarfile.TarInfo("structnpe-0.1.0b1/README.md")
+        member = tarfile.TarInfo(EXPECTED_SDIST_ROOT + "/README.md")
         member.size = len(payload)
         member.mode = 0o777
         member.uid = 123

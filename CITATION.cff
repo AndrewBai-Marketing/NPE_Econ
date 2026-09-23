@@ -5,6 +5,6 @@ type: software
 authors:
   - family-names: Bai
     given-names: Andrew
-version: 0.1.0b1
+version: 0.1.0b2
 license: MIT
 abstract: "Public-beta software for amortized simulator-based posterior inference in structural models."

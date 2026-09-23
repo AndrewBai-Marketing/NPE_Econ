@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0b2
+
+- Added experimental `fit(..., backend="spline")`, adapting the recent
+  stockpiling inference architecture to the public simulator interface.
+  The validated MDN remains the default: the new flow passes conjugate
+  recovery checks but misses some Eight Schools accuracy limits.
+- Preserved train-only preprocessing, bounded parameter transforms, seeded
+  sampling, joint posterior outputs, and checksummed numeric save/load files.
+- Added optional Torch/nflows dependencies for spline training and inference;
+  existing MDN artifacts still load with NumPy-only CPU inference.
+- Added conjugate-posterior recovery and artifact round-trip checks for the
+  spline backend, and a separate reproducible Eight Schools comparison.
+- Included a context-only connection in every spline conditioner so its first
+  coordinate can respond to observed data for every permutation seed.
+
 ## 0.1.0b1 - Unreleased
 
 - Reworked the README around the posterior target, a runnable workflow, and

@@ -1,0 +1,413 @@
+{
+  "all_seeds_pass": false,
+  "benchmark": "eight_schools_spline_hyperposterior_v1",
+  "canonical_configuration": true,
+  "configuration": {
+    "backend": "spline",
+    "batch_size": 512,
+    "benchmark": "eight_schools_spline_hyperposterior_v1",
+    "components": 10,
+    "depth": 2,
+    "epochs": 150,
+    "exact_draws": 400000,
+    "exact_seed": 72991,
+    "hidden_dim": 96,
+    "inference_seed_offset": 1000,
+    "interpretation": "Three new training seeds after fixing the context path and increasing the development budget. Accuracy limits are inherited unchanged from the MDN comparison; components is ignored by spline fits.",
+    "learning_rate": 0.0005,
+    "patience": 25,
+    "posterior_draws": 100000,
+    "quadrature_points": 100001,
+    "schema_version": 2,
+    "seeds": [
+      83201,
+      83202,
+      83203
+    ],
+    "simulations": 50000,
+    "thresholds": {
+      "central_95_endpoint_max_standardized_abs_error": 0.2,
+      "correlation_abs_error": 0.15,
+      "hyperparameter_mean_max_standardized_abs_error": 0.15,
+      "hyperparameter_sd_max_relative_abs_error": 0.15,
+      "joint_20x20_quantile_grid_total_variation": 0.08,
+      "marginal_cdf_max_abs_error": 0.1,
+      "tau_support_violation_rate": 0.0
+    },
+    "torch_num_threads": 1
+  },
+  "configuration_file_sha256": "aa59782b514c0d434131af6ebd2529e41f1b9f35996400df6f59348509cca373",
+  "data": {
+    "reported_effects": [
+      28.0,
+      8.0,
+      -3.0,
+      7.0,
+      -1.0,
+      1.0,
+      18.0,
+      12.0
+    ],
+    "reported_standard_errors": [
+      15.0,
+      10.0,
+      16.0,
+      11.0,
+      9.0,
+      11.0,
+      10.0,
+      18.0
+    ]
+  },
+  "effective_configuration_sha256": "4f8019710d56a7c6b028124029e2839355ff3d2d7e0646d743f49025b127d3e3",
+  "environment": {
+    "numpy": "2.4.2",
+    "platform": "Linux-5.14.0-687.38.1.el9_8.x86_64-x86_64-with-glibc2.34",
+    "python": "3.13.11",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    },
+    "torch": "2.5.1+cu121",
+    "torch_num_threads": 1
+  },
+  "exact_reference": {
+    "correlation": -0.04649431715408,
+    "draw_seed": 72991,
+    "draws_for_distributional_metrics": 400000,
+    "mean": [
+      6.47201703296998,
+      4.75310343438264
+    ],
+    "method": "dense log-tau quadrature with conditional Gaussian mu",
+    "sd": [
+      4.1911629448257,
+      3.68381836174331
+    ]
+  },
+  "execution_note": "Each fixed seed was run separately from one frozen source snapshot; results combined in configuration order.",
+  "nonclaim": "This validates the marginalized (mu, tau) posterior for one public dataset and stated prior. It does not validate arbitrary simulators, latent-variable parameterizations, or posterior geometries.",
+  "runs": [
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.1757521472468
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.11374827116624
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.08234192783298
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.02705207494751
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.06033
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.03094
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "c8eb202a701964796d778380df26b8899cc1025c96db0b607009826a5b435138",
+      "metrics": {
+        "approximate_correlation": -0.16024258832032,
+        "central_95_endpoint_max_standardized_abs_error": 0.1757521472468,
+        "correlation_abs_error": 0.11374827116624,
+        "hyperparameter_mean_max_standardized_abs_error": 0.08234192783298,
+        "hyperparameter_sd_max_relative_abs_error": 0.02705207494751,
+        "joint_20x20_quantile_grid_total_variation": 0.06033,
+        "marginal_cdf_max_abs_error": 0.03094,
+        "marginal_cdf_supremum": [
+          0.03094,
+          0.0268525
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "fe1ed82905e0412ef33a3eaab93566ed6ee08d3a52966558f19918946ef17d22",
+      "parameters": [
+        {
+          "approximate_mean": 6.1269085962309,
+          "approximate_q025": -2.54379876912466,
+          "approximate_q975": 14.38808244096832,
+          "approximate_sd": 4.30454259892634,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.03094,
+          "mean_error_in_exact_sd": 0.08234192783298,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.02705207494751
+        },
+        {
+          "approximate_mean": 4.91316020084177,
+          "approximate_q025": 0.18442065909645,
+          "approximate_q975": 13.77720321075307,
+          "approximate_sd": 3.71612156861557,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.0268525,
+          "mean_error_in_exact_sd": 0.04344860433981,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.00876894670153
+        }
+      ],
+      "seed": 83201,
+      "status": "PASS",
+      "training_summary": {
+        "best_epoch": 24,
+        "best_validation_nll": 1.680804347229,
+        "number_of_simulations": 50000,
+        "simulation_seed": 1154649630,
+        "training_seed": 1020030610
+      }
+    },
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": true,
+          "value": 0.13511199657586
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.02892578293576
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.14094154209201
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.0289774932443
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": false,
+          "value": 0.08115
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.068665
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "90c96b4983ec78f18b33318a0f53f316cfa59e9e39b0ed79c0237621ee9ef3ae",
+      "metrics": {
+        "approximate_correlation": -0.01756853421831,
+        "central_95_endpoint_max_standardized_abs_error": 0.13511199657586,
+        "correlation_abs_error": 0.02892578293576,
+        "hyperparameter_mean_max_standardized_abs_error": 0.14094154209201,
+        "hyperparameter_sd_max_relative_abs_error": 0.0289774932443,
+        "joint_20x20_quantile_grid_total_variation": 0.08115,
+        "marginal_cdf_max_abs_error": 0.068665,
+        "marginal_cdf_supremum": [
+          0.068665,
+          0.0296025
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "fe1ed82905e0412ef33a3eaab93566ed6ee08d3a52966558f19918946ef17d22",
+      "parameters": [
+        {
+          "approximate_mean": 7.06272600157259,
+          "approximate_q025": -1.24091648866016,
+          "approximate_q975": 14.91912484176333,
+          "approximate_sd": 4.0849590769608,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.068665,
+          "mean_error_in_exact_sd": 0.14094154209201,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.0253399520045
+        },
+        {
+          "approximate_mean": 4.68409809623574,
+          "approximate_q025": 0.18005328164873,
+          "approximate_q975": 14.03149476278065,
+          "approximate_sd": 3.79056618343395,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.0296025,
+          "mean_error_in_exact_sd": 0.01873201427723,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.0289774932443
+        }
+      ],
+      "seed": 83202,
+      "status": "FAIL",
+      "training_summary": {
+        "best_epoch": 35,
+        "best_validation_nll": 1.65498280296326,
+        "number_of_simulations": 50000,
+        "simulation_seed": 407350167,
+        "training_seed": 525755744
+      }
+    },
+    {
+      "checks": {
+        "central_95_endpoint_max_standardized_abs_error": {
+          "maximum": 0.2,
+          "passed": false,
+          "value": 0.36018084853307
+        },
+        "correlation_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.01739981780928
+        },
+        "hyperparameter_mean_max_standardized_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.07609553004959
+        },
+        "hyperparameter_sd_max_relative_abs_error": {
+          "maximum": 0.15,
+          "passed": true,
+          "value": 0.10559705026633
+        },
+        "joint_20x20_quantile_grid_total_variation": {
+          "maximum": 0.08,
+          "passed": true,
+          "value": 0.06189
+        },
+        "marginal_cdf_max_abs_error": {
+          "maximum": 0.1,
+          "passed": true,
+          "value": 0.0333625
+        },
+        "tau_support_violation_rate": {
+          "maximum": 0.0,
+          "passed": true,
+          "value": 0.0
+        }
+      },
+      "estimator_fingerprint": "4915c8ed222721bd76cb0beb87a48ef3149396929c4a52237470b5ecc3d85c17",
+      "metrics": {
+        "approximate_correlation": -0.02909449934479,
+        "central_95_endpoint_max_standardized_abs_error": 0.36018084853307,
+        "correlation_abs_error": 0.01739981780928,
+        "hyperparameter_mean_max_standardized_abs_error": 0.07609553004959,
+        "hyperparameter_sd_max_relative_abs_error": 0.10559705026633,
+        "joint_20x20_quantile_grid_total_variation": 0.06189,
+        "marginal_cdf_max_abs_error": 0.0333625,
+        "marginal_cdf_supremum": [
+          0.022315,
+          0.0333625
+        ],
+        "tau_support_violation_rate": 0.0
+      },
+      "model_fingerprint": "fe1ed82905e0412ef33a3eaab93566ed6ee08d3a52966558f19918946ef17d22",
+      "parameters": [
+        {
+          "approximate_mean": 6.34614003960701,
+          "approximate_q025": -2.90509156145724,
+          "approximate_q975": 14.74555196431251,
+          "approximate_sd": 4.47020745226796,
+          "exact_draw_q025": -1.80719288211033,
+          "exact_draw_q975": 14.63997857226399,
+          "marginal_cdf_supremum": 0.022315,
+          "mean_error_in_exact_sd": 0.03003390586815,
+          "parameter": "mu",
+          "quadrature_mean": 6.47201703296998,
+          "quadrature_sd": 4.1911629448257,
+          "sd_relative_error": 0.06657925523673
+        },
+        {
+          "approximate_mean": 5.0334255452259,
+          "approximate_q025": 0.15229700918803,
+          "approximate_q975": 15.07446390025416,
+          "approximate_sd": 4.07281871446033,
+          "exact_draw_q025": 0.18320367894687,
+          "exact_draw_q975": 13.74762307687974,
+          "marginal_cdf_supremum": 0.0333625,
+          "mean_error_in_exact_sd": 0.07609553004959,
+          "parameter": "tau",
+          "quadrature_mean": 4.75310343438264,
+          "quadrature_sd": 3.68381836174331,
+          "sd_relative_error": 0.10559705026633
+        }
+      ],
+      "seed": 83203,
+      "status": "FAIL",
+      "training_summary": {
+        "best_epoch": 34,
+        "best_validation_nll": 1.69477936954498,
+        "number_of_simulations": 50000,
+        "simulation_seed": 2164629388,
+        "training_seed": 4210480061
+      }
+    }
+  ],
+  "schema_version": 2,
+  "status": "FAIL",
+  "training_source_sha256": {
+    "replication/eight_schools/__init__.py": "c44a9e8c46831fb4ce5b6177741ea2e0e494850f908336d5be08e2d86b07f559",
+    "replication/eight_schools/config.json": "5971bf8d4f335e937e4677e45b9ea39fb97fdf890d140c91f87b417af4e22048",
+    "replication/eight_schools/exact.py": "64e9ceb69930fbf0a1970590b384e343b8a29be5b65f5f796bd488ffb90a8480",
+    "replication/eight_schools/expected_metrics.json": "9113f89e04605a973cc7c02f0761f8a47b8e9c29349131136d36fe96beb95609",
+    "replication/eight_schools/model.py": "e5c1a5e2d389ff569277343877dc37c35c28e09ffccde8baa308ae42de73b309",
+    "replication/eight_schools/run_validation.py": "be3120b464a30db4ce7b62c7310b679a01777107949e56bfd1f107e9b7ae3fd7",
+    "replication/eight_schools/spline_config.json": "aa59782b514c0d434131af6ebd2529e41f1b9f35996400df6f59348509cca373",
+    "src/structnpe/__init__.py": "00c4f936c1decb301f7997c6ba3eeba792dca998ca354ff633efa2b024fea756",
+    "src/structnpe/_artifacts.py": "f3ce3607fa542e2a2ec009b9b7e583c1eb5d1d56688a2cdb704efaa15ec2d56f",
+    "src/structnpe/_fingerprints.py": "14c9b82c9677ffce84d8a7ab5a07db04dde0bd2695816636e3996fa3c4800b8c",
+    "src/structnpe/_spline.py": "d9e94e4b67a7e28197519bbe38df7eb7362c0a6cf169e591d25487e3306c5449",
+    "src/structnpe/_version.py": "f74068c94fbb0c98638fc7768555e9ab05524fed226e592e94b6fc6d73f861f3",
+    "src/structnpe/api.py": "c33b4340057d335ff9b78c3150e3536287ce84de8e8919e3e840ce1335aa8663",
+    "src/structnpe/cli.py": "1407f7855756e3c1d43774896a7785043f867935090e3ff1e685ed2f05a158e3",
+    "src/structnpe/config.py": "01958469bb75edd2e8ca1ab5af3aca904bdda6a41f878341df41b269412f57a0",
+    "src/structnpe/counterfactuals.py": "6c68332e49c84aec54d7c0368630f06dc42955d2554a8db30f0f3400551d6e45",
+    "src/structnpe/estimator.py": "9601f41f6d95d14c60e5cb2ec59c3e7ee96143db8ad64c07f46f80657fdfca20",
+    "src/structnpe/estimators/__init__.py": "fd243570a3dab63ef5e2862d592332a4e4633fb3de266c9e9289f0c55192ac19",
+    "src/structnpe/estimators/finite_grid.py": "56e94963bc27f458334269b670cf95dbf07836673cac7c77fdd77a1ed8e23c4e",
+    "src/structnpe/estimators/gaussian.py": "cb6c35df1eeab0c900d4cf8508637488e08a40987b7c739c4b3654b55afad7bb",
+    "src/structnpe/estimators/mdn.py": "f9ceb469bd58fc74231e25a9aeab31099487852915478a2761c6039fa6bc9e9e",
+    "src/structnpe/estimators/model_index.py": "f45dd57a3e0c0cfff7846fc2cd5d5ee11fe20b21d626632754858e5ebe8347b5",
+    "src/structnpe/inference.py": "f7a9cced7bc5b8b0d975cc819b3c2d3bf42d76917a92c41920c0209383dec43f",
+    "src/structnpe/posterior.py": "587575e844a1c9caac9bf4ae28606f53b843eb87ceebc4a79509735f82e000cb",
+    "src/structnpe/reports.py": "3575b7a1f8d31d05bfe339822651e2ffa919cef06561d35ad191e8e133bf8fb1",
+    "src/structnpe/results.py": "b06dc732d447212f21136c07cf3f3445d52dd4415ee0c9dc413925ebe1371ff2",
+    "src/structnpe/schema.py": "ef59c422bb37e487a8d5737a0ea8a5f76b0cd48ea1f5e2353b617b250f0c3a99",
+    "src/structnpe/simulation_bank.py": "7cfa9e16e50131b029d6a003ff998bc8daca0b241bdb541cf292dc66180bb323",
+    "src/structnpe/simulator.py": "8be96b1cc086a94c01929939e1c4304a1707a188771ebe3f999d1aedffcc6043",
+    "src/structnpe/summaries.py": "502cc823a16acfac7a5f4ab2a8be4f2d106806e73705d30b0c84688d1c04abd4",
+    "src/structnpe/templates/custom_simulator/model.py": "fb9bc2d717d68f4e520ba795d10920ba67af125a50f1d6bc41de8caf74da20ba",
+    "src/structnpe/templates/finite_ddc/model.py": "beb29627bb4cebe75fe80eab334a6cdeb78eb142bf3132ad063372cc4c8dff49",
+    "src/structnpe/templates/model_index_ddc/model.py": "bba3c5c8a890f3679ff2b008778871069d8c981801732e96fc9f8edca6c9bc06",
+    "src/structnpe/validation.py": "e66fd10778f3594df1187487c5a9aee594854e048a1dd584548b05df5b58cda3"
+  }
+}

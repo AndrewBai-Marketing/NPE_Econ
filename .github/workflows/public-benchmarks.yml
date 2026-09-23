@@ -46,6 +46,7 @@ jobs:
           tests/test_replication_eight_schools.py
           tests/test_replication_rust.py
           tests/test_replication_rust_structured_classifier.py
+          tests/test_structnpe_spline.py
 
       - name: Run the custom-model training example
         run: python scripts/run_installed_wheel_examples.py --profile neural

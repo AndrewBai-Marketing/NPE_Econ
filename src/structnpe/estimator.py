@@ -27,6 +27,7 @@ from ._artifacts import (
 )
 from ._fingerprints import fingerprint
 from ._version import __version__
+from ._spline import SPLINE_TYPE
 from .results import InferenceResult
 from .schema import (
     ObservationAdapter,
@@ -69,7 +70,7 @@ class ValidationResult:
 
 
 class TrainedEstimator:
-    """A fitted MDN with safe NumPy inference and artifact persistence."""
+    """A fitted conditional posterior with checked numeric artifact persistence."""
 
     def __init__(
         self,
@@ -145,8 +146,12 @@ class TrainedEstimator:
         support = self._support_diagnostics(representation)
         resolved_device, device_warning = _resolve_inference_device(device)
         draw_start = time.perf_counter()
-        raw = self._forward(representation, resolved_device)
-        transformed_draws = self._sample_raw(raw, draws=draws, seed=seed)
+        if self.architecture["estimator_type"] == SPLINE_TYPE:
+            from ._spline import sample
+            transformed_draws = sample(self, representation, draws=draws, seed=seed, device=resolved_device)
+        else:
+            raw = self._forward(representation, resolved_device)
+            transformed_draws = self._sample_raw(raw, draws=draws, seed=seed)
         posterior_draws = _inverse_parameters(transformed_draws, self.parameters)
         draw_seconds = time.perf_counter() - draw_start
         if device_warning:
@@ -170,7 +175,7 @@ class TrainedEstimator:
         rep_output = representation if batch else representation[0]
         metadata = {
             "package_version": __version__,
-            "estimator_type": ESTIMATOR_TYPE,
+            "estimator_type": self.architecture["estimator_type"],
             "estimator_fingerprint": self.estimator_fingerprint,
             "model_fingerprint": self.model_fingerprint,
             "model_contract_fingerprint": self.model_contract_fingerprint,
@@ -333,7 +338,7 @@ class TrainedEstimator:
             "estimator_format_version": ESTIMATOR_FORMAT_VERSION,
             "package_version": __version__,
             "package_compatibility": _compatibility_line(__version__),
-            "estimator_type": ESTIMATOR_TYPE,
+            "estimator_type": self.architecture["estimator_type"],
             "architecture": self.architecture,
             "parameters": [parameter.to_dict() for parameter in self.parameters],
             "observation_adapter": adapter_to_dict(self.observation_adapter),
@@ -504,10 +509,14 @@ class TrainedEstimator:
 def fit(
     model: StructuralModel,
     *,
+    backend: str = "mdn",
+    flow_layers: int = 3,
+    num_bins: int = 8,
+    tail_bound: float = 6.0,
     simulations: int = 200_000,
     seed: int = 1234,
     validation_fraction: float = 0.1,
-    hidden_dim: int = 64,
+    hidden_dim: int | None = None,
     depth: int = 2,
     components: int = 5,
     epochs: int = 100,
@@ -521,10 +530,22 @@ def fit(
     progress: bool | Callable[[dict[str, Any]], None] = True,
     support_reference_size: int = 2048,
 ) -> TrainedEstimator:
-    """Simulate, train, and return the primary public-beta MDN estimator."""
+    """Simulate and fit a joint conditional posterior.
 
+    Experimental ``backend='spline'`` uses autoregressive rational-quadratic spline layers;
+    ``flow_layers``, ``num_bins``, and ``tail_bound`` configure that backend.
+    The default ``backend='mdn'`` retains the Gaussian mixture, configured by ``components``.
+    ``hidden_dim=None`` selects 96 features for splines and 64 for the MDN.
+    Spline training and inference require the ``neural`` dependency extra;
+    MDN inference on CPU remains NumPy-only.
+    """
+
+    if backend not in {"spline", "mdn"}:
+        raise ValueError("backend must be 'spline' or 'mdn'.")
     if not isinstance(model, StructuralModel):
         raise TypeError("model must be a StructuralModel.")
+    if hidden_dim is None:
+        hidden_dim = 96 if backend == "spline" else 64
     if simulations < 10:
         raise ValueError("simulations must be at least 10.")
     if not 0.01 <= validation_fraction < 0.5:
@@ -588,6 +609,15 @@ def fit(
         "components": int(components),
         "log_variance_bounds": list(LOG_VARIANCE_BOUNDS),
     }
+    if backend == "spline":
+        architecture = {
+            "estimator_type": SPLINE_TYPE, "activation": "silu", "nflows_version": "0.14",
+            "conditioner": "made_with_context_skip_v1",
+            "input_dim": int(x_train.shape[1]), "theta_dim": int(theta.shape[1]),
+            "hidden_dim": hidden_dim, "depth": depth, "flow_layers": flow_layers,
+            "num_bins": num_bins, "tail_bound": tail_bound,
+        }
+    _validated_architecture(architecture)
     full_spec = {
         "package_compatibility": _compatibility_line(__version__),
         "model": model.specification(include_adapter_state=True),
@@ -614,7 +644,7 @@ def fit(
                     f"({name} differs). Reuse the same seed, simulation budget, split, and model, or start fresh."
                 )
         _load_numpy_weights_into_torch(torch_model, resumed.weights)
-    weights, history, best_epoch, best_valid = _train_torch_mdn(
+    weights, history, best_epoch, best_valid = _train_torch_density(
         torch,
         torch_model,
         x_train_std,
@@ -641,7 +671,7 @@ def fit(
     checkpoint_path = str(Path(output_dir) / "best_estimator") if output_dir is not None else None
     metadata: dict[str, Any] = {
         "package_version": __version__,
-        "estimator_type": ESTIMATOR_TYPE,
+        "estimator_type": architecture["estimator_type"],
         "architecture": architecture,
         "seed": int(seed),
         "training_seed": training_seed,
@@ -755,6 +785,8 @@ def load_estimator(
         incompatible_reasons.append(reason)
     architecture = dict(manifest.get("architecture") or {})
     _validated_architecture(architecture)
+    if manifest.get("estimator_type") != architecture.get("estimator_type"):
+        raise ArtifactError("Estimator type disagrees with its architecture.")
     parameter_payload = list(manifest.get("parameters") or [])
     adapter_payload = dict(manifest.get("observation_adapter") or {})
     model_contract = dict(manifest.get("model_contract") or {})
@@ -907,7 +939,7 @@ def _check_model_contract(
     return [reason]
 
 
-def _train_torch_mdn(
+def _train_torch_density(
     torch: Any,
     model: Any,
     x_train: np.ndarray,
@@ -961,6 +993,11 @@ def _train_torch_mdn(
         )
         return -torch.mean(torch.logsumexp(torch.log_softmax(logits, dim=1) + component_log_probability, dim=1))
 
+    def conditional_loss(context: Any, target: Any) -> Any:
+        if architecture["estimator_type"] == SPLINE_TYPE:
+            return -model.log_prob(target, context=context).mean()
+        return nll(model(context), target)
+
     train_x = torch.from_numpy(x_train)
     train_y = torch.from_numpy(theta_train)
     valid_x = torch.from_numpy(x_valid)
@@ -975,9 +1012,13 @@ def _train_torch_mdn(
             indices = order[start : start + batch_size]
             batch_x = train_x[indices].to(torch_device)
             batch_y = train_y[indices].to(torch_device)
-            loss = nll(model(batch_x), batch_y)
+            loss = conditional_loss(batch_x, batch_y)
+            if not torch.isfinite(loss):
+                raise RuntimeError("Posterior training produced a non-finite loss.")
             optimizer.zero_grad()
             loss.backward()
+            if architecture["estimator_type"] == SPLINE_TYPE:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 5.0)
             optimizer.step()
             running_loss += float(loss.detach().cpu()) * len(indices)
             seen += len(indices)
@@ -988,7 +1029,7 @@ def _train_torch_mdn(
             for start in range(0, len(valid_x), batch_size):
                 batch_valid_x = valid_x[start : start + batch_size].to(torch_device)
                 batch_valid_y = valid_y[start : start + batch_size].to(torch_device)
-                batch_validation_loss = nll(model(batch_valid_x), batch_valid_y)
+                batch_validation_loss = conditional_loss(batch_valid_x, batch_valid_y)
                 batch_count = len(batch_valid_x)
                 validation_total += float(batch_validation_loss.detach().cpu()) * batch_count
                 validation_seen += batch_count
@@ -1018,7 +1059,7 @@ def _train_torch_mdn(
         if stale >= patience:
             break
     if best_state is None:
-        raise RuntimeError("MDN training did not produce a finite validation checkpoint.")
+        raise RuntimeError("Posterior training did not produce a finite validation checkpoint.")
     model.load_state_dict(best_state)
     return _numpy_weights_from_torch(model), history, best_epoch, best_valid
 
@@ -1029,6 +1070,9 @@ def _torch_model(
     device: str,
     seed: int | None = None,
 ) -> tuple[Any, Any]:
+    if architecture.get("estimator_type") == SPLINE_TYPE:
+        from ._spline import make_flow
+        return make_flow(architecture, seed=seed)
     try:
         import torch
         from torch import nn
@@ -1060,6 +1104,9 @@ def _torch_model(
 
 
 def _numpy_weights_from_torch(model: Any) -> dict[str, np.ndarray]:
+    if getattr(model, "_structnpe_spline", False):
+        from ._spline import numpy_weights
+        return numpy_weights(model)
     result: dict[str, np.ndarray] = {}
     linear_index = 0
     for module in model.backbone:
@@ -1073,6 +1120,10 @@ def _numpy_weights_from_torch(model: Any) -> dict[str, np.ndarray]:
 
 
 def _load_numpy_weights_into_torch(model: Any, weights: Mapping[str, np.ndarray]) -> None:
+    if getattr(model, "_structnpe_spline", False):
+        from ._spline import load_weights
+        load_weights(model, weights)
+        return
     import torch
 
     linear_index = 0
@@ -1087,6 +1138,9 @@ def _load_numpy_weights_into_torch(model: Any, weights: Mapping[str, np.ndarray]
 
 
 def _weight_shapes(architecture: Mapping[str, Any]) -> dict[str, tuple[int, ...]]:
+    if architecture.get("estimator_type") == SPLINE_TYPE:
+        from ._spline import weight_shapes
+        return weight_shapes(architecture)
     input_dim, theta_dim, hidden_dim, depth, components = _validated_architecture(architecture)
     shapes: dict[str, tuple[int, ...]] = {}
     width = input_dim
@@ -1103,6 +1157,9 @@ def _weight_shapes(architecture: Mapping[str, Any]) -> dict[str, tuple[int, ...]
 def _validated_architecture(
     architecture: Mapping[str, Any],
 ) -> tuple[int, int, int, int, int]:
+    if architecture.get("estimator_type") == SPLINE_TYPE:
+        from ._spline import validate_architecture
+        return validate_architecture(architecture)
     if architecture.get("estimator_type") != ESTIMATOR_TYPE:
         raise ArtifactError("Estimator architecture has an unsupported estimator type.")
     if architecture.get("activation") != "relu":

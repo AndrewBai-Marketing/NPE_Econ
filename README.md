@@ -40,8 +40,11 @@ $$
 The implementation applies parameter transforms and training-split
 standardization; the expression above is the equivalent objective in the
 original parameter coordinates, up to a term independent of $\phi$.
-The current density is a configurable mixture of diagonal Gaussians in
-transformed coordinates, with five components by default.
+The package now includes an experimental **conditional neural spline flow**,
+adapting the autoregressive rational-quadratic architecture from our recent
+stockpiling research: select `backend="spline"`. Both backends learn a joint
+density in transformed parameter coordinates. The Gaussian-mixture estimator
+(`backend="mdn"`) remains the default while the new flow is being validated.
 
 The result is an approximate posterior, not a maximum-likelihood estimate.
 It equals the full-data posterior only when the representation preserves the
@@ -62,8 +65,8 @@ python examples/custom_model.py
 The [complete example](examples/custom_model.py) defines a prior and batched
 simulator, trains an estimator, saves and reloads it, and estimates a normal
 model's location and scale. Its small default budget demonstrates the workflow;
-the numerical accuracy benchmark is below. Training requires Torch; loading
-and sampling from a saved estimator use NumPy on CPU.
+the numerical accuracy benchmark is below. Spline training and inference use
+Torch and `nflows`; saved legacy MDN estimators retain NumPy-only CPU inference.
 
 For your own model, the same interface is:
 
@@ -79,7 +82,7 @@ model = StructuralModel(
     prior_id="my_model.prior.v1",
     simulator_id="my_model.simulator.v1",
 )
-estimator = fit(model, simulations=100_000, seed=1)
+estimator = fit(model, backend="spline", simulations=100_000, seed=1)
 posterior = estimator.infer(observed_data, draws=20_000, seed=2)
 print(posterior.summary())
 joint_draws = posterior.to_dataframe()
@@ -102,14 +105,15 @@ $$
 
 The simulator uses all eight reported effects as its representation. We compare
 the learned hyperparameter posterior with independent numerical quadrature
-under the same model, data, and prior. Each of five fixed training seeds uses
-50,000 simulations and ten mixture components.
+under the same model, data, and prior. This established comparison uses
+`backend="mdn"`: each of five fixed training seeds uses 50,000 simulations
+and ten mixture components.
 
 | Result | Population mean `mu` | Heterogeneity `tau` |
 | --- | ---: | ---: |
 | Deterministic quadrature posterior mean | 6.4720 | 4.7531 |
-| `structnpe.fit`, average posterior mean over five seeds | 6.4178 | 4.7042 |
-| Range of the five fitted posterior means | [6.0483, 6.9624] | [4.5063, 5.0521] |
+| `structnpe.fit`, average posterior mean over five MDN seeds | 6.4178 | 4.7042 |
+| Range of the five fitted MDN posterior means | [6.0483, 6.9624] | [4.5063, 5.0521] |
 
 All five runs pass the documented numerical comparison limits. The largest
 marginal-CDF discrepancy is **0.04997**, the largest posterior-mean error is
@@ -128,6 +132,15 @@ This is a posterior-accuracy check, not a speed advantage over quadrature.
 It is development evidence on one dataset, not a general calibration result.
 The [benchmark page](BENCHMARKS.md) includes every seed, priors, diagnostics,
 commands, and limitations, including the weak dependence in this example.
+
+**New spline backend:** it passes a conjugate-normal recovery test, seeded
+save/load checks, and a test that each parameter can respond to observed data.
+On three new Eight Schools fits, all posterior-mean errors are below 0.15
+reference posterior standard deviations, but only one run passes every
+distributional limit. One misses the joint-grid limit; another misses a
+95% interval-endpoint limit. These results are reported separately in the
+[spline comparison](BENCHMARKS.md#experimental-spline-backend). They do not
+establish superiority over the MDN.
 
 For a canonical economic DDC, the repository also includes **Rust bus
 replacement**. Its successful simulation-trained grid comparison is

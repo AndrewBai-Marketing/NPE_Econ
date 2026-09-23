@@ -54,7 +54,7 @@ jobs:
       - name: Build wheel and source distribution
         run: |
           python -m build --wheel --sdist
-          python scripts/normalize_sdist.py dist/structnpe-0.1.0b1.tar.gz
+          python scripts/normalize_sdist.py dist/structnpe-0.1.0b2.tar.gz
 
       - name: Run base package tests
         run: python -m pytest -q

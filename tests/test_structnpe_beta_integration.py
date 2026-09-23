@@ -73,6 +73,7 @@ def tiny_estimator():
     pytest.importorskip("torch")
     return fit(
         _model(),
+        backend="mdn",
         simulations=64,
         seed=777,
         validation_fraction=0.2,
@@ -129,6 +130,7 @@ def test_validation_smoke_reports_required_coverages(tiny_estimator) -> None:
 def test_training_seed_reproduces_weights_and_draws(tiny_estimator) -> None:
     repeated = fit(
         _model(),
+        backend="mdn",
         simulations=64,
         seed=777,
         validation_fraction=0.2,
@@ -155,6 +157,7 @@ def test_custom_adapter_load_uses_supplied_class_without_mutating_model(tmp_path
     pytest.importorskip("torch")
     estimator = fit(
         _custom_adapter_model(),
+        backend="mdn",
         simulations=32,
         seed=812,
         validation_fraction=0.2,
